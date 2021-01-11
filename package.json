@@ -2,6 +2,12 @@
   "name": "streameo",
   "version": "1.0.0",
   "description": "This package is for the backend src of a video streaming app called 'streameo'.",
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
