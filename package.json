@@ -1,0 +1,27 @@
+{
+  "name": "streameo",
+  "version": "1.0.0",
+  "description": "This package is for the backend src of a video streaming app called 'streameo'.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdacgroup16/streameo.git"
+  },
+  "author": "Adarsh Pandey, Rishabh Agrawal, Pranjali Ingle, Deepak Thakur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cdacgroup16/streameo/issues"
+  },
+  "homepage": "https://github.com/cdacgroup16/streameo#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.11.11",
+    "nodemon": "^2.0.7"
+  }
+}
