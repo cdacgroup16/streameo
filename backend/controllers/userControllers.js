@@ -37,7 +37,7 @@ exports.getUser = (req, res) => {
 
 // @desc    Creates new user
 // @route   POST /api/users
-// @access  Protected
+// @access  Public
 exports.createUser = asyncHandler(async (req, res) => {
   let { firstname, lastname, email, password } = req.body
   firstname = firstname && firstname.toLowerCase()
@@ -72,3 +72,32 @@ exports.createUser = asyncHandler(async (req, res) => {
     throw new Error('Signup failed! Invalid user data')
   }
 })
+
+// @desc    Updates user data
+// @route   PUT /api/users/:userId
+// @access  Protected
+exports.updateUserById = (req, res) => {
+  const user = await User.findById(req.user._id)
+  let newUserData = req.body
+  if (user) {
+    user.firstname = newUserData.firstname || user.firstname
+    user.lastname = newUserData.lastname || user.lastname
+    user.subscription_plan =
+      newUserData.subscription_plan || user.subscription_plan
+
+    if(User.authenticate(req.body.password.trim())){
+      const updatedUserData = await user.save()
+      updatedUserData.salt = undefined
+      updatedUserData.hashed_password = undefined
+      updatedUserData.stream_count = undefined
+      updatedUserData.account_balance = undefined
+      res.json(updatedUserData)
+    } else {
+      res.status(401)
+      throw new Error('Password authentication failed!')
+    }
+  } else {
+    res.status(404)
+    throw new Error('User not found!')
+  }
+}
