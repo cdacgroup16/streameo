@@ -84,7 +84,7 @@ exports.updateUserById = asyncHandler(async (req, res) => {
     user.subscription_plan =
       newUserData.subscription_plan || user.subscription_plan
 
-    if (User.authenticate(req.body.password.trim())) {
+    if (user.authenticate(req.body.password.trim())) {
       const updatedUserData = await user.save()
       updatedUserData.salt = undefined
       updatedUserData.hashed_password = undefined
@@ -97,5 +97,27 @@ exports.updateUserById = asyncHandler(async (req, res) => {
   } else {
     res.status(404)
     throw new Error('User not found!')
+  }
+})
+
+// @desc    Updates user data
+// @route   PUT /api/users/reset-password/:userId
+// @access  Protected
+exports.resetPassword = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+  const { newPassword, oldPassword } = req.body
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found!')
+  }
+  if (user.hashed_password === user.authenticate(oldPassword)) {
+    user.password = newPassword
+    const updatedUser = await user.save()
+    res.json({
+      message: `User password changed successfully!`,
+    })
+  } else {
+    res.status(401)
+    throw new Error('Password authentication failed!')
   }
 })
