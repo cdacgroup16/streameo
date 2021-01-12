@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const asyncHandler = require('express-async-handler')
+const { generateJwtToken } = require('../utils/jwt')
 
 // @desc    Fetches user from db and stores it in req object
 // @route   path param "userId"
@@ -64,7 +65,7 @@ exports.createUser = asyncHandler(async (req, res) => {
       lastname: user.lastname,
       email: user.email,
       role: user.role,
-      token: 'JWT goes here',
+      token: generateJwtToken(user._id, user.role),
     })
   } else {
     res.status(400)
