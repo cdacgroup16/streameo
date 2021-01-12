@@ -75,7 +75,7 @@ exports.createUser = asyncHandler(async (req, res) => {
 // @desc    Updates user data
 // @route   PUT /api/users/:userId
 // @access  Protected
-exports.updateUserById = (req, res) => {
+exports.updateUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
   let newUserData = req.body
   if (user) {
@@ -84,7 +84,7 @@ exports.updateUserById = (req, res) => {
     user.subscription_plan =
       newUserData.subscription_plan || user.subscription_plan
 
-    if(User.authenticate(req.body.password.trim())){
+    if (User.authenticate(req.body.password.trim())) {
       const updatedUserData = await user.save()
       updatedUserData.salt = undefined
       updatedUserData.hashed_password = undefined
@@ -98,4 +98,4 @@ exports.updateUserById = (req, res) => {
     res.status(404)
     throw new Error('User not found!')
   }
-}
+})
