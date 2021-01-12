@@ -31,7 +31,6 @@ exports.getUser = (req, res) => {
     throw new Error('User not found!')
   }
   user.stream_count = undefined
-  user.account_balance = undefined
   res.json(user)
 }
 
@@ -90,7 +89,6 @@ exports.updateUserById = (req, res) => {
       updatedUserData.salt = undefined
       updatedUserData.hashed_password = undefined
       updatedUserData.stream_count = undefined
-      updatedUserData.account_balance = undefined
       res.json(updatedUserData)
     } else {
       res.status(401)
