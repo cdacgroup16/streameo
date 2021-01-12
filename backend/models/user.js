@@ -71,6 +71,10 @@ userSchema
   })
 
 userSchema.methods = {
+  authenticate: function (password) {
+    return this.hashPassword(password) === this.hashed_password
+  },
+
   hashPassword: function (plainPassword) {
     if (!plainPassword) return ''
     try {
