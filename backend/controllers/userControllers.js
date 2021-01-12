@@ -1,10 +1,11 @@
 const User = require('../models/user')
+const asyncHandler = require('express-async-handler')
 
 // @desc    Fetches user from db and stores it in req object
 // @route   path param "userId"
 // @access  Protected
-exports.getUserById = (req, res, next, id) => {
-  User.findById(id).exec((err, user) => {
+exports.getUserById = asyncHandler(async (req, res, next, id) => {
+  await User.findById(id).exec((err, user) => {
     if (err) {
       res.status(400)
       throw new Error('Error occured while finding user!')
@@ -18,7 +19,7 @@ exports.getUserById = (req, res, next, id) => {
     req.user = user
     next()
   })
-}
+})
 
 // @desc    Fetches user req object
 // @route   GET /api/users/:userId
@@ -33,3 +34,41 @@ exports.getUser = (req, res) => {
   user.account_balance = undefined
   res.json(user)
 }
+
+// @desc    Creates new user
+// @route   POST /api/users
+// @access  Protected
+exports.createUser = asyncHandler(async (req, res) => {
+  let { firstname, lastname, email, password } = req.body
+  firstname = firstname && firstname.toLowerCase()
+  lastname = lastname && lastname.toLowerCase()
+  email = email && email.toLowerCase()
+
+  const userExists = await User.findOne({ email })
+
+  if (userExists) {
+    res.status(400)
+    throw new Error('User already exists!')
+  }
+
+  const user = await User.create({
+    firstname,
+    lastname,
+    email,
+    password,
+  })
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      role: user.role,
+      token: 'JWT goes here',
+    })
+  } else {
+    res.status(400)
+    throw new Error('Signup failed! Invalid user data')
+  }
+})
