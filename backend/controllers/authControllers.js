@@ -17,7 +17,7 @@ exports.signin = asyncHandler(async (req, res) => {
   email = email.trim().toLowerCase()
   password = password.trim()
 
-  await User.find({ email }).exec((err, user) => {
+  await User.findOne({ email }).exec((err, user) => {
     if (err) {
       res.status(500)
       throw new Error(err.message)
@@ -57,7 +57,9 @@ exports.signup = (req, res) => {
   }
   if (firstname.length < 3) {
     res.status(422)
-    throw new Error("Validation failed: Firstname can't be smaller than 3 characters")
+    throw new Error(
+      "Validation failed: Firstname can't be smaller than 3 characters"
+    )
   }
   if (!validateEmail(email)) {
     res.status(422)
@@ -65,7 +67,9 @@ exports.signup = (req, res) => {
   }
   if (!validatePassword(password)) {
     res.status(422)
-    throw new Error('Validation failed: Password must contain atleast one lowercase, one uppercase character and atleast one number')
+    throw new Error(
+      'Validation failed: Password must contain atleast one lowercase, one uppercase character and atleast one number'
+    )
   }
-  await createUser(req,res)
+  createUser(req, res)
 }
