@@ -39,13 +39,15 @@ exports.getUser = (req, res) => {
 // @route   GET /api/users
 // @access  Admin
 exports.getAllUsers = asyncHandler(async (req, res) => {
-  await User.find().exec((err, users) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Bad request')
-    }
-    res.json(users)
-  })
+  await User.find()
+    .select('-hashed_password -salt')
+    .exec((err, users) => {
+      if (err) {
+        res.status(400)
+        throw new Error('Bad request')
+      }
+      res.json(users)
+    })
 })
 
 // @desc    Creates new user
@@ -72,14 +74,12 @@ exports.createUser = asyncHandler(async (req, res) => {
   })
 
   if (user) {
-    res.status(201).json({
-      _id: user._id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      role: user.role,
-      token: generateJwtToken(user._id, user.role),
-    })
+    user.hashed_password = undefined
+    user.salt = undefined
+    user.stream_count = undefined
+    res
+      .status(201)
+      .json({ ...user, token: generateJwtToken(user._id, user.role) })
   } else {
     res.status(400)
     throw new Error('Signup failed! Invalid user data')
