@@ -1,6 +1,7 @@
 const express = require('express')
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 const { connectMongoDB } = require('./config/mongodb')
+const userRoutes = require('./routes/userRoutes')
 require('colors')
 require('dotenv').config()
 
@@ -19,6 +20,9 @@ app.get('/', (req, res) => {
     message: 'API is running!',
   })
 })
+
+// user routes
+app.use('/api/users', userRoutes)
 
 // Custom middlewares
 app.use(notFound)
