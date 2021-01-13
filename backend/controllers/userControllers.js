@@ -35,6 +35,19 @@ exports.getUser = (req, res) => {
   res.json(user)
 }
 
+// @desc    Fetches all users from db
+// @route   GET /api/users
+// @access  Admin
+exports.getAllUsers = asyncHandler(async (req, res) => {
+  await User.find().exec((err, users) => {
+    if (err) {
+      res.status(400)
+      throw new Error('Bad request')
+    }
+    res.json(users)
+  })
+})
+
 // @desc    Creates new user
 // @route   POST /api/users
 // @access  Public
@@ -111,7 +124,7 @@ exports.resetPassword = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('User not found!')
   }
-  if (user.hashed_password === user.authenticate(oldPassword)) {
+  if (user.authenticate(oldPassword)) {
     user.password = newPassword
     const updatedUser = await user.save()
     res.json({
