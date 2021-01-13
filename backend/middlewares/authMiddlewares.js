@@ -4,24 +4,37 @@ const User = require('../models/user')
 
 exports.isSignedIn = asyncHandler(async (req, res, next) => {
   if (
-    req.headers.Authorization &&
-    req.headers.Authorization.startsWith('Bearer')
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
   ) {
-    const token = req.headers.Authorization.split(' ')[1]
+    const token = req.headers.authorization.split(' ')[1]
     if (!token) {
       res.status(401)
       throw new Error('Authentication failed: Token not found')
     }
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET)
-      req.user = await User.findById(decoded.id).isSelected(
-        '-hashed_password -salt'
-      )
-      next()
+      const decoded = await jwt.verify(token, process.env.JWT_SECRET)
+      await User.findById(decoded.id).exec((err, user) => {
+        if (err) {
+          res.status(400)
+          throw new Error('Error occured while finding user!')
+        }
+        if (!user) {
+          res.status(404)
+          throw new Error('User not found!')
+        }
+        user.salt = undefined
+        user.hashed_password = undefined
+        req.user = user
+        next()
+      })
     } catch (err) {
       res.status(401)
       throw new Error('Authentication failed: Token is invalid')
     }
+  } else {
+    res.status(403)
+    throw new Error('Access denied: user is not signed in')
   }
 })
 
@@ -32,5 +45,3 @@ exports.isAdmin = asyncHandler(async (req, res, next) => {
   }
   next()
 })
-
-module.exports = { isSignedIn, isAdmin }
