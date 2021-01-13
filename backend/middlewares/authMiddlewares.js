@@ -25,4 +25,12 @@ exports.isSignedIn = asyncHandler(async (req, res, next) => {
   }
 })
 
-module.exports = { isSignedIn }
+exports.isAdmin = asyncHandler(async (req, res, next) => {
+  if (req.user.role !== 1) {
+    res.status(403)
+    throw new Error('Access denied: You do not have admin privilege')
+  }
+  next()
+})
+
+module.exports = { isSignedIn, isAdmin }
