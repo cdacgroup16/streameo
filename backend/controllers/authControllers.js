@@ -46,7 +46,7 @@ exports.signin = asyncHandler(async (req, res) => {
 // @desc    Registers a new user
 // @route   POST /api/signup
 // @access  Public
-exports.signup = (req, res) => {
+exports.signup = asyncHandler(async (req, res) => {
   // Validation
   let { firstname, email, password } = req.body
   firstname = firstname && firstname.toLowerCase()
@@ -71,5 +71,5 @@ exports.signup = (req, res) => {
       'Validation failed: Password must contain atleast one lowercase, one uppercase character and atleast one number'
     )
   }
-  createUser(req, res)
-}
+  await createUser(req, res)
+})
