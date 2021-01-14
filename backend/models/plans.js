@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { ObjectId } = mongoose.Types
 
 const planSchema = new mongoose.Schema( 
   {
@@ -36,7 +35,6 @@ const planSchema = new mongoose.Schema(
     }
 )
 module.exports = mongoose.model('plan', planSchema)
-
 
 
 
