@@ -1,41 +1,29 @@
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Types
-const purchaseSchema = new mongoose.purchase(
+const purchaseSchema = new mongoose.Schema(
   {
-      user_id:{
-          type:ObjectId,
-          required:true,
-      },
-      order_id:{
-          type:string,
-          maxLength:20,
-          required:true,
-      },
-      transaction_id:{
-          type:string,
-          maxLength:20,
-          required:true,
-      },
-      payment_id:{
-          type:string,
-          maxLength:20,
-          required:true,
-      },
-      payment_status:{
-      type:string,
-      maxLength:50,
-      required:true,
-      },
-      amount:{
-          type:Number,
-          default:0,
-      },
-      user:{
-          type:ObjectId,
-          ref:'user',
-        },
+    order_id: {
+      type: String,
+      required: true,
     },
-    { timestamps: true }
-  )
-  
-  module.exports = mongoose.model('Purchase', purchaseSchema)
+    transaction_id: {
+      type: String,
+    },
+    payment_status: {
+      type: String,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+    user: {
+      type: ObjectId,
+      ref: 'User',
+    },
+  },
+  { timestamps: true }
+)
+
+module.exports = mongoose.model('Purchase', purchaseSchema)
