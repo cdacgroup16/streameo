@@ -77,9 +77,7 @@ exports.createUser = asyncHandler(async (req, res) => {
     user.hashed_password = undefined
     user.salt = undefined
     user.stream_count = undefined
-    res
-      .status(201)
-      .json({ ...user, token: generateJwtToken(user._id, user.role) })
+    res.status(201).json({ user, token: generateJwtToken(user._id, user.role) })
   } else {
     res.status(400)
     throw new Error('Signup failed! Invalid user data')
