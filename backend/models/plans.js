@@ -15,7 +15,7 @@ const planSchema = new mongoose.Schema(
         trim: true,
         required: true,
       },
-      Concurrent_Streams: {
+      concurrent_streams: {
         type: Number,
         default: 0,
         required: true,
@@ -36,7 +36,6 @@ const planSchema = new mongoose.Schema(
     }
 )
 module.exports = mongoose.model('plan', planSchema)
-
 
 
 
