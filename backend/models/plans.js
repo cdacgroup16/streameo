@@ -19,7 +19,7 @@ const planSchema = new mongoose.Schema(
         default: 0,
         required: true,
       },
-      duration: {
+      validity: {
         type: Number,
         default: 0,
         required: true,
@@ -35,7 +35,6 @@ const planSchema = new mongoose.Schema(
     }
 )
 module.exports = mongoose.model('plan', planSchema)
-
 
 
 
