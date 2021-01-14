@@ -2,13 +2,14 @@ const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Types
 
 const planSchema = new mongoose.Schema( 
-    name_Of_Plan: {
+  {
+    name: {
         type: String,
         maxlength: 50,
         trim: true,
         required: true,
       },
-      price_Of_Plan: {
+      price: {
         type: String,
         maxlength: 50,
         trim: true,
@@ -19,14 +20,22 @@ const planSchema = new mongoose.Schema(
         default: 0,
         required: true,
       },
-      
-
-
-
-
-
-
+      duration: {
+        type: Number,
+        default: 0,
+        required: true,
+      },
+      max_quality: {
+        type: Number,
+        default: 0,
+        required: true,
+      },
+ },
+    {
+      timestamps: true
+    }
 )
+module.exports = mongoose.model('plan', planSchema)
 
 
 
