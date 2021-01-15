@@ -1,12 +1,12 @@
 const express = require('express')
 const {
   getCategoryById,
-  getALLCategory,
-  getOneCategory,
+  getAllCategory,
+  getCategory,
   createCategory,
-	updateCategory,
-	removeCategory,
-} = require("../controllers/categoriesControllers")
+  updateCategory,
+  removeCategory,
+} = require('../controllers/categoriesControllers')
 const { isSignedIn, isAdmin } = require('../middlewares/authMiddlewares')
 
 const router = express.Router()
@@ -15,13 +15,12 @@ const router = express.Router()
 router.param('categoryId', getCategoryById)
 
 // Routes
-router.route('/').get(getALLCategory).post(createCategory)
+router.route('/').get(getAllCategory).post(isSignedIn, isAdmin, createCategory)
 
 router
   .route('/:categoryId')
-  .get(getOneCategory)
-  .post(isAdmin,createCategory)
-  .put(isAdmin, updateCategory)
-  .delete(isAdmin,removeCategory)
+  .get(getCategory)
+  .put(isSignedIn, isAdmin, updateCategory)
+  .delete(isSignedIn, isAdmin, removeCategory)
 
-  module.exports = router
+module.exports = router

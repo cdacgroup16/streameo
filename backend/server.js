@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/users', userRoutes)
 app.use('/api', authRoutes)
-app.use('/api/categories',categoriesRoutes)
+app.use('/api/categories', categoriesRoutes)
 
 // Custom middlewares
 app.use(notFound)
