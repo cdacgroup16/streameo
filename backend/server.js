@@ -3,6 +3,7 @@ const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 const { connectMongoDB } = require('./config/mongodb')
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
+const categoriesRoutes = require('./routes/categoriesRoutes')
 require('colors')
 require('dotenv').config()
 
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/users', userRoutes)
 app.use('/api', authRoutes)
+app.use('/api/categories',categoriesRoutes)
 
 // Custom middlewares
 app.use(notFound)
