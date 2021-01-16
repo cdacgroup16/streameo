@@ -12,26 +12,19 @@ exports.isSignedIn = asyncHandler(async (req, res, next) => {
       res.status(401)
       throw new Error('Authentication failed: Token not found')
     }
-    try {
-      const decoded = await jwt.verify(token, process.env.JWT_SECRET)
-      await User.findById(decoded.id).exec((err, user) => {
-        if (err) {
-          res.status(400)
-          throw new Error('Error occured while finding user!')
-        }
-        if (!user) {
-          res.status(404)
-          throw new Error('User not found!')
-        }
-        user.salt = undefined
-        user.hashed_password = undefined
-        req.user = user
-        next()
-      })
-    } catch (err) {
-      res.status(401)
-      throw new Error('Authentication failed: Token is invalid')
+
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET)
+    const user = await User.findById(decoded.id)
+
+    if (!user) {
+      res.status(404)
+      throw new Error('User not found!')
     }
+
+    user.salt = undefined
+    user.hashed_password = undefined
+    req.user = user
+    next()
   } else {
     res.status(403)
     throw new Error('Access denied: user is not signed in')
