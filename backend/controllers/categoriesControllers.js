@@ -55,6 +55,7 @@ exports.createCategory = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error(`Category with name ${name} already exists!`)
   }
+  // Validation
   if (!name) {
     res.status(422)
     throw new Error('Validation failed: The Category name is required')
@@ -72,15 +73,12 @@ exports.createCategory = asyncHandler(async (req, res) => {
     )
   }
 
-  const category = new Category({ name })
-  await category.save((err, category) => {
-    if (err) {
-      res.status(400)
-      throw new Error(err.message)
-    }
-    res.status(201)
-    res.json(category)
-  })
+  const category = await Category.create({ name })
+  if (!category) {
+    throw new Error(`Failed to create the category with name ${name}`)
+  }
+  res.status(201)
+  res.json(category)
 })
 
 // @desc    Updates a category with the same id responds with updated category
