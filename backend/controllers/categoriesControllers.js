@@ -5,9 +5,17 @@ const asyncHandler = require('express-async-handler')
 // @route   path param "/api/categories/:categoryId"
 // @access  Public
 exports.getCategoryById = asyncHandler(async (req, res, next, id) => {
-  const category = await Category.findById(id)
-  req.category = category
-  next()
+  try {
+    const category = await Category.findById(id)
+    if (!category) {
+      res.status(404)
+      throw new Error(`Category with the supplied id doesn't exists`)
+    }
+    req.category = category
+    next()
+  } catch (error) {
+    next(error)
+  }
 })
 
 // @desc    Gives data for a single category in the database
