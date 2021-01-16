@@ -140,16 +140,12 @@ exports.removeCategory = asyncHandler(async (req, res) => {
     throw new Error(`Category with the supplied id doesn't exists`)
   }
 
-  await category.deleteOne((err, removedCategory) => {
-    if (err) {
-      res.status(400)
-      throw new Error(
-        `Failed to delete category ${category.name} from the database`
-      )
-    }
-    res.status(200)
-    res.json({
-      message: ` \'${removedCategory.name}\' category was deleted successfully from the DB`,
-    })
+  const removedCategory = await category.deleteOne()
+  if (!removedCategory) {
+    throw new Error(`Failed to delete category ${category.name}`)
+  }
+  res.status(200)
+  res.json({
+    message: ` \'${removedCategory.name}\' category was deleted successfully from the DB`,
   })
 })
