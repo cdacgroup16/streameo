@@ -25,7 +25,7 @@ exports.getPlan = (req, res) => {
   const plan = req.plan
   if (!plan) {
     res.status(404)
-    throw new Error('User not found!')
+    throw new Error('Plan not found!')
   }
   res.json(plan)
 }
@@ -35,12 +35,12 @@ exports.getPlan = (req, res) => {
 // @access  Admin
 exports.getAllPlans = asyncHandler(async (req, res) => {
   await Plan.find()
-    .exec((err, users) => {
+    .exec((err, plans) => {
       if (err) {
         res.status(400)
         throw new Error('Bad request')
       }
-      res.json(users)
+      res.json(plans)
     })
 })
 
