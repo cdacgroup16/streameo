@@ -24,7 +24,7 @@ exports.getUserById = async (req, res, next, id) => {
 // @desc    Fetches user req object
 // @route   GET /api/users/:userId
 // @access  Protected
-exports.getUser = (req, res) => {
+exports.getUser = asyncHandler(async (req, res) => {
   const user = req.user
   if (!user) {
     res.status(404)
@@ -32,7 +32,7 @@ exports.getUser = (req, res) => {
   }
   user.stream_count = undefined
   res.json(user)
-}
+})
 
 // @desc    Fetches all users from db
 // @route   GET /api/users
