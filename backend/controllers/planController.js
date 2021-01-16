@@ -21,7 +21,7 @@ exports.getPlanById = asyncHandler(async (req, res, next, id) => {
 // @desc    Fetches plan req object
 // @route   GET /api/plans/:planId
 // @access  Protected
-exports.getUser = (req, res) => {
+exports.getPlan = (req, res) => {
   const plan = req.plan
   if (!plan) {
     res.status(404)
