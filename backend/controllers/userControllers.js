@@ -5,12 +5,9 @@ const { generateJwtToken } = require('../utils/jwt')
 // @desc    Fetches user from db and stores it in req object
 // @route   path param "userId"
 // @access  Protected
-exports.getUserById = asyncHandler(async (req, res, next, id) => {
-  await User.findById(id).exec((err, user) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Error occured while finding user!')
-    }
+exports.getUserById = async (req, res, next, id) => {
+  try {
+    const user = await User.findById(id)
     if (!user) {
       res.status(400)
       throw new Error('User not found!')
@@ -19,8 +16,10 @@ exports.getUserById = asyncHandler(async (req, res, next, id) => {
     user.hashed_password = undefined
     req.user = user
     next()
-  })
-})
+  } catch (error) {
+    next(error)
+  }
+}
 
 // @desc    Fetches user req object
 // @route   GET /api/users/:userId
