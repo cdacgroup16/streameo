@@ -90,6 +90,7 @@ exports.updateCategory = asyncHandler(async (req, res) => {
 
   const categoryExists = await Category.findOne({ name })
 
+  // Validation
   if (categoryExists) {
     res.status(400)
     throw new Error(`Another category with the name '${name}' already exists!`)
@@ -119,18 +120,13 @@ exports.updateCategory = asyncHandler(async (req, res) => {
   const oldCategoryName = category.name
   category.name = name
 
-  await category.save((err, updatedCategory) => {
-    if (err) {
-      res.status(400)
-      throw new Error(err.message)
-    }
-    if (!updatedCategory) {
-      res.status(400)
-      throw new Error(`Failed to updated category ${oldCategoryName}`)
-    }
-    res.status(200)
-    res.json(updatedCategory)
-  })
+  const updatedCategory = await category.save()
+  if (!updatedCategory) {
+    res.status(400)
+    throw new Error(`Failed to updated category ${oldCategoryName}`)
+  }
+  res.status(200)
+  res.json(updatedCategory)
 })
 
 // @desc    Deletes a category with the same id if the category has no videos linked to it
