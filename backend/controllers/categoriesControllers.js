@@ -34,17 +34,12 @@ exports.getCategory = (req, res) => {
 // @route   GET "/api/categories"
 // @access  Public
 exports.getAllCategory = asyncHandler(async (req, res) => {
-  await Category.find().exec((err, categories) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Error while fetching all categories from DataBase')
-    }
-    if (!categories) {
-      res.status(404)
-      throw new Error('No categories  found in DataBase')
-    }
-    res.json(categories)
-  })
+  const categories = await Category.find()
+  if (!categories) {
+    res.status(404)
+    throw new Error('No categories  found in DataBase')
+  }
+  res.json(categories)
 })
 
 // @desc    Creates new category and responds with the new category data
