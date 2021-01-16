@@ -23,7 +23,7 @@ exports.isSignedIn = asyncHandler(async (req, res, next) => {
 
     user.salt = undefined
     user.hashed_password = undefined
-    req.user = user
+    req.auth = user
     next()
   } else {
     res.status(403)
@@ -31,8 +31,19 @@ exports.isSignedIn = asyncHandler(async (req, res, next) => {
   }
 })
 
+exports.isAuthorized = asyncHandler(async (req, res, next) => {
+  if (
+    (req.user && req.auth && req.user._id === req.auth._id) ||
+    (req.user && req.auth && req.auth.role === 1)
+  ) {
+    next()
+  }
+  res.status(403)
+  throw new Error('Access denied: user is not authorized')
+})
+
 exports.isAdmin = asyncHandler(async (req, res, next) => {
-  if (req.user.role !== 1) {
+  if (req.auth.role !== 1) {
     res.status(403)
     throw new Error('Access denied: You do not have admin privilege')
   }
