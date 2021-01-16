@@ -10,7 +10,7 @@ const { isSignedIn, isAdmin } = require('../middlewares/authMiddlewares')
 
 const router = express.Router()
 
-// middleware to fetch user data from db if 'userId' is present in the path
+// middleware to fetch plan data from db if 'planId' is present in the path
 router.param('planId', getPlanById)
 
 // Routes
