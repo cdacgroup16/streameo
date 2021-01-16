@@ -4,6 +4,7 @@ const { connectMongoDB } = require('./config/mongodb')
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
 const categoriesRoutes = require('./routes/categoriesRoutes')
+const purchaseRoutes = require('./routes/purchasesRoutes')
 require('colors')
 require('dotenv').config()
 
@@ -27,6 +28,8 @@ app.get('/', (req, res) => {
 app.use('/api/users', userRoutes)
 app.use('/api', authRoutes)
 app.use('/api/categories', categoriesRoutes)
+app.use('/api/purchases', purchaseRoutes)
+
 
 // Custom middlewares
 app.use(notFound)
