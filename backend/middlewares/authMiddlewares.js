@@ -33,10 +33,11 @@ exports.isSignedIn = asyncHandler(async (req, res, next) => {
 
 exports.isAuthorized = asyncHandler(async (req, res, next) => {
   if (
-    (req.user && req.auth && req.user._id === req.auth._id) ||
+    (req.user && req.auth && req.user._id.equals(req.auth._id)) ||
     (req.user && req.auth && req.auth.role === 1)
   ) {
     next()
+    return
   }
   res.status(403)
   throw new Error('Access denied: user is not authorized')
