@@ -7,7 +7,11 @@ const {
   resetPassword,
   getAllUsers,
 } = require('../controllers/userControllers')
-const { isSignedIn, isAdmin } = require('../middlewares/authMiddlewares')
+const {
+  isSignedIn,
+  isAdmin,
+  isAuthorized,
+} = require('../middlewares/authMiddlewares')
 
 const router = express.Router()
 
@@ -20,8 +24,8 @@ router.route('/').get(getAllUsers).post(createUser)
 router
   .route('/:userId')
   .get(isSignedIn, getUser)
-  .put(isSignedIn, updateUserById)
+  .put(isSignedIn, isAuthorized, updateUserById)
 
-router.put('/reset-password/:userId', resetPassword)
+router.put('/reset-password/:userId', isSignedIn, isAuthorized, resetPassword)
 
 module.exports = router

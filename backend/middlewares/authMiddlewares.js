@@ -12,34 +12,39 @@ exports.isSignedIn = asyncHandler(async (req, res, next) => {
       res.status(401)
       throw new Error('Authentication failed: Token not found')
     }
-    try {
-      const decoded = await jwt.verify(token, process.env.JWT_SECRET)
-      await User.findById(decoded.id).exec((err, user) => {
-        if (err) {
-          res.status(400)
-          throw new Error('Error occured while finding user!')
-        }
-        if (!user) {
-          res.status(404)
-          throw new Error('User not found!')
-        }
-        user.salt = undefined
-        user.hashed_password = undefined
-        req.user = user
-        next()
-      })
-    } catch (err) {
-      res.status(401)
-      throw new Error('Authentication failed: Token is invalid')
+
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET)
+    const user = await User.findById(decoded.id)
+
+    if (!user) {
+      res.status(404)
+      throw new Error('User not found!')
     }
+
+    user.salt = undefined
+    user.hashed_password = undefined
+    req.auth = user
+    next()
   } else {
     res.status(403)
     throw new Error('Access denied: user is not signed in')
   }
 })
 
+exports.isAuthorized = asyncHandler(async (req, res, next) => {
+  if (
+    (req.user && req.auth && req.user._id.equals(req.auth._id)) ||
+    (req.user && req.auth && req.auth.role === 1)
+  ) {
+    next()
+    return
+  }
+  res.status(403)
+  throw new Error('Access denied: user is not authorized')
+})
+
 exports.isAdmin = asyncHandler(async (req, res, next) => {
-  if (req.user.role !== 1) {
+  if (req.auth.role !== 1) {
     res.status(403)
     throw new Error('Access denied: You do not have admin privilege')
   }

@@ -17,29 +17,25 @@ exports.signin = asyncHandler(async (req, res) => {
   email = email.trim().toLowerCase()
   password = password.trim()
 
-  await User.findOne({ email }).exec((err, user) => {
-    if (err) {
-      res.status(500)
-      throw new Error(err.message)
-    }
-    if (!user) {
-      res.status(404)
-      throw new Error(`The user with email ${email} doesn't exist`)
-    }
-    if (!user.authenticate(password)) {
-      res.status(401)
-      throw new Error('Authentication failed: Wrong password!')
-    }
+  const user = await User.findOne({ email })
 
-    const token = generateJwtToken(user._id, user.role)
-    user.hashed_password = undefined
-    user.salt = undefined
-    user.createdAt = undefined
-    user.updatedAt = undefined
-    res.json({
-      token,
-      user,
-    })
+  if (!user) {
+    res.status(404)
+    throw new Error(`The user with email ${email} doesn't exist`)
+  }
+  if (!user.authenticate(password)) {
+    res.status(401)
+    throw new Error('Authentication failed: Wrong password!')
+  }
+
+  const token = generateJwtToken(user._id, user.role)
+  user.hashed_password = undefined
+  user.salt = undefined
+  user.createdAt = undefined
+  user.updatedAt = undefined
+  res.json({
+    token,
+    user,
   })
 })
 
