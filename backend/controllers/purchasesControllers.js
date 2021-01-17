@@ -1,9 +1,9 @@
 const Purchase = require('../models/purchases')
 const asyncHandler = require('express-async-handler')
 
-// @desc    Fetches purchases from db and stores it in req object
+// @desc    Fetches purchase from db and stores it in req.purchase object
 // @route   path param "/api/purchases/:purchaseId"
-// @access  Public
+// @access  Protected
 exports.getPurchaseById = async (req, res, next, id) => {
   try {
     const purchase = await Purchase.findById(id)
@@ -17,6 +17,18 @@ exports.getPurchaseById = async (req, res, next, id) => {
     next(error)
   }
 }
+
+// @desc    Gives data for a single purchase in the database
+// @route   GET /api/purchases/:getPurchaseId
+// @access  Protected
+exports.getPurchase = asyncHandler(async (req, res) => {
+  const purchase = req.purchase
+  if (!purchase) {
+    res.status(404)
+    throw new Error(`Purchase with this id doesn't exists`)
+  }
+  res.json(purchase)
+})
 
 // @desc    Gives json data for all the purchases in the database
 // @route   GET "/api/purchases”
@@ -35,17 +47,6 @@ exports.getAllPurchase = asyncHandler(async (req, res) => {
   })
 })
 
-// @desc    Gives data for a single purchase in the database
-// @route   GET "/api/purchases/:getPurchaseId”  , GET "/api/purchases/:getUserId”
-// @access  Public
-exports.getPurchaseId = (req, res) => {
-  const purchase = req.purchase
-  if (!purchase) {
-    res.status(404)
-    throw new Error(`Purchase with this id doesn't exists`)
-  }
-  res.json(purchase)
-}
 // @desc    Gives json data for a purchases for a userId in the database
 // @route   GET "/api/purchases/:userId"
 // @access  Public
