@@ -5,9 +5,17 @@ const asyncHandler = require('express-async-handler')
 // @route   path param "/api/categories/:categoryId"
 // @access  Public
 exports.getCategoryById = asyncHandler(async (req, res, next, id) => {
-  const category = await Category.findById(id)
-  req.category = category
-  next()
+  try {
+    const category = await Category.findById(id)
+    if (!category) {
+      res.status(404)
+      throw new Error(`Category with the supplied id doesn't exists`)
+    }
+    req.category = category
+    next()
+  } catch (error) {
+    next(error)
+  }
 })
 
 // @desc    Gives data for a single category in the database
@@ -26,17 +34,12 @@ exports.getCategory = (req, res) => {
 // @route   GET "/api/categories"
 // @access  Public
 exports.getAllCategory = asyncHandler(async (req, res) => {
-  await Category.find().exec((err, categories) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Error while fetching all categories from DataBase')
-    }
-    if (!categories) {
-      res.status(404)
-      throw new Error('No categories  found in DataBase')
-    }
-    res.json(categories)
-  })
+  const categories = await Category.find()
+  if (!categories) {
+    res.status(404)
+    throw new Error('No categories  found in DataBase')
+  }
+  res.json(categories)
 })
 
 // @desc    Creates new category and responds with the new category data
@@ -52,6 +55,7 @@ exports.createCategory = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error(`Category with name ${name} already exists!`)
   }
+  // Validation
   if (!name) {
     res.status(422)
     throw new Error('Validation failed: The Category name is required')
@@ -69,15 +73,12 @@ exports.createCategory = asyncHandler(async (req, res) => {
     )
   }
 
-  const category = new Category({ name })
-  await category.save((err, category) => {
-    if (err) {
-      res.status(400)
-      throw new Error(err.message)
-    }
-    res.status(201)
-    res.json(category)
-  })
+  const category = await Category.create({ name })
+  if (!category) {
+    throw new Error(`Failed to create the category with name ${name}`)
+  }
+  res.status(201)
+  res.json(category)
 })
 
 // @desc    Updates a category with the same id responds with updated category
@@ -89,6 +90,7 @@ exports.updateCategory = asyncHandler(async (req, res) => {
 
   const categoryExists = await Category.findOne({ name })
 
+  // Validation
   if (categoryExists) {
     res.status(400)
     throw new Error(`Another category with the name '${name}' already exists!`)
@@ -118,18 +120,13 @@ exports.updateCategory = asyncHandler(async (req, res) => {
   const oldCategoryName = category.name
   category.name = name
 
-  await category.save((err, updatedCategory) => {
-    if (err) {
-      res.status(400)
-      throw new Error(err.message)
-    }
-    if (!updatedCategory) {
-      res.status(400)
-      throw new Error(`Failed to updated category ${oldCategoryName}`)
-    }
-    res.status(200)
-    res.json(updatedCategory)
-  })
+  const updatedCategory = await category.save()
+  if (!updatedCategory) {
+    res.status(400)
+    throw new Error(`Failed to updated category ${oldCategoryName}`)
+  }
+  res.status(200)
+  res.json(updatedCategory)
 })
 
 // @desc    Deletes a category with the same id if the category has no videos linked to it
@@ -143,16 +140,12 @@ exports.removeCategory = asyncHandler(async (req, res) => {
     throw new Error(`Category with the supplied id doesn't exists`)
   }
 
-  await category.deleteOne((err, removedCategory) => {
-    if (err) {
-      res.status(400)
-      throw new Error(
-        `Failed to delete category ${category.name} from the database`
-      )
-    }
-    res.status(200)
-    res.json({
-      message: ` \'${removedCategory.name}\' category was deleted successfully from the DB`,
-    })
+  const removedCategory = await category.deleteOne()
+  if (!removedCategory) {
+    throw new Error(`Failed to delete category ${category.name}`)
+  }
+  res.status(200)
+  res.json({
+    message: ` \'${removedCategory.name}\' category was deleted successfully from the DB`,
   })
 })

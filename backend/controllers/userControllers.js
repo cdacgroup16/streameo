@@ -1,16 +1,14 @@
 const User = require('../models/user')
 const asyncHandler = require('express-async-handler')
 const { generateJwtToken } = require('../utils/jwt')
+const { validatePassword } = require('../utils/validation')
 
 // @desc    Fetches user from db and stores it in req object
 // @route   path param "userId"
 // @access  Protected
-exports.getUserById = asyncHandler(async (req, res, next, id) => {
-  await User.findById(id).exec((err, user) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Error occured while finding user!')
-    }
+exports.getUserById = async (req, res, next, id) => {
+  try {
+    const user = await User.findById(id)
     if (!user) {
       res.status(400)
       throw new Error('User not found!')
@@ -19,13 +17,15 @@ exports.getUserById = asyncHandler(async (req, res, next, id) => {
     user.hashed_password = undefined
     req.user = user
     next()
-  })
-})
+  } catch (error) {
+    next(error)
+  }
+}
 
 // @desc    Fetches user req object
 // @route   GET /api/users/:userId
 // @access  Protected
-exports.getUser = (req, res) => {
+exports.getUser = asyncHandler(async (req, res) => {
   const user = req.user
   if (!user) {
     res.status(404)
@@ -33,7 +33,7 @@ exports.getUser = (req, res) => {
   }
   user.stream_count = undefined
   res.json(user)
-}
+})
 
 // @desc    Fetches all users from db
 // @route   GET /api/users
@@ -117,14 +117,24 @@ exports.updateUserById = asyncHandler(async (req, res) => {
 // @access  Protected
 exports.resetPassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
-  const { newPassword, oldPassword } = req.body
+  let { newPassword, oldPassword } = req.body
+  newPassword = newPassword.trim()
   if (!user) {
     res.status(404)
     throw new Error('User not found!')
   }
+  if (!validatePassword(newPassword)) {
+    res.status(422)
+    throw new Error(
+      'Validation failed: Password must contain atleast one lowercase, one uppercase character and atleast one number'
+    )
+  }
   if (user.authenticate(oldPassword)) {
     user.password = newPassword
     const updatedUser = await user.save()
+    if (!updatedUser) {
+      throw new Error('Password reset failed')
+    }
     res.json({
       message: `User password changed successfully!`,
     })
