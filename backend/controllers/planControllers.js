@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler')
 
 // @desc    Fetches plans from db and stores it in req.plan object
 // @route   path param "planId"
-// @access  Protected
+// @access  Public
 exports.getPlanById = async (req, res, next, id) => {
   try {
     const plan = await Plan.findById(id)
@@ -20,7 +20,7 @@ exports.getPlanById = async (req, res, next, id) => {
 
 // @desc    Fetches plan req object
 // @route   GET /api/plans/:planId
-// @access  Protected
+// @access  Public
 exports.getPlan = asyncHandler(async (req, res) => {
   const plan = req.plan
   if (!plan) {
@@ -32,7 +32,7 @@ exports.getPlan = asyncHandler(async (req, res) => {
 
 // @desc    Fetches all plans from db
 // @route   GET /api/plans
-// @access  Admin
+// @access  Public
 exports.getAllPlans = asyncHandler(async (req, res) => {
   const plans = await Plan.find()
   if (!plans) {
@@ -43,8 +43,8 @@ exports.getAllPlans = asyncHandler(async (req, res) => {
 })
 
 // @desc    Creates new Plan
-// @route   POST /api/plans --------
-// @access  Public------
+// @route   POST /api/plans
+// @access  Admin
 exports.createPlan = asyncHandler(async (req, res) => {
   let { name, price, validity, concurrent_streams, max_quality } = req.body
   name = name && name.toLowerCase()
@@ -139,7 +139,7 @@ exports.createPlan = asyncHandler(async (req, res) => {
 
 // @desc    Updates plan data
 // @route   PUT /api/plans/:planId
-// @access  Protected
+// @access  Admin
 exports.updatePlanById = asyncHandler(async (req, res) => {
   const plan = await Plan.findById(req.plan._id)
   let newPlanData = req.body
@@ -215,4 +215,25 @@ exports.updatePlanById = asyncHandler(async (req, res) => {
   }
   res.status(200)
   res.json(updatedPlan)
+})
+
+// @desc    Deletes plan by id
+// @route   DELETE /api/plans/:planId
+// @access  Admin
+exports.removePlan = asyncHandler(async (req, res) => {
+  const plan = req.plan
+
+  if (!plan) {
+    res.status(404)
+    throw new Error(`Plan with the supplied id doesn't exists`)
+  }
+
+  const removedPlan = await plan.deleteOne()
+  if (!removedPlan) {
+    throw new Error(`Failed to remove plan ${plan.name}`)
+  }
+  res.status(200)
+  res.json({
+    message: `\'${removedPlan.name}\' plan was deleted successfully from the DB`,
+  })
 })

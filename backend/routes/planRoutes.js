@@ -5,6 +5,7 @@ const {
   updatePlanById,
   getPlan,
   getAllPlans,
+  removePlan,
 } = require('../controllers/planControllers')
 const { isSignedIn, isAdmin } = require('../middlewares/authMiddlewares')
 
@@ -16,6 +17,10 @@ router.param('planId', getPlanById)
 // Routes
 router.route('/').get(getAllPlans).post(isSignedIn, isAdmin, createPlan)
 
-router.route('/:planId').get(getPlan).put(isSignedIn, isAdmin, updatePlanById)
+router
+  .route('/:planId')
+  .get(getPlan)
+  .put(isSignedIn, isAdmin, updatePlanById)
+  .delete(isSignedIn, isAdmin, removePlan)
 
 module.exports = router
