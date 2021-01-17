@@ -31,20 +31,15 @@ exports.getPurchase = asyncHandler(async (req, res) => {
 })
 
 // @desc    Gives json data for all the purchases in the database
-// @route   GET "/api/purchases”
-// @access  Protected
+// @route   GET /api/purchases
+// @access  Admin
 exports.getAllPurchase = asyncHandler(async (req, res) => {
-  await Purchase.find().exec((err, purchases) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Error while fetching all Purchases from DataBase')
-    }
-    if (!purchases) {
-      res.status(404)
-      throw new Error('No Purchase found in DataBase')
-    }
-    res.json(purchases)
-  })
+  const purchases = await Purchase.find()
+  if (!purchases) {
+    res.status(404)
+    throw new Error('No purchases found in dataBase')
+  }
+  res.json(purchases)
 })
 
 // @desc    Gives json data for a purchases for a userId in the database
