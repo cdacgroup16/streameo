@@ -119,3 +119,10 @@ exports.updatePurchaseById = asyncHandler(async (req, res) => {
   const updatedPurchaseData = await purchase.save()
   res.json(updatedPurchaseData)
 })
+
+// @desc    Gets the list of all enum values for payment_status
+// @route   GET /api/purchases/paymentstatus
+// @access  Admin
+exports.getAllPaymentStatus = asyncHandler(async (req, res) => {
+  res.json(Purchase.schema.path('payment_status').enumValues)
+})
