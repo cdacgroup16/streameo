@@ -34,14 +34,13 @@ exports.getPlan = asyncHandler(async (req, res) => {
 // @route   GET /api/plans
 // @access  Admin
 exports.getAllPlans = asyncHandler(async (req, res) => {
-  await Plan.find()
-    .exec((err, plans) => {
-      if (err) {
-        res.status(400)
-        throw new Error('Bad request')
-      }
-      res.json(plans)
-    })
+  const plans = await Plan.find()
+  if(!plans){
+    res.status(404)
+    throw new Error('Plan not found!')
+  }
+  res.json(plans)
+
 })
 
 // @desc    Creates new Plan
