@@ -55,12 +55,12 @@ exports.createPlan = asyncHandler(async (req, res) => {
 
   const planExists = await Plan.findOne({ name })
 
+  // Valdiation
   if (planExists) {
     res.status(400)
     throw new Error(`Plan with name ${planExists.name} already exists!`)
   }
 
-  // Valdiation
   if (!name) {
     res.status(422)
     throw new Error('Validation failed: The plan name is required')
@@ -105,6 +105,10 @@ exports.createPlan = asyncHandler(async (req, res) => {
       'Validation failed: Validity must be an integer containing number of days'
     )
   }
+  if (!Number.isInteger(price)) {
+    res.status(422)
+    throw new Error('Validation failed: Price must be an integer')
+  }
   if (!Number.isInteger(concurrent_streams)) {
     res.status(422)
     throw new Error(
@@ -140,17 +144,75 @@ exports.updatePlanById = asyncHandler(async (req, res) => {
   const plan = await Plan.findById(req.plan._id)
   let newPlanData = req.body
   if (!plan) {
-    plan.name = newPlanData.name || plan.name
-    plan.price = newPlanData.price || plan.price
-    plan.validity = newPlanData.validity || plan.validity
-    plan.concurrent_streams =
-      newPlanData.concurrent_streams || plan.concurrent_streams
-    plan.max_quality = newPlanData.max_quality || plan.max_quality
-    // res.json({
-    //   message = "Plan Updated Success"
-    // })
-  } else {
     res.status(404)
     throw new Error('Plan not found!')
   }
+  plan.name =
+    (newPlanData.name && newPlanData.name.trim().toLowerCase()) || plan.name
+  plan.price = newPlanData.price || plan.price
+  plan.validity = newPlanData.validity || plan.validity
+  plan.concurrent_streams =
+    newPlanData.concurrent_streams || plan.concurrent_streams
+  plan.max_quality = newPlanData.max_quality || plan.max_quality
+
+  const planExists = await Plan.findOne({ name: newPlanData.name })
+  // Validation
+  if (planExists) {
+    res.status(400)
+    throw new Error(`Plan with name ${planExists.name} already exists!`)
+  }
+  if (!newPlanData) {
+    res.status(400)
+    throw new Error(`Provide atlease one field to be updated!`)
+  }
+
+  if (newPlanData.name && newPlanData.name.length > 50) {
+    res.status(422)
+    throw new Error(
+      "Validation failed: The Plan name can't be longer than 50 characters"
+    )
+  }
+  if (newPlanData.name && newPlanData.name.length < 3) {
+    res.status(422)
+    throw new Error(
+      "Validation failed: The Plan name can't be shorter than 3 characters"
+    )
+  }
+  if (!Number.isInteger(newPlanData.price)) {
+    res.status(422)
+    throw new Error('Validation failed: Price must be an integer')
+  }
+  if (newPlanData.price && newPlanData.price < 0) {
+    res.status(422)
+    throw new Error("Validation failed: The Plan price can't be less than 0")
+  }
+  if (newPlanData.validity && !Number.isInteger(newPlanData.validity)) {
+    res.status(422)
+    throw new Error(
+      'Validation failed: Validity must be an integer containing number of days'
+    )
+  }
+  if (
+    newPlanData.concurrent_streams &&
+    !Number.isInteger(newPlanData.concurrent_streams)
+  ) {
+    res.status(422)
+    throw new Error(
+      'Validation failed: concurrent_streams (Screens) must be an integer containing number of Screens'
+    )
+  }
+  if (newPlanData.max_quality && !Number.isInteger(newPlanData.max_quality)) {
+    res.status(422)
+    throw new Error(
+      'Validation failed: max_quality must be an integer containing max resolution quality'
+    )
+  }
+
+  const updatedPlan = await plan.save()
+  if (!updatedPlan) {
+    res.status(400)
+    throw new Error(`Failed to update plan ${plan._id}`)
+  }
+  res.status(200)
+  res.json(updatedPlan)
 })
