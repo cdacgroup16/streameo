@@ -1,4 +1,4 @@
-const Purchase = require('../models/purchases')
+const Purchase = require('../models/purchase')
 const asyncHandler = require('express-async-handler')
 
 // @desc    Fetches purchase from db and stores it in req.purchase object
@@ -42,56 +42,65 @@ exports.getAllPurchase = asyncHandler(async (req, res) => {
   res.json(purchases)
 })
 
-// @desc    Gives json data for a purchases for a userId in the database
-// @route   GET "/api/purchases/:userId"
-// @access  Public
-
-// @desc     Creates new plan and responds with the new plan data
-// @route    POST "/api/purchases”
-// @access   Admin
+// @desc     Creates new purchase and responds with the new purchase data
+// @route    POST /api/purchases
+// @access   Protected
 exports.createPurchase = asyncHandler(async (req, res) => {
-  let { order_id, transaction_id, payment_status, amount } = req.body
-  order_id = order_id && order_id.trim()
-  transaction_id = transaction_id && transaction_id.trim()
-  payment_status = payment_status && payment_status.toLowerCase().trim()
-  amount = amount && amount.trim()
+  let { plan_id, quantity, amount, transaction_id, payment_status } = req.body
+  const { _id: user } = req.auth
 
-  const purchaseExist = await Purchase.findOne({ order_Id })
-  if (purchaseExist) {
-    res.status(400)
-    throw new Error('Purchases already exists!')
-  }
-
-  const purchase = await Purchase.create({
-    order_id,
-    transaction_id,
-    payment_status,
-    amount,
-  })
-  if (!order_id) {
+  if (!plan_id) {
     res.status(422)
-    throw new Error('Validation failed: Purchase Order_id is required')
+    throw new Error('Validation failed: Purchase plan_id is required')
   }
   if (!transaction_id) {
     res.status(422)
     throw new Error('Validation failed: Purchase transaction_id is required')
   }
+  if (!amount) {
+    res.status(422)
+    throw new Error('Validation failed: Purchase amount is required')
+  }
   if (amount < 0) {
     res.status(422)
-    throw new Error('Validation failed: Purchase amount cannot be negative')
+    throw new Error('Validation failed: Purchase amount cannot be less than 0')
   }
-  if (!payment_status) {
+  if (!user) {
     res.status(422)
-    throw new Error('Validation failed: Purchase payment_status is required')
+    throw new Error('Validation failed: User needs to be signed in')
   }
+
+  const purchase = await Purchase.create({
+    plan_id,
+    quantity,
+    transaction_id,
+    amount,
+    payment_status,
+    user,
+  })
+
+  if (!purchase) {
+    throw new Error('Failed to create a purchase')
+  }
+  res.status(201)
+  res.json(purchase)
 })
 
 // @desc    Updates a plan with the same id responds with updated plan data
-// @route   "/api/purchases/:purchaseId”
-// @access  Protected
+// @route   POST /api/purchases/:purchaseId
+// @access  Admin
 exports.updatePurchaseById = asyncHandler(async (req, res) => {
   const purchase = await Purchase.findById(req.purchase._id)
   let newPurchaseData = req.body
+
+  const purchaseExist = await Purchase.findOne({ order_Id })
+  if (purchaseExist) {
+    res.status(400)
+    throw new Error(
+      'Purchases already with the given id already exists exists!'
+    )
+  }
+
   if (purchase) {
     purchase.order_id = newPurchaseData.order_id || purchase.order_id
     purchase.transaction_id =
