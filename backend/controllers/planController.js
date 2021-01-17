@@ -1,34 +1,34 @@
 const Plan = require('../models/Plan')
 const asyncHandler = require('express-async-handler')
 
-// @desc    Fetches plans from db and stores it in req object
+// @desc    Fetches plans from db and stores it in req.plan object
 // @route   path param "planId"
 // @access  Protected
-exports.getPlanById = asyncHandler(async (req, res, next, id) => {
-  await Plan.findById(id).exec((err, plan) => {
-    if (err) {
-      res.status(400)
-      throw new Error('Error occured while finding plan!')
-    }
+exports.getPlanById = async (req, res, next, id) => {
+  try {
+    await Plan.findById(id)
     if (!plan) {
       res.status(400)
       throw new Error('Plan not found!')
     }
+    req.plan
     next()
-  })
-})
+  } catch (error) {
+    next(error)
+  }
+}
 
 // @desc    Fetches plan req object
 // @route   GET /api/plans/:planId
 // @access  Protected
-exports.getPlan = (req, res) => {
+exports.getPlan = asyncHandler(async (req, res) => {
   const plan = req.plan
   if (!plan) {
     res.status(404)
     throw new Error('Plan not found!')
   }
   res.json(plan)
-}
+})
 
 // @desc    Fetches all plans from db
 // @route   GET /api/plans
