@@ -90,28 +90,32 @@ exports.createPurchase = asyncHandler(async (req, res) => {
 // @route   POST /api/purchases/:purchaseId
 // @access  Admin
 exports.updatePurchaseById = asyncHandler(async (req, res) => {
-  const purchase = await Purchase.findById(req.purchase._id)
-  let newPurchaseData = req.body
-
-  const purchaseExist = await Purchase.findOne({ order_Id })
-  if (purchaseExist) {
-    res.status(400)
-    throw new Error(
-      'Purchases already with the given id already exists exists!'
-    )
-  }
-
-  if (purchase) {
-    purchase.order_id = newPurchaseData.order_id || purchase.order_id
-    purchase.transaction_id =
-      newPurchaseData.transaction_id || purchase.transaction_id
-    purchase.amount = newPurchaseData.amount || purchase.amount
-    purchase.payment_status =
-      newPurchaseData.payment_status || purchase.payment_status
-    const updatedPurchaseData = await purchase.save()
-    res.json(updatedPurchaseData)
-  } else {
+  const purchase = req.purchase
+  if (!purchase) {
     res.status(404)
-    throw new Error('Purchases not found!')
+    throw new Error("Purchase with the provided id doesn't exists")
   }
+
+  let newPurchaseData = req.body
+  const { payment_status } = newPurchaseData
+
+  if (!payment_status) {
+    res.status(422)
+    throw new Error('Validation failed: Purchase payment_status is required')
+  }
+  switch (payment_status) {
+    case 'pending':
+    case 'failed':
+    case 'success':
+      break
+
+    default:
+      res.status(400)
+      throw new Error('The payment_status must be one of the enum values')
+  }
+
+  purchase.payment_status =
+    newPurchaseData.payment_status || purchase.payment_status
+  const updatedPurchaseData = await purchase.save()
+  res.json(updatedPurchaseData)
 })
