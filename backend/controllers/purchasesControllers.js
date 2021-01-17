@@ -1,29 +1,37 @@
-const Purchases = require('../models/purchases')
+const Purchase = require('../models/purchases')
 const asyncHandler = require('express-async-handler')
 
 // @desc    Fetches purchases from db and stores it in req object
 // @route   path param "/api/purchases/:purchaseId"
 // @access  Public
-exports.getPurchaseById = asyncHandler(async (req, res, next, id) => {
+exports.getPurchaseById = async (req, res, next, id) => {
+  try {
     const purchase = await Purchase.findById(id)
-    req.purchase = Purchase
+    if (!purchase) {
+      res.status(404)
+      throw new Error('Purchase not found!')
+    }
+    req.purchase = purchase
     next()
-  })
+  } catch (error) {
+    next(error)
+  }
+}
 
 // @desc    Gives json data for all the purchases in the database
 // @route   GET "/api/purchases”
 // @access  Protected
 exports.getAllPurchase = asyncHandler(async (req, res) => {
   await Purchase.find().exec((err, purchases) => {
-  if (err) {
-    res.status(400)
-    throw new Error('Error while fetching all Purchases from DataBase')
-  }
-  if (!purchases) {
-    res.status(404)
-    throw new Error('No Purchase found in DataBase')
-  }
-  res.json(purchases)
+    if (err) {
+      res.status(400)
+      throw new Error('Error while fetching all Purchases from DataBase')
+    }
+    if (!purchases) {
+      res.status(404)
+      throw new Error('No Purchase found in DataBase')
+    }
+    res.json(purchases)
   })
 })
 
@@ -46,14 +54,14 @@ exports.getPurchaseId = (req, res) => {
 // @route    POST "/api/purchases”
 // @access   Admin
 exports.createPurchase = asyncHandler(async (req, res) => {
-  let { order_id,transaction_id,payment_status,amount } = req.body
-    order_id = order_id && order_id.trim()
-    transaction_id = transaction_id && transaction_id.trim()
-    payment_status = payment_status && payment_status.toLowerCase().trim()
-    amount=amount && amount.trim()
+  let { order_id, transaction_id, payment_status, amount } = req.body
+  order_id = order_id && order_id.trim()
+  transaction_id = transaction_id && transaction_id.trim()
+  payment_status = payment_status && payment_status.toLowerCase().trim()
+  amount = amount && amount.trim()
 
-  const purchaseExist = await Purchase.findOne({order_Id})
-  if(purchaseExist) {
+  const purchaseExist = await Purchase.findOne({ order_Id })
+  if (purchaseExist) {
     res.status(400)
     throw new Error('Purchases already exists!')
   }
@@ -62,21 +70,21 @@ exports.createPurchase = asyncHandler(async (req, res) => {
     order_id,
     transaction_id,
     payment_status,
-    amount
+    amount,
   })
   if (!order_id) {
     res.status(422)
     throw new Error('Validation failed: Purchase Order_id is required')
   }
-  if(!transaction_id) {
+  if (!transaction_id) {
     res.status(422)
     throw new Error('Validation failed: Purchase transaction_id is required')
   }
-  if(amount<0) {
+  if (amount < 0) {
     res.status(422)
     throw new Error('Validation failed: Purchase amount cannot be negative')
   }
-  if(!payment_status)
+  if (!payment_status) {
     res.status(422)
     throw new Error('Validation failed: Purchase payment_status is required')
   }
@@ -90,13 +98,14 @@ exports.updatePurchaseById = asyncHandler(async (req, res) => {
   let newPurchaseData = req.body
   if (purchase) {
     purchase.order_id = newPurchaseData.order_id || purchase.order_id
-    purchase.transaction_id = newPurchaseData.transaction_id|| purchase.transaction_id
-    purchase.amount= newPurchaseData.amount || purchase.amount
-    purchase.payment_status= newPurchaseData.payment_status || purchase.payment_status
+    purchase.transaction_id =
+      newPurchaseData.transaction_id || purchase.transaction_id
+    purchase.amount = newPurchaseData.amount || purchase.amount
+    purchase.payment_status =
+      newPurchaseData.payment_status || purchase.payment_status
     const updatedPurchaseData = await purchase.save()
     res.json(updatedPurchaseData)
-  }
-  else {
+  } else {
     res.status(404)
     throw new Error('Purchases not found!')
   }
