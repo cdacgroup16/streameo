@@ -5,7 +5,7 @@ const videoSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      maxlength: 250,
+      maxlength: 100,
       trim: true,
       required: true,
     },
@@ -22,24 +22,28 @@ const videoSchema = new mongoose.Schema(
       type: ObjectId,
       required: true,
     },
-    tags: [{
-      type: String,
-    }],
+    tags: [
+      {
+        type: String,
+      },
+    ],
     views_count: {
       type: Number,
       default: 0,
     },
-    language: [{
-      type: String
-    }],
+    language: [
+      {
+        type: String,
+      },
+    ],
     link_low: {
-      type: String
+      type: String,
     },
     link_med: {
       type: String,
     },
     link_high: {
-      type: String
+      type: String,
     },
   },
   { timestamps: true }
