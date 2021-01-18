@@ -7,7 +7,7 @@ const {
   updatePurchaseById,
   getAllPaymentStatus,
   getAllPurchaseForUser,
-} = require('../controllers/purchasesControllers')
+} = require('../controllers/purchaseControllers')
 const { isSignedIn, isAdmin } = require('../middlewares/authMiddlewares')
 const { getUserById } = require('../controllers/userControllers')
 const router = express.Router()
