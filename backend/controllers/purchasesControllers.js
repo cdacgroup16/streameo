@@ -42,6 +42,19 @@ exports.getAllPurchase = asyncHandler(async (req, res) => {
   res.json(purchases)
 })
 
+// @desc    Gets all the purchases for a user
+// @route   GET /api/purchases/:userId
+// @access  Protcted
+exports.getAllPurchaseForUser = asyncHandler(async (req, res) => {
+  const user = req.user._id
+  const purchases = await Purchase.find({ user }).populate('user', '_id name')
+  if (!purchases) {
+    res.status(404)
+    throw new Error('No purchases found in database')
+  }
+  res.json(purchases)
+})
+
 // @desc     Creates new purchase and responds with the new purchase data
 // @route    POST /api/purchases
 // @access   Protected
