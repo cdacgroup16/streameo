@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
 
 //CORS Policy
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Allow-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Allow-Control-Allow-Headers", "Content-Type,X-Requested-With");
-  next();
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
+  res.header("Access-Control-Allow-Headers", "*")
+  next()
 })
 
 // Routes
