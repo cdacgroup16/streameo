@@ -89,6 +89,14 @@ const videoSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    processed: {
+      type: Boolean,
+      default: false,
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 )
