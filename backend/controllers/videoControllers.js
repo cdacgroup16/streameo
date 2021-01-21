@@ -172,7 +172,9 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
     const videoObject = Video.create(req.video)
     videoObject
       .then((data) => {
-        res.json(data)
+        res.status(201).json(data)
+        console.log('Something is still running')
+        processVideo(res.req.files, data)
       })
       .catch((err) => {
         fs.unlinkSync(res.req.files.poster[0].path)
@@ -181,7 +183,61 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
         next(err)
         return
       })
-    console.log('Something is still running')
-    // next()
   })
 })
+
+const processVideo = (files, videoDataFromDB) => {
+  let { _id } = videoDataFromDB
+  let { path: videoPath, filename: videoName, originalname } = files.video[0]
+
+  ensureFolderStructureForUploads()
+  const videoDestination = path.join(
+    __dirname,
+    '../',
+    'assets',
+    'videos',
+    Date.now() + '_' + originalname
+  )
+  const readStream = fs.createReadStream(videoPath)
+  const writeStream = fs.createWriteStream(videoDestination)
+
+  // handling file upload
+  readStream.on('data', (chunk) => {
+    writeStream.write(chunk)
+  })
+
+  // error handling: streams
+  readStream.on('error', (error) => {
+    readStream.close()
+    writeStream.close()
+    if (fs.existsSync(videoDestination)) {
+      fs.unlinkSync(videoDestination)
+    }
+    console.log(error)
+  })
+  writeStream.on('error', (error) => {
+    readStream.close()
+    writeStream.close()
+    if (fs.existsSync(videoDestination)) {
+      fs.unlinkSync(videoDestination)
+    }
+    console.log(error)
+  })
+  readStream.on('end', () => {
+    Video.updateOne(
+      { _id },
+      { 'video.path': videoDestination, active: true }
+    ).exec((err, data) => {
+      if (err) {
+        console.error(err)
+      }
+      if (data.nModified > 0) {
+        console.log('Video details updated')
+      }
+      if (fs.existsSync(videoPath)) {
+        fs.unlinkSync(videoPath)
+      }
+    })
+  })
+  writeStream.on('end', () => {})
+}
