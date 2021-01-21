@@ -16,12 +16,12 @@ const videoSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    length: {
+    duration: {
       type: Number,
-      trim: true,
     },
     category: {
       type: ObjectId,
+      ref: 'Category',
       required: true,
     },
     tags: [
@@ -68,19 +68,32 @@ const videoSchema = new mongoose.Schema(
     },
     link_low: {
       type: String,
+      trim: true,
     },
     link_med: {
       type: String,
+      trim: true,
     },
     link_high: {
       type: String,
+      trim: true,
+    },
+    privacy: {
+      type: String,
+      trim: true,
+      default: 'private',
+      enum: ['public', 'private'],
+    },
+    user: {
+      type: ObjectId,
+      ref: 'User',
+      required: true,
     },
   },
   { timestamps: true }
 )
 
 videoSchema.post('save', (data) => {
-  // console.log(data)
   data.poster.src = `/api/videos/poster/${data._id}`
   data.save()
 })
