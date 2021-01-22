@@ -125,6 +125,7 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
   })
 })
 
+// Helper functions
 const ensureFolderStructureForUploads = () => {
   if (!fs.existsSync(path.join(__dirname, '../', 'assets'))) {
     fs.mkdirSync(path.join(__dirname, '../', 'assets'), 0744)
@@ -185,11 +186,25 @@ const validateVideoInputFields = (req, res, next) => {
   return true
 }
 
+// Process Video and delete file from temp folder
 const processVideo = (files, videoDataFromDB) => {
   let { _id } = videoDataFromDB
   let { path: videoPath, filename: videoName, originalname } = files.video[0]
+  let {
+    path: posterPath,
+    originalname: posterOriginalname,
+    mimetype: posterMimeType,
+  } = files.poster[0]
 
   ensureFolderStructureForUploads()
+  const posterExtension = posterMimeType.toString().split('/')[1]
+  const posterDestination = path.join(
+    __dirname,
+    '../',
+    'assets',
+    'posters',
+    Date.now() + '_' + posterOriginalname
+  )
   const videoDestinationLow = path.join(
     __dirname,
     '../',
@@ -272,7 +287,10 @@ const processVideo = (files, videoDataFromDB) => {
     })
 
     .on('end', function () {
-      console.log('Processing finished !')
+      console.log('\nProcessing finished !')
+      if (fs.existsSync(posterPath)) {
+        fs.renameSync(posterPath, posterDestination)
+      }
       if (fs.existsSync(videoPath)) {
         fs.unlinkSync(videoPath)
       }
@@ -285,6 +303,8 @@ const processVideo = (files, videoDataFromDB) => {
           'video.path_low': videoDestinationLow,
           'video.path_med': videoDestinationMed,
           'video.path_high': videoDestinationHigh,
+          'poster.path': posterDestination,
+          'poster.type': posterExtension,
           active: true,
         }
       ).exec((err, data) => {
