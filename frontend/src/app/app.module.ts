@@ -12,12 +12,14 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { MatButtonModule } from '@angular/material/button';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     CarouselComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
