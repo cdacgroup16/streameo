@@ -18,7 +18,7 @@ import { HomeComponent } from './components/pages/home/home.component';
   declarations: [
     AppComponent,
     NavigationComponent,
-    CarouselComponent
+    CarouselComponent,
     HomeComponent
   ],
   imports: [
