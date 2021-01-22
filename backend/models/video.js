@@ -55,8 +55,21 @@ const videoSchema = new mongoose.Schema(
         type: String,
         trim: true,
       },
+      type: {
+        type: String,
+        trim: true,
+      },
+      processed: {
+        type: String,
+        default: 'not started',
+        enum: ['not started', 'failed', 'running', 'done'],
+      },
     },
     video: {
+      src: {
+        type: String,
+        trim: true,
+      },
       path: {
         type: String,
         trim: true,
@@ -64,6 +77,15 @@ const videoSchema = new mongoose.Schema(
       size: {
         type: String,
         trim: true,
+      },
+      type: {
+        type: String,
+        trim: true,
+      },
+      processed: {
+        type: String,
+        default: 'not started',
+        enum: ['not started', 'failed', 'running', 'done'],
       },
     },
     link_low: {
@@ -89,10 +111,6 @@ const videoSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    processed: {
-      type: Boolean,
-      default: false,
-    },
     active: {
       type: Boolean,
       default: false,
@@ -103,6 +121,7 @@ const videoSchema = new mongoose.Schema(
 
 videoSchema.post('save', (data) => {
   data.poster.src = `/api/videos/poster/${data._id}`
+  data.video.src = `/api/videos/stream/${data._id}`
   data.save()
 })
 
