@@ -214,7 +214,6 @@ const processVideo = (files, videoDataFromDB) => {
 
   ffmpeg(videoPath)
     .renice(process.env.FFMPEG_NICE_VALUE)
-
     .videoCodec(process.env.VIDEO_CODEC)
     .withOutputFormat(process.env.VIDEO_EXTENSION)
     .aspect(process.env.VIDEO_ASPECT_RATIO)
@@ -230,7 +229,7 @@ const processVideo = (files, videoDataFromDB) => {
     .size(process.env.VIDEO_RESOLUTION_HIGH)
 
     .on('start', function (commandLine) {
-      console.log('Spawned Ffmpeg with command: ' + commandLine)
+      // console.log('Spawned Ffmpeg with command: ' + commandLine)
       Video.updateOne({ _id }, { 'video.processed': 'running' }).exec(
         (err, data) => {
           if (err) {
@@ -245,7 +244,8 @@ const processVideo = (files, videoDataFromDB) => {
     })
 
     .on('error', function (err) {
-      console.log('An error occurred: ' + err.message)
+      console.log('Error Message: ' + err.message)
+      console.log('Error Stack: ' + err.stack)
       Video.updateOne({ _id }, { 'video.processed': 'failed' }).exec(
         (err, data) => {
           if (err) {
