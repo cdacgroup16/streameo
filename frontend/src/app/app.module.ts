@@ -14,6 +14,8 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { PlansComponent } from './components/pages/plans/plans.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { LoginComponent } from './components/pages/login/login.component';
     NavigationComponent,
     CarouselComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    PlansComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { LoginComponent } from './components/pages/login/login.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCarouselModule.forRoot()
+    MatCarouselModule.forRoot(),
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
