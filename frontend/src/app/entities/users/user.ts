@@ -19,6 +19,4 @@ export class User {
     this.profiles = profiles;
     this.watch_history = watch_history;
   }
-
 }
-
