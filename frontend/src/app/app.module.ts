@@ -11,11 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
