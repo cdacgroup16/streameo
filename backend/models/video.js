@@ -66,11 +66,19 @@ const videoSchema = new mongoose.Schema(
       },
     },
     video: {
-      src: {
+      path_temp: {
         type: String,
         trim: true,
       },
-      path: {
+      path_low: {
+        type: String,
+        trim: true,
+      },
+      path_med: {
+        type: String,
+        trim: true,
+      },
+      path_high: {
         type: String,
         trim: true,
       },
@@ -121,7 +129,9 @@ const videoSchema = new mongoose.Schema(
 
 videoSchema.post('save', (data) => {
   data.poster.src = `/api/videos/poster/${data._id}`
-  data.video.src = `/api/videos/stream/${data._id}`
+  data.link_low = `/api/videos/stream/low/${data._id}`
+  data.link_med = `/api/videos/stream/med/${data._id}`
+  data.link_high = `/api/videos/stream/high/${data._id}`
   data.save()
 })
 

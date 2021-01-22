@@ -102,7 +102,7 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
       type: res.req.files.poster[0].mimetype.toString().split('/')[1],
     }
     req.video.video = {
-      path: res.req.files.video[0].path,
+      path_temp: res.req.files.video[0].path,
       size: res.req.files.video[0].size,
       type: res.req.files.video[0].mimetype.toString().split('/')[1],
     }
@@ -240,7 +240,11 @@ const processVideo = (files, videoDataFromDB) => {
     })
 
     .on('progress', function (progress) {
-      process.stdout.write(`FFMPEG Processing: ${progress.percent} % done \r`)
+      process.stdout.write(
+        `FFMPEG Processing: ${
+          progress.percent && progress.percent.toFixed(2)
+        } % done \r`
+      )
     })
 
     .on('error', function (err) {
@@ -275,13 +279,13 @@ const processVideo = (files, videoDataFromDB) => {
       Video.updateOne(
         { _id },
         {
-          'video.path': videoDestinationHigh,
+          'video.path_temp': null,
           'video.type': process.env.VIDEO_EXTENSION,
           'video.processed': 'done',
+          'video.path_low': videoDestinationLow,
+          'video.path_med': videoDestinationMed,
+          'video.path_high': videoDestinationHigh,
           active: true,
-          link_low: videoDestinationLow,
-          link_med: videoDestinationMed,
-          link_high: videoDestinationHigh,
         }
       ).exec((err, data) => {
         if (err) {
