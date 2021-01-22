@@ -1,71 +1,9 @@
 const Video = require('../models/video')
 const asyncHandler = require('express-async-handler')
-// const formidable = require('formidable')
 const multer = require('multer')
 const ffmpeg = require('fluent-ffmpeg')
-const { v4: uuid } = require('uuid')
 const fs = require('fs')
 const path = require('path')
-
-const ensureFolderStructureForUploads = () => {
-  if (!fs.existsSync(path.join(__dirname, '../', 'assets'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets'), 0744)
-  }
-  if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'temp'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'temp'), 0744)
-  }
-  if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'videos'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'videos'), 0744)
-  }
-  if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'posters'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'posters'), 0744)
-  }
-}
-
-const validateVideoInputFields = (req, res, next) => {
-  let { title, description, category, tags, language, privacy } = res.req.body
-  privacy = privacy && privacy.toLowerCase()
-
-  if (!title) {
-    next(new Error(`'title' is required`))
-    return false
-  }
-  if (!category) {
-    next(new Error(`'category' is required`))
-    return false
-  }
-  if (!language) {
-    next(new Error(`Atleast one 'language' is required`))
-    return false
-  }
-  if (!privacy) {
-    next(new Error(`'Privacy' mode is required`))
-    return false
-  }
-  if (title.length < 2 || title.length > 100) {
-    next(new Error(`'title' must be between 2 to 100 characters in length`))
-    return false
-  }
-  if (!Video.schema.path('privacy').enumValues.includes(privacy)) {
-    next(
-      new Error(
-        `'privacy' must include one of the following: ${
-          Video.schema.path('privacy').enumValues
-        }`
-      )
-    )
-    return false
-  }
-  if (typeof tags === 'string') {
-    tags = tags.split(',')
-  }
-  if (typeof language === 'string') {
-    language = language.split(',')
-  }
-
-  req.video = { title, description, category, tags, language, privacy }
-  return true
-}
 
 // @desc    Creates a new Video object in db. Also uploads video and poster file in the server
 // @route   POST /api/videos
@@ -161,10 +99,12 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
     req.video.poster = {
       path: res.req.files.poster[0].path,
       size: res.req.files.poster[0].size,
+      type: res.req.files.poster[0].mimetype.toString().split('/')[1],
     }
     req.video.video = {
       path: res.req.files.video[0].path,
       size: res.req.files.video[0].size,
+      type: res.req.files.video[0].mimetype.toString().split('/')[1],
     }
     req.video.user = req.auth._id
 
@@ -173,7 +113,6 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
     videoObject
       .then((data) => {
         res.status(201).json(data)
-        console.log('Something is still running')
         processVideo(res.req.files, data)
       })
       .catch((err) => {
@@ -186,58 +125,172 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
   })
 })
 
+const ensureFolderStructureForUploads = () => {
+  if (!fs.existsSync(path.join(__dirname, '../', 'assets'))) {
+    fs.mkdirSync(path.join(__dirname, '../', 'assets'), 0744)
+  }
+  if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'temp'))) {
+    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'temp'), 0744)
+  }
+  if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'videos'))) {
+    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'videos'), 0744)
+  }
+  if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'posters'))) {
+    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'posters'), 0744)
+  }
+}
+
+const validateVideoInputFields = (req, res, next) => {
+  let { title, description, category, tags, language, privacy } = res.req.body
+  privacy = privacy && privacy.toLowerCase()
+
+  if (!title) {
+    next(new Error(`'title' is required`))
+    return false
+  }
+  if (!category) {
+    next(new Error(`'category' is required`))
+    return false
+  }
+  if (!language) {
+    next(new Error(`Atleast one 'language' is required`))
+    return false
+  }
+  if (!privacy) {
+    next(new Error(`'Privacy' mode is required`))
+    return false
+  }
+  if (title.length < 2 || title.length > 100) {
+    next(new Error(`'title' must be between 2 to 100 characters in length`))
+    return false
+  }
+  if (!Video.schema.path('privacy').enumValues.includes(privacy)) {
+    next(
+      new Error(
+        `'privacy' must include one of the following: ${
+          Video.schema.path('privacy').enumValues
+        }`
+      )
+    )
+    return false
+  }
+  if (typeof tags === 'string') {
+    tags = tags.split(',')
+  }
+  if (typeof language === 'string') {
+    language = language.split(',')
+  }
+
+  req.video = { title, description, category, tags, language, privacy }
+  return true
+}
+
 const processVideo = (files, videoDataFromDB) => {
   let { _id } = videoDataFromDB
   let { path: videoPath, filename: videoName, originalname } = files.video[0]
 
   ensureFolderStructureForUploads()
-  const videoDestination = path.join(
+  const videoDestinationLow = path.join(
     __dirname,
     '../',
     'assets',
     'videos',
-    Date.now() + '_' + originalname
+    Date.now() + '_low_' + originalname
   )
-  const readStream = fs.createReadStream(videoPath)
-  const writeStream = fs.createWriteStream(videoDestination)
+  const videoDestinationMed = path.join(
+    __dirname,
+    '../',
+    'assets',
+    'videos',
+    Date.now() + '_med_' + originalname
+  )
+  const videoDestinationHigh = path.join(
+    __dirname,
+    '../',
+    'assets',
+    'videos',
+    Date.now() + '_high_' + originalname
+  )
 
-  // handling file upload
-  readStream.on('data', (chunk) => {
-    writeStream.write(chunk)
-  })
+  ffmpeg(videoPath)
+    .renice(process.env.FFMPEG_NICE_VALUE)
 
-  // error handling: streams
-  readStream.on('error', (error) => {
-    readStream.close()
-    writeStream.close()
-    if (fs.existsSync(videoDestination)) {
-      fs.unlinkSync(videoDestination)
-    }
-    console.log(error)
-  })
-  writeStream.on('error', (error) => {
-    readStream.close()
-    writeStream.close()
-    if (fs.existsSync(videoDestination)) {
-      fs.unlinkSync(videoDestination)
-    }
-    console.log(error)
-  })
-  readStream.on('end', () => {
-    Video.updateOne(
-      { _id },
-      { 'video.path': videoDestination, active: true }
-    ).exec((err, data) => {
-      if (err) {
-        console.error(err)
-      }
-      if (data.nModified > 0) {
-        console.log('Video details updated')
-      }
+    .videoCodec(process.env.VIDEO_CODEC)
+    .withOutputFormat(process.env.VIDEO_EXTENSION)
+    .aspect(process.env.VIDEO_ASPECT_RATIO)
+    .autopad(process.env.VIDEO_PADDING_COLOR)
+
+    .output(videoDestinationLow)
+    .size(process.env.VIDEO_RESOLUTION_LOW)
+
+    .output(videoDestinationMed)
+    .size(process.env.VIDEO_RESOLUTION_MED)
+
+    .output(videoDestinationHigh)
+    .size(process.env.VIDEO_RESOLUTION_HIGH)
+
+    .on('start', function (commandLine) {
+      console.log('Spawned Ffmpeg with command: ' + commandLine)
+      Video.updateOne({ _id }, { 'video.processed': 'running' }).exec(
+        (err, data) => {
+          if (err) {
+            console.error(err)
+          }
+        }
+      )
+    })
+
+    .on('progress', function (progress) {
+      process.stdout.write(`FFMPEG Processing: ${progress.percent} % done \r`)
+    })
+
+    .on('error', function (err) {
+      console.log('An error occurred: ' + err.message)
+      Video.updateOne({ _id }, { 'video.processed': 'failed' }).exec(
+        (err, data) => {
+          if (err) {
+            console.error(err)
+          }
+        }
+      )
       if (fs.existsSync(videoPath)) {
         fs.unlinkSync(videoPath)
       }
+      if (fs.existsSync(videoDestinationLow)) {
+        fs.unlinkSync(videoDestinationLow)
+      }
+      if (fs.existsSync(videoDestinationMed)) {
+        fs.unlinkSync(videoDestinationMed)
+      }
+      if (fs.existsSync(videoDestinationHigh)) {
+        fs.unlinkSync(videoDestinationHigh)
+      }
     })
-  })
-  writeStream.on('end', () => {})
+
+    .on('end', function () {
+      console.log('Processing finished !')
+      if (fs.existsSync(videoPath)) {
+        fs.unlinkSync(videoPath)
+      }
+      Video.updateOne(
+        { _id },
+        {
+          'video.path': videoDestinationHigh,
+          'video.type': process.env.VIDEO_EXTENSION,
+          'video.processed': 'done',
+          active: true,
+          link_low: videoDestinationLow,
+          link_med: videoDestinationMed,
+          link_high: videoDestinationHigh,
+        }
+      ).exec((err, data) => {
+        if (err) {
+          console.error(err)
+        }
+        if (data.nModified > 0) {
+          console.log('Video details updated')
+        }
+      })
+    })
+    .run()
 }
