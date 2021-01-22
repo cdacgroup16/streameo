@@ -13,13 +13,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { PlansComponent } from './components/pages/plans/plans.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     CarouselComponent,
-    HomeComponent
+    HomeComponent,
+    PlansComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { HomeComponent } from './components/pages/home/home.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCarouselModule.forRoot()
+    MatCarouselModule.forRoot(),
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
