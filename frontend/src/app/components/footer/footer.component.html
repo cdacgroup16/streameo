@@ -1,12 +1,26 @@
-<div id="textbox">
-<p class="alignlogocenter"><a mat-button  color="link" [routerLink]="['/home']" class="logo">
-  <span>streamo </span>
-</a></p>
+<div class="wrapper">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div class="aligncenter">
+      <div>
+        <a mat-button color="link" [routerLink]="['/home']" class="logo">
+          <span>streamo </span>
+        </a>
+      </div>
+      <div >
+        <ul>
+          <li class="li">
+            <a href="#" color="primary" [routerLink]="['/about']">About us</a>
+          </li>
+          <li class="li">
+            <a href="#" color="primary" [routerLink]="['/contact']">Contact us</a>
+          </li>
+          <li class="li">
+            <a href="#" color="primary" [routerLink]="['/termandcondition']">Terms and conditions</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
 </div>
-<div style="clear: both;"></div>
-<div id="textbox">
-  <p class="alignleft"><a>contact us</a></p>
-  <p class="aligncenter"><a>about us</a></p>
-  <p class="alignright"><a>Terms and condition</a></p>
-</div>
-  <div style="clear: both;"></div>
