@@ -15,3 +15,4 @@ export class Plans {
     this.max_quality = max_quality;
   }
 }
+
