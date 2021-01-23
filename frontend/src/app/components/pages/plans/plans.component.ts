@@ -16,6 +16,4 @@ export class PlansComponent implements OnInit {
       this.planList = res;
     })
   }
-
-
 }
