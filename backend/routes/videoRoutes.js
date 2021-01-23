@@ -11,6 +11,7 @@ const router = express.Router()
 router.param('videoId', getVideoById)
 
 router.route('/:videoId').get(getVideo)
+router.route('/:videoId/admin').get(isSignedIn, isAdmin, getVideo)
 router.route('/').post(isSignedIn, isAdmin, createVideo)
 
 module.exports = router

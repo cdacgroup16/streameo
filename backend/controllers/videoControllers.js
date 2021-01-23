@@ -23,31 +23,37 @@ exports.getVideoById = async (req, res, next, id) => {
 // @access  Pubic
 exports.getVideo = asyncHandler(async (req, res) => {
   const video = req.video
-  if (req.auth && req.auth.role === 0) {
-    if (video.privacy !== 'public') {
-      res.status(403)
-      throw new Error('The video you requested is private')
-    }
-    if (!video.active) {
-      res.status(403)
-      throw new Error('The video you requested is not yet active')
-    }
-    video.poster.processed = undefined
-    video.poster.path = undefined
-    video.video.processed = undefined
-    video.video.path_temp = undefined
-    video.video.path_low = undefined
-    video.video.path_med = undefined
-    video.video.path_high = undefined
-    video.user = undefined
-    video.privacy = undefined
-    video.active = undefined
-  }
-
   if (!video) {
     res.status(404)
     throw new Error("The video with the provided id doesn't exists")
   }
+
+  // For Admin User
+  if (req.auth && req.auth.role !== 0) {
+    res.json(video)
+    return
+  }
+
+  // For public (not signed in users)
+  if (video.privacy !== 'public') {
+    res.status(403)
+    throw new Error('The video you requested is private')
+  }
+  if (!video.active) {
+    res.status(403)
+    throw new Error('The video you requested is not yet active')
+  }
+  video.poster.processed = undefined
+  video.poster.path = undefined
+  video.video.processed = undefined
+  video.video.path_temp = undefined
+  video.video.path_low = undefined
+  video.video.path_med = undefined
+  video.video.path_high = undefined
+  video.user = undefined
+  video.privacy = undefined
+  video.active = undefined
+
   res.json(video)
 })
 
