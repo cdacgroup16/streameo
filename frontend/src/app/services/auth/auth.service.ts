@@ -5,15 +5,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  url = "http://localhost:5000/signup";
+  url = "http://localhost:5000/";
 
   constructor(private http: HttpClient) { }
 
   signup(signup) {
-    return this.http.post(this.url, signup);
+    const tempUrl = this.url + "/signup";
+    return this.http.post(tempUrl, signup);
   }
   signin(signin) {
-    return this.http.post(this.url, signin)
+    const tempUrl = this.url + "/signin";
+    return this.http.post(tempUrl, signin)
   }
   logout(id) {
     return localStorage.removeItem(id);
