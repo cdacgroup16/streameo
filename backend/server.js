@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes')
 const categoriesRoutes = require('./routes/categoriesRoutes')
 const purchaseRoutes = require('./routes/purchaseRoutes')
 const planRoutes = require('./routes/planRoutes')
+const videoRoutes = require('./routes/videoRoutes')
 require('colors')
 require('dotenv').config()
 
@@ -27,18 +28,19 @@ app.get('/', (req, res) => {
 
 //CORS Policy
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
-  res.header("Access-Control-Allow-Headers", "*")
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  res.header('Access-Control-Allow-Headers', '*')
   next()
 })
 
 // Routes
-app.use('/api/users', userRoutes)
 app.use('/api', authRoutes)
+app.use('/api/users', userRoutes)
 app.use('/api/categories', categoriesRoutes)
 app.use('/api/plans', planRoutes)
 app.use('/api/purchases', purchaseRoutes)
+app.use('/api/videos', videoRoutes)
 
 // Custom middlewares
 app.use(notFound)
