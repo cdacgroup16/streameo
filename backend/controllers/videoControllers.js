@@ -5,7 +5,53 @@ const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const path = require('path')
 
-// @desc    Creates a new Video object in db. Also uploads video and poster file in the server
+// @desc    Gets a video by id
+// @route   req.param(:videoId)
+// @access  Pubic
+exports.getVideoById = async (req, res, next, id) => {
+  const video = await Video.findById(id).populate('category', '_id name')
+  if (!video) {
+    res.status(404)
+    next(new Error("Video with the provided id doesn't exists"))
+  }
+  req.video = video
+  next()
+}
+
+// @desc    Gets a video from req.video object
+// @route   GET /api/videos/:videoID
+// @access  Pubic
+exports.getVideo = asyncHandler(async (req, res) => {
+  const video = req.video
+  if (req.auth && req.auth.role === 0) {
+    if (video.privacy !== 'public') {
+      res.status(403)
+      throw new Error('The video you requested is private')
+    }
+    if (!video.active) {
+      res.status(403)
+      throw new Error('The video you requested is not yet active')
+    }
+    video.poster.processed = undefined
+    video.poster.path = undefined
+    video.video.processed = undefined
+    video.video.path_temp = undefined
+    video.video.path_low = undefined
+    video.video.path_med = undefined
+    video.video.path_high = undefined
+    video.user = undefined
+    video.privacy = undefined
+    video.active = undefined
+  }
+
+  if (!video) {
+    res.status(404)
+    throw new Error("The video with the provided id doesn't exists")
+  }
+  res.json(video)
+})
+
+// @desc    Creates a new Video details in db. Also uploads video and poster file in the server
 // @route   POST /api/videos
 // @access  Admin
 exports.createVideo = asyncHandler(async (req, res, next) => {
