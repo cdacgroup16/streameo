@@ -57,6 +57,46 @@ exports.getVideo = asyncHandler(async (req, res) => {
   res.json(video)
 })
 
+// @desc    Gets all videos from database
+// @route   GET /api/videos/
+// @access  Pubic
+exports.getAllVideos = asyncHandler(async (req, res) => {
+  let q = req.query
+  let filter = JSON.parse(q.filter) || {},
+    limit = parseInt(q.limit) || 8,
+    page = parseInt(q.page) || 0,
+    sort = q.sort || '',
+    skip = page * limit
+
+  const videos = await Video.find(filter)
+    .populate('category', '_id name')
+    .limit(limit)
+    .skip(skip)
+    .sort(sort)
+
+  // For Admin User
+  if (req.auth && req.auth.role !== 0) {
+    res.json(videos)
+    return
+  }
+
+  // For public (not signed in users)
+  const refractoredVideos = videos.map((video) => {
+    video.poster.processed = undefined
+    video.poster.path = undefined
+    video.video.processed = undefined
+    video.video.path_temp = undefined
+    video.video.path_low = undefined
+    video.video.path_med = undefined
+    video.video.path_high = undefined
+    video.user = undefined
+    video.privacy = undefined
+    video.active = undefined
+    return video
+  })
+  res.json(refractoredVideos)
+})
+
 // @desc    Creates a new Video details in db. Also uploads video and poster file in the server
 // @route   POST /api/videos
 // @access  Admin
