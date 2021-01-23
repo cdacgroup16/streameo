@@ -16,6 +16,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     LoginComponent,
     PlansComponent,
+    DashboardComponent,
     FooterComponent
   ],
   imports: [
