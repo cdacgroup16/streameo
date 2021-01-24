@@ -19,7 +19,8 @@ import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { AboutComponent } from './components/about/about.component';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     PlansComponent,
     DashboardComponent,
-    FooterComponent
+    FooterComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatCarouselModule.forRoot(),
     MatTableModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
