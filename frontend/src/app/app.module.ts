@@ -19,6 +19,11 @@ import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { FormsModule } from '@angular/forms';
+import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
+import { AboutComponent } from './components/about/about.component';
+import {MatCardModule} from '@angular/material/card';
 import { SliderComponentComponent } from './components/slider-component/slider-component.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +31,10 @@ import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
+import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
+import {MatCardModule} from '@angular/material/card';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,9 +45,12 @@ import { MatInputModule } from '@angular/material/input';
     PlansComponent,
     DashboardComponent,
     FooterComponent,
+    SideNavigationComponent,
+    AboutComponent,
     SliderComponentComponent,
     PlanComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    TermandconditionComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +63,16 @@ import { MatInputModule } from '@angular/material/input';
     MatTableModule,
     MatGridListModule,
     HttpClientModule,
+    MatSidenavModule,
+    FormsModule,
+    MatCardModule,
     IvyCarouselModule,
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
