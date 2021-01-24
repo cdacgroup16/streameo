@@ -24,6 +24,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatRadioModule } from '@angular/material/radio';
     DashboardComponent,
     FooterComponent,
     SliderComponentComponent,
-    PlanComponent
+    PlanComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
