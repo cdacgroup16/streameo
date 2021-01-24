@@ -4,7 +4,7 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
-
+import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
 const routes: Routes = [
   {
     path: '',
@@ -26,7 +26,12 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
-  }
+  },
+
+  {
+    path: 'termandcondition',
+    component: TermandconditionComponent
+  },
 ];
 
 @NgModule({
