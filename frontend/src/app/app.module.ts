@@ -31,7 +31,6 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
-
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
@@ -51,6 +50,7 @@ import { MatCardModule } from '@angular/material/card';
     CheckoutComponent,
     TermandconditionComponent,
     ContactusComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -72,7 +72,6 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]

@@ -1,8 +1,51 @@
-.example-card {
-  max-width: 400px;
+.mat-card{
+  max-width:400px;
+  margin: auto;
 }
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+.mat-card-avatar{
+  //background-image: url('./assets/images/Green_Lantern.jpg');
   background-size: cover;
 }
+
+.mat-card-actions{
+  display: flex;
+}
+
+.mat-card-actions .spacing {
+  width: 100%;
+}
+
+.tabler-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tabler-icon {
+  width: 10rem;
+  font-size: 12px;
+  text-align: center;
+  padding: .5rem .25rem 2rem;
+}
+
+.tabler-icon i {
+  display: block;
+  align-items: center;
+  font-size: 32px;
+  height: 1em;
+  margin-bottom: 1rem;
+}
+
+.tabler-icon code {
+  font-size: 10px;
+}
+
+.tabler-icon strong {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.tabler-icon-codes {
+  line-height: 2em;
+}
+
