@@ -22,7 +22,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
 import { AboutComponent } from './components/about/about.component';
-import {MatCardModule} from '@angular/material/card';
 import { SliderComponentComponent } from './components/slider-component/slider-component.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
 
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -71,8 +71,8 @@ import { ContactusComponent } from './components/contactus/contactus.component';
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatInputModule,
-    MatCardModule
+    MatInputModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
