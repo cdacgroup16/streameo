@@ -20,17 +20,15 @@ import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FormsModule } from '@angular/forms';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
 import { AboutComponent } from './components/about/about.component';
-import {MatCardModule} from '@angular/material/card';
 import { SliderComponentComponent } from './components/slider-component/slider-component.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,8 +63,8 @@ import {MatCardModule} from '@angular/material/card';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule,
-    MatCardModule
+    MatRadioModule
+
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
