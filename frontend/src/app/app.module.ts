@@ -25,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +55,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
