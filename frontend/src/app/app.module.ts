@@ -26,7 +26,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { MatRadioModule } from '@angular/material/radio';
     FooterComponent,
     AboutComponent,
     SliderComponentComponent,
-    PlanComponent
+    PlanComponent,
+    TermandconditionComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
