@@ -19,6 +19,8 @@ import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AboutComponent } from './components/about/about.component';
+import {MatCardModule} from '@angular/material/card';
 import { SliderComponentComponent } from './components/slider-component/slider-component.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +37,7 @@ import { MatRadioModule } from '@angular/material/radio';
     PlansComponent,
     DashboardComponent,
     FooterComponent,
+    AboutComponent,
     SliderComponentComponent,
     PlanComponent
   ],
@@ -49,6 +52,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTableModule,
     MatGridListModule,
     HttpClientModule,
+    MatCardModule,
     IvyCarouselModule,
     MatCheckboxModule,
     FormsModule,
