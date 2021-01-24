@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService } from '../../../services/categories/categories.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cat: CategoriesService) { }
+
+  catList: any;
 
   ngOnInit(): void {
+    this.cat.getAllCat().subscribe((res) => {
+      this.catList = res;
+    })
   }
 
 }

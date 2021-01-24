@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +21,12 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutComponent } from './components/about/about.component';
 import {MatCardModule} from '@angular/material/card';
+import { SliderComponentComponent } from './components/slider-component/slider-component.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlanComponent } from './components/plan/plan.component';
+import { MatRadioModule } from '@angular/material/radio';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +37,9 @@ import {MatCardModule} from '@angular/material/card';
     PlansComponent,
     DashboardComponent,
     FooterComponent,
-    AboutComponent
+    AboutComponent,
+    SliderComponentComponent,
+    PlanComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,12 @@ import {MatCardModule} from '@angular/material/card';
     MatTableModule,
     MatGridListModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    IvyCarouselModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
