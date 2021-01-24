@@ -152,7 +152,6 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
 
   upload(req, res, (err) => {
     let { poster, video } = res.req.files
-
     if (!validateVideoInputFields(req, res, next)) {
       return
     }
@@ -217,6 +216,107 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
   })
 })
 
+// @desc    Updates a Video details in db. Also uploads video and poster file in the server
+// @route   PUT /api/videos
+// @access  Admin
+exports.updateVideoById = asyncHandler(async (req, res, next) => {
+  ensureFolderStructureForUploads()
+
+  let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, path.join(__dirname, '../', 'assets', 'temp'))
+    },
+    filename: (req, file, cb) => {
+      cb(null, path.join(Date.now() + '_' + file.originalname))
+    },
+  })
+
+  const upload = multer({
+    storage: storage,
+    limits: {
+      fieldNameSize: 100,
+      fileSize: parseInt(process.env.MAX_POSTER_SIZE),
+    },
+    fileFilter: (req, file, cb) => {
+      if (file) {
+        const ext = file.mimetype.toString().split('/')[1]
+        if (ext !== 'jpg' && ext !== 'jpeg' && ext !== 'png') {
+          return cb(
+            new Error('Only jpg, jpeg, png files are allowed for poster'),
+            false
+          )
+        }
+        cb(null, true)
+      }
+    },
+  }).single('poster')
+
+  upload(req, res, (err) => {
+    if (!validateVideoInputFieldsForUpdate(req, res, next)) {
+      return
+    }
+
+    // Checking for Poster uploads
+    if (res.req.file) {
+      let poster = res.req.file
+      const posterDestination = path.join(
+        __dirname,
+        '../',
+        'assets',
+        'posters',
+        Date.now() + '_' + poster.originalname
+      )
+
+      if (err) {
+        res.status(400)
+        return next(err)
+      }
+
+      // Delete the previously existing poster here
+      if (fs.existsSync(req.video.poster.path)) {
+        fs.unlinkSync(req.video.poster.path)
+      }
+
+      // Move the upoaded poster to destination here
+      fs.renameSync(poster.path, posterDestination)
+
+      // Setting video object files details
+      req.video.poster = {
+        path: posterDestination,
+        size: poster.size,
+        type: poster.mimetype.toString().split('/')[1],
+      }
+
+      // Create video in database
+      const videoObject = req.video.save()
+      videoObject
+        .then((data) => {
+          res.status(200).json(data)
+        })
+        .catch((err) => {
+          if (fs.existsSync(poster.path)) {
+            fs.unlinkSync(poster.path)
+          }
+          res.status(400)
+          next(err)
+          return
+        })
+    } else {
+      // Save updated details video in database
+      const videoObject = req.video.save()
+      videoObject
+        .then((data) => {
+          res.status(200).json(data)
+        })
+        .catch((err) => {
+          res.status(400)
+          next(err)
+          return
+        })
+    }
+  })
+})
+
 // Helper functions
 const ensureFolderStructureForUploads = () => {
   if (!fs.existsSync(path.join(__dirname, '../', 'assets'))) {
@@ -275,6 +375,59 @@ const validateVideoInputFields = (req, res, next) => {
   }
 
   req.video = { title, description, category, tags, language, privacy }
+  return true
+}
+
+const validateVideoInputFieldsForUpdate = (req, res, next) => {
+  let { title, description, category, tags, language, privacy } = res.req.body
+  let poster = res.req.file
+
+  title = title && title.toLowerCase()
+  description = description && description.toLowerCase()
+  privacy = privacy && privacy.toLowerCase()
+
+  if (
+    !title &&
+    !description &&
+    !category &&
+    !tags &&
+    !language &&
+    !privacy &&
+    !poster
+  ) {
+    res.status(403)
+    next(new Error('No update field provided by the client'))
+    return
+  }
+
+  if ((title && title.length < 2) || (title && title.length > 100)) {
+    next(new Error(`'title' must be between 2 to 100 characters in length`))
+    return false
+  }
+  if (privacy && !Video.schema.path('privacy').enumValues.includes(privacy)) {
+    next(
+      new Error(
+        `'privacy' must include one of the following: ${
+          Video.schema.path('privacy').enumValues
+        }`
+      )
+    )
+    return false
+  }
+  if (tags && typeof tags === 'string') {
+    tags = tags.split(',')
+  }
+  if (language && typeof language === 'string') {
+    language = language.split(',')
+  }
+  req.video.title = title || req.video.title
+  req.video.description = description || req.video.description
+  req.video.category = category || req.video.category
+  req.video.tags = tags || req.video.tags
+  req.video.language = language || req.video.language
+  req.video.privacy = privacy || req.video.privacy
+  req.video.user = req.auth._id
+
   return true
 }
 

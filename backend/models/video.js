@@ -51,10 +51,6 @@ const videoSchema = new mongoose.Schema(
         type: String,
         trim: true,
       },
-      path_temp: {
-        type: String,
-        trim: true,
-      },
       size: {
         type: String,
         trim: true,
