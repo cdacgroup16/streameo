@@ -31,7 +31,6 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
