@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +21,10 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponentComponent } from './components/slider-component/slider-component.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlanComponent } from './components/plan/plan.component';
+import { MatRadioModule } from '@angular/material/radio';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     PlansComponent,
     DashboardComponent,
     FooterComponent,
-    SliderComponentComponent
+    SliderComponentComponent,
+    PlanComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,11 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     MatTableModule,
     MatGridListModule,
     HttpClientModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]

@@ -4,30 +4,31 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class PlansService {
-
-  url: string = "http://localhost:5000/api/plans";
+export class CategoriesService {
+  url: string = "http://localhost:5000/api/categories"
 
   constructor(private http: HttpClient) { }
 
-  getAllPlans(): any {
+  getAllCat(): any {
     return this.http.get(this.url);
   }
 
-  getPlan(id): any {
-    const tempUrl = this.url + "/" + id;
+
+  getCat(id): any {
+    const tempUrl: string = this.url + "/" + id;
     return this.http.get(tempUrl);
   }
 
-  postNewPlan(pObj): any {
-    return this.http.post(this.url, pObj);
+
+  postNewCat(cObj): any {
+    return this.http.post(this.url, cObj);
   }
 
-  updatePlan(pObj): any {
-    return this.http.put(this.url, pObj);
+  updateCat(cObj): any {
+    return this.http.put(this.url, cObj);
   }
 
-  deletePlan(id): any {
+  delCat(id): any {
     const tempUrl = this.url + "/" + id;
     return this.http.delete(tempUrl);
   }
