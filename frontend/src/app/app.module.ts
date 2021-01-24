@@ -29,8 +29,12 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import {MatCardModule} from '@angular/material/card';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +49,7 @@ import {MatCardModule} from '@angular/material/card';
     AboutComponent,
     SliderComponentComponent,
     PlanComponent,
+    CheckoutComponent,
     TermandconditionComponent
   ],
   imports: [
@@ -66,6 +71,7 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
+    MatInputModule,
     MatCardModule
   ],
   providers: [],
