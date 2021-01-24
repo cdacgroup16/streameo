@@ -19,11 +19,11 @@ import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SliderComponentComponent } from './components/slider-component/slider-component.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
 import { MatRadioModule } from '@angular/material/radio';
-
-
 
 @NgModule({
   declarations: [
@@ -35,9 +35,8 @@ import { MatRadioModule } from '@angular/material/radio';
     PlansComponent,
     DashboardComponent,
     FooterComponent,
-    PlanComponent,
-
-
+    SliderComponentComponent,
+    PlanComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +49,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTableModule,
     MatGridListModule,
     HttpClientModule,
+    IvyCarouselModule,
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
