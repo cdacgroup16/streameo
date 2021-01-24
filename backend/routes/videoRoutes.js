@@ -5,6 +5,7 @@ const {
   getVideo,
   getAllVideos,
   updateVideoById,
+  removeVideoById,
 } = require('../controllers/videoControllers')
 const { isAdmin, isSignedIn } = require('../middlewares/authMiddlewares')
 
@@ -19,6 +20,7 @@ router
   .route('/:videoId')
   .get(getVideo)
   .put(isSignedIn, isAdmin, updateVideoById)
+  .delete(isSignedIn, isAdmin, removeVideoById)
 router.route('/:videoId/admin').get(isSignedIn, isAdmin, getVideo)
 
 module.exports = router

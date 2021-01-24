@@ -13,6 +13,7 @@ exports.getVideoById = async (req, res, next, id) => {
   if (!video) {
     res.status(404)
     next(new Error("Video with the provided id doesn't exists"))
+    return
   }
   req.video = video
   next()
@@ -314,6 +315,41 @@ exports.updateVideoById = asyncHandler(async (req, res, next) => {
           return
         })
     }
+  })
+})
+
+// @desc    Deletes a Video in db. Also deletes video and poster file in the server
+// @route   DELETE /api/videos/:videoId
+// @access  Admin
+exports.removeVideoById = asyncHandler(async (req, res) => {
+  const video = req.video
+  if (!video) {
+    res.status(404)
+    throw new Error("The video with the provided id doesn't exists!")
+  }
+
+  const deletedVideo = await video.deleteOne()
+  if (!deletedVideo) {
+    res.status(400)
+    throw new Error('Failed to delete the video with the given id')
+  }
+
+  //Deleting stored files from the server
+  if (fs.existsSync(video.poster.path)) {
+    fs.unlinkSync(video.poster.path)
+  }
+  if (fs.existsSync(video.video.path_low)) {
+    fs.unlinkSync(video.video.path_low)
+  }
+  if (fs.existsSync(video.video.path_med)) {
+    fs.unlinkSync(video.video.path_med)
+  }
+  if (fs.existsSync(video.video.path_high)) {
+    fs.unlinkSync(video.video.path_high)
+  }
+
+  res.json({
+    message: `Successfully deleted the requested video with id: "${deletedVideo._id}" and title "${deletedVideo.title}"`,
   })
 })
 
