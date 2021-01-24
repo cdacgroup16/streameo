@@ -1,10 +1,47 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened">SideNav</mat-sidenav>
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="bgColor">
+
+    <ul class="side_bar">
+
+      <li>
+        <button mat-button [routerLink]="[ '/home' ]">home</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="[ '/plans' ]">plans</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="[ '/checkout' ]">checkout</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="[ '/login' ]">login</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="[ '/signup' ]">signup</button>
+      </li>
+
+      <li>
+        <button mat-button [routerLink]="[ '/TandC' ]">Terms & Conditions</button>
+      </li>
+    </ul>
+
+    <ul class="side_bar">
+      <li>
+        <button mat-button [routerLink]="[ '/about' ]">About</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="[ '/contact' ]">Contact-us</button>
+      </li>
+    </ul>
+  </mat-sidenav>
+
   <mat-sidenav-content>
+
     <button mat-icon-button color="accent" (click)="sidenav.toggle()">
       <i class="material-icons">menu</i> </button>
+
     <router-outlet></router-outlet>
 
-
   </mat-sidenav-content>
+
+
 </mat-sidenav-container>
