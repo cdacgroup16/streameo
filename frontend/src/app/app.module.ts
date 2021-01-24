@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,7 +19,8 @@ import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { SliderComponentComponent } from './components/slider-component/slider-component.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     PlansComponent,
     DashboardComponent,
-    FooterComponent
+    FooterComponent,
+    SliderComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatCarouselModule.forRoot(),
     MatTableModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    IvyCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
