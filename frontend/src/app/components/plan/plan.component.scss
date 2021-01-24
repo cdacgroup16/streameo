@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+}
+.mytable {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 12px;
+}
+.planbutton {
+  width: 100;
+  gap: 20%;
+  padding: 0 10px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.centeralign {
+  text-align: center;
+  align-items: center;
+}
+
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+.mytable h1 {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 16px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.radio_group {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+.Radio_btn {
+  padding: 10px 10px;
+}
