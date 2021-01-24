@@ -1,81 +1,50 @@
 <!-- table component  -->
+<div class="mytable">
+  <h1>Subscribe to get more out of Streameo</h1>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
+
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
-  
-    
+
+
     <ng-container matColumnDef="plan1">
-      <th mat-header-cell *matHeaderCellDef>Silver Pack</th>
-      <td mat-cell *matCellDef="let element" ><i class="material-icons">{{ element.plan1}}</i></td>
+      <th mat-header-cell *matHeaderCellDef>Feature 1</th>
+      <td mat-cell *matCellDef="let element"><i class="material-icons">{{ element.plan1}}</i></td>
     </ng-container>
-  
+
     <ng-container matColumnDef="plan2">
-      <th mat-header-cell *matHeaderCellDef>Gold Pack</th>
+      <th mat-header-cell *matHeaderCellDef>Feature 2</th>
       <td mat-cell *matCellDef="let element"><i class="material-icons">{{ element.plan2 }}</i></td>
     </ng-container>
-  
+
     <ng-container matColumnDef="plan3">
-      <th mat-header-cell *matHeaderCellDef>Premium Pack</th>
+      <th mat-header-cell *matHeaderCellDef>Feature 3</th>
       <td mat-cell *matCellDef="let element"><i class="material-icons">{{ element.plan3 }}</i></td>
+
+
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
 
+</div>
+<span *ngFor="let item of planList">
+  <p></p>
+</span>
+<div class="radio_group">
+  <mat-radio-group aria-label="Select an option">
+    <span *ngFor="let item of planList">
+      <mat-radio-button value="{{item._id}}" class="Radio_btn">
+        <span class="planName">{{item.name | titlecase}} </span>
+        <span class="planPrice">{{item.price | currency:'Rs.'}}</span>
+      </mat-radio-button>
+    </span>
+  </mat-radio-group>
+  <div>
 
-  <!-- <mat-card>
-    <mat-card-content>
-      <h2 class="example-h2">Checkbox configuration</h2>
-      <section class="example-section">
-        <label class="example-margin">Align:</label>
-        <mat-radio-group [(ngModel)]="labelPosition">
-          <mat-radio-button class="example-margin">Plan1</mat-radio-button>
-          <mat-radio-button class="example-margin">Plan2</mat-radio-button>
-          <mat-radio-button class="example-margin">Plan3</mat-radio-button>
-        </mat-radio-group>
-      </section>
-    </mat-card-content>
-  </mat-card>   -->
-
-
-
-
-
-
-  <!-- three buttons for plans -->
-
-  <!-- <div class="centeralign">
-  <a
-     href="#"
-    mat-raised-button
-    color="warn"
-    aria-label="Pack" [routerLink]="['/home']" class="planbutton">
-    Silver Pack <br> 
-    <sup>₹</sup>299 /Month
-  </a>
-    
-      <a
-      href="#"
-      mat-raised-button
-      color="warn"
-      aria-label="Pack" [routerLink]="['/home']" class="planbutton"
-    >
-     Gold Pack
-      <br> <sup>₹</sup> 
-       399 
-      /Month
-    </a>
-    <a
-      href="#"
-      mat-raised-button
-      color="warn"
-      aria-label="Pack" [routerLink]="['/home']" class="planbutton"
-    >
-      Premium Pack
-      <br> <sup>₹</sup>599 /Month
-    </a>
-  </div>  -->
+    <button mat-raised-button color="warn">Proceed to Checkout</button>
+  </div>
+</div>
