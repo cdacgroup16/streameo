@@ -58,6 +58,22 @@ exports.getVideo = asyncHandler(async (req, res) => {
   res.json(video)
 })
 
+// @desc    Gets a video's poster
+// @route   GET /api/videos/poster/:videoId
+// @access  Pubic
+exports.getPoster = asyncHandler(async (req, res) => {
+  const video = req.video
+  if (!video) {
+    res.status(404)
+    throw new Error("The video with the provided id doesn't exists!")
+  }
+  const readPoster = fs.createReadStream(video.poster.path)
+
+  res.status(206)
+  res.contentType(`image/${video.poster.type}`)
+  readPoster.pipe(res)
+})
+
 // @desc    Gets all videos from database
 // @route   GET /api/videos/
 // @access  Pubic
