@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +22,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
+import { AboutComponent } from './components/about/about.component';
+import {MatCardModule} from '@angular/material/card';
+import { SliderComponentComponent } from './components/slider-component/slider-component.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlanComponent } from './components/plan/plan.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +41,11 @@ import { SideNavigationComponent } from './components/side-navigation/side-navig
     PlansComponent,
     DashboardComponent,
     FooterComponent,
-    SideNavigationComponent
+    SideNavigationComponent,
+    AboutComponent,
+    SliderComponentComponent,
+    PlanComponent,
+    TermandconditionComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +59,14 @@ import { SideNavigationComponent } from './components/side-navigation/side-navig
     MatGridListModule,
     HttpClientModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    IvyCarouselModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent, NavigationComponent]
