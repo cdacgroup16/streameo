@@ -20,7 +20,6 @@ import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FormsModule } from '@angular/forms';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
 import { AboutComponent } from './components/about/about.component';
 import {MatCardModule} from '@angular/material/card';
@@ -32,7 +31,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
-import {MatCardModule} from '@angular/material/card';
+import { ContactusComponent } from './components/contactus/contactus.component';
 
 
 @NgModule({
@@ -50,7 +49,8 @@ import {MatCardModule} from '@angular/material/card';
     SliderComponentComponent,
     PlanComponent,
     CheckoutComponent,
-    TermandconditionComponent
+    TermandconditionComponent,
+    ContactusComponent
   ],
   imports: [
     BrowserModule,
