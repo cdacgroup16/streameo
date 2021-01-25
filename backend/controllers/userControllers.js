@@ -8,7 +8,7 @@ const { validatePassword } = require('../utils/validation')
 // @access  Protected
 exports.getUserById = async (req, res, next, id) => {
   try {
-    const user = await User.findById(id)
+    const user = await User.findById(id).populate('subscription_plan')
     if (!user) {
       res.status(400)
       throw new Error('User not found!')
@@ -89,6 +89,13 @@ exports.createUser = asyncHandler(async (req, res) => {
 // @access  Protected
 exports.updateUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
+  const { password } = req.body
+
+  if (!password) {
+    res.status(403)
+    throw new Error('Password is required for this action')
+  }
+
   let newUserData = req.body
   if (user) {
     user.firstname = newUserData.firstname || user.firstname
