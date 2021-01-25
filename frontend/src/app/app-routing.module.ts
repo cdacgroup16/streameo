@@ -8,7 +8,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
 import { SignupComponent } from './components/signup/signup.component';
-
+import {VideouploadComponent} from './components/videoupload/videoupload.component';
 const routes: Routes = [
   {
     path: '',
@@ -47,6 +47,10 @@ const routes: Routes = [
 {
   path:'signup',
   component: SignupComponent
+},
+{
+  path:'videoupload',
+  component: VideouploadComponent
 }
 ];
 

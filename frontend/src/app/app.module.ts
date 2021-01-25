@@ -32,6 +32,7 @@ import { TermandconditionComponent } from './components/termandcondition/termand
 import { MatCardModule } from '@angular/material/card';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { VideouploadComponent } from './components/videoupload/videoupload.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SigninComponent } from './components/signin/signin.component';
     TermandconditionComponent,
     LoginComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    VideouploadComponent
   ],
   imports: [
     BrowserModule,
