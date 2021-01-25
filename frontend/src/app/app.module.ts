@@ -9,7 +9,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
@@ -37,7 +36,6 @@ import { SigninComponent } from './components/signin/signin.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     CarouselComponent,
     HomeComponent,
     LoginComponent,
@@ -77,6 +75,6 @@ import { SigninComponent } from './components/signin/signin.component';
     MatCardModule
   ],
   providers: [],
-  bootstrap: [AppComponent, NavigationComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

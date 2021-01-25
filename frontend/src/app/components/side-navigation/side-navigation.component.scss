@@ -24,6 +24,21 @@ ul {
 .side_bar {
   background-color: white;
 }
-.bgColor {
-  background-color: rgba(205, 206, 206, 0.337);
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.logo {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+.bottom {
+  // margin-top: 10px;
+  border-top: 1px solid #ccc;
+  bottom: 0;
+  position: relative;
+  // padding-top: 20px;
 }
