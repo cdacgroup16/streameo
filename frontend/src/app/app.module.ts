@@ -30,10 +30,15 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
+import { SettingsComponent } from './components/settings/settings.component';
+import {MatTabsModule} from '@angular/material/tabs';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import {OverlayModule} from '@angular/cdk/overlay';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +54,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     PlanComponent,
     CheckoutComponent,
     TermandconditionComponent,
+    SettingsComponent,
     LoginComponent,
     SignupComponent,
     SigninComponent,
@@ -75,7 +81,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatRadioModule,
     MatInputModule,
     MatCardModule,
-    OverlayModule
+    OverlayModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

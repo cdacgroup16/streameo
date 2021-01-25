@@ -1,25 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  url = "http://localhost:5000/";
+  url = "http://localhost:5000/api";
 
   constructor(private http: HttpClient) { }
 
-  signup({ firstname, email, password }) {
+  signup( payload ): Observable<any> {
     const tempUrl = this.url + "/signup";
-    return this.http.post(tempUrl, { firstname, email, password });
+    return this.http.post(tempUrl, payload);
   }
 
-  signin({ email, password }) {
+  signin( email: string, password: string ): Observable<any> {
     const tempUrl = this.url + "/signin";
-    return this.http.post(tempUrl, { email, password })
+    return this.http.post(tempUrl, { email, password });
   }
 
-  logout(id) {
-    return localStorage.removeItem(id);
+  logout(): void {
+    if ( window.localStorage && (localStorage.getItem('token') || localStorage.getItem('token')) ){
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
   }
 }
