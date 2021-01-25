@@ -30,7 +30,6 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
-import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     SliderComponentComponent,
     PlanComponent,
     CheckoutComponent,
-    TermandconditionComponent,
-    SettingsComponent
+    TermandconditionComponent
   ],
   imports: [
     BrowserModule,
