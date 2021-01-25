@@ -10,7 +10,7 @@ import {TermandconditionComponent} from './components/termandcondition/termandco
 import {SettingsComponent} from './components/settings/settings.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
-
+import {VideomanagementComponent} from './components/videomanagement/videomanagement.component';
 const routes: Routes = [
   {
     path: '',
@@ -53,6 +53,11 @@ const routes: Routes = [
 {
   path:'signup',
   component: SignupComponent
+},
+{
+  path:'videomanagement',
+  component: VideomanagementComponent 
+   
 }
 ];
 
