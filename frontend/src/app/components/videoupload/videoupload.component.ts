@@ -13,6 +13,9 @@ export class VideouploadComponent implements OnInit {
     this.service.getAllCat().subscribe((res) => {
       this.categoryList = res;
     })
+    
   }
   isOpen = false;
+
+  
 }

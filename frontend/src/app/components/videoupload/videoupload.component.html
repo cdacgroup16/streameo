@@ -55,7 +55,11 @@
       <tr>
         <td style="text-align: center">
           <span>
-            <button mat-flat-button color="primary">upload video</button>
+           
+
+
+
+
             <button mat-flat-button color="primary">add video</button>
           </span>
         </td>
@@ -82,30 +86,28 @@
 </div>
 
 
-
-
-  
-
-
+<input class="ng-hide" id="input-file-id" multiple type="file" />
+<!-- <label><button mat-flat-button color="primary">Choose Files</button></label> -->
 
 
 
-
-
-
-
-
-<!-- <div ng-app="CategoryList" ng-controller="myCtrl">
- 
-<select ng-model="selectedName" ng-options="x for x in names">
-</select>
- 
+<div ng-app="myapp" ng-controller="AppCtrl" layout-margin layout-padding>
+     
 </div>
- 
-<script>
- 
-var app = angular.module('CategoryList', []);
-app.controller('myCtrl', function($scope) {
-$scope.names = ["Demavand", "Pradeep", "Ashutosh"];
-});
-</script> -->
+
+
+<!-- 
+   <div>
+              <mat-form-field class="columns">
+                <mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.item(0).name}}</mat-label>
+                <ng-template #newFile>
+                    <mat-label>Choose file</mat-label>
+                </ng-template>
+                <input matInput disabled>
+                <button mat-icon-button matSuffix (click)="fileInput.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+            </mat-form-field>
+            </div>
+ -->
