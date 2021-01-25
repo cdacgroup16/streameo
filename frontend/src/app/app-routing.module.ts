@@ -7,6 +7,8 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
+import { SignupComponent } from './components/signup/signup.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -41,6 +43,10 @@ const routes: Routes = [
 {
   path: 'checkout',
     component: CheckoutComponent
+},
+{
+  path:'signup',
+  component: SignupComponent
 }
 ];
 

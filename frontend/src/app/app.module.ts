@@ -30,6 +30,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
+import { SignupComponent } from './components/signup/signup.component';
+import { SigninComponent } from './components/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,10 @@ import { MatCardModule } from '@angular/material/card';
     SliderComponentComponent,
     PlanComponent,
     CheckoutComponent,
-    TermandconditionComponent
+    TermandconditionComponent,
+    LoginComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
