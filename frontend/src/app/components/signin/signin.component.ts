@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -16,7 +17,6 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit = () => {
-    console.log('Login initiated!')
     this.auth.signin(this.email, this.password).subscribe(data => {
       const {  token, user} = data;
       this.user = user;

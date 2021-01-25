@@ -9,6 +9,7 @@ import { PlansComponent } from './components/pages/plans/plans.component';
 import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { SigninComponent } from './components/signin/signin.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: SigninComponent,
   },
   {
     path: 'plans',
@@ -47,7 +48,7 @@ const routes: Routes = [
 },
   {
     path:'settings',
-    component: SettingsComponent 
+    component: SettingsComponent
   },
 {
   path:'signup',
