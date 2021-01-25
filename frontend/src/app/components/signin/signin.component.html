@@ -6,14 +6,14 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput type="email" />
+        <input matInput type="email" [(ngModel)]="email" />
       </mat-form-field><br />
 
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput type="password" />
+        <input matInput type="password" [(ngModel)]="password" />
       </mat-form-field><br />
-      <button color="accent" mat-flat-button type="submit" style="width: 50%;">login</button>
+      <button (click)="onSubmit()" color="accent" mat-flat-button type="submit" style="width: 50%;">login</button>
       <div class="signup link">
         Not a member? <a href="#" [routerLink]="['/signup']"> Sign Up</a>
       </div>
