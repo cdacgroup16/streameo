@@ -1,5 +1,3 @@
-<!-- categoryList -->
-
 <div class="setting">
   <mat-toolbar>
     <span class="center">
@@ -22,6 +20,14 @@
             />
           </mat-form-field>
         </td>
+        <td>
+          <div style="text-align: center">
+            <input hidden type="file" #uploader (change)="uploadFile($event)" />
+            <button mat-flat-button color="warn" (click)="uploader.click()">
+              Upload File
+            </button>
+          </div>
+        </td>
       </tr>
       <tr>
         <td>
@@ -39,75 +45,18 @@
         <td>
           <mat-form-field class="table">
             <mat-label>Category </mat-label>
-            <input matInput disabled value="" />
+            <input matInput value="" />
           </mat-form-field>
         </td>
-
-        <td style="text-align: right;">
-          <button mat-flat-button color="primary" (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-            {{isOpen ? "Close" : "Select"}}
-          </button>
-        </td>
-
       </tr>
-
       <tr></tr>
       <tr>
         <td style="text-align: center">
           <span>
-           
-
-
-
-
-            <button mat-flat-button color="primary">add video</button>
+            <button mat-flat-button color="primary">Add Video</button>
           </span>
         </td>
       </tr>
     </table>
   </form>
 </div>
-
-<div>
-<!-- This template displays the overlay content and is connected to the button -->
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="isOpen"
->
-  <ul class="example-list">
-    <span *ngFor="let category of categoryList">
-      <span value="{{category._id}}" >
-        <span class="planName">{{category.name | titlecase}} <br></span>
-      </span>
-  </span>
-  </ul>
-</ng-template>
-</div>
-
-
-<input class="ng-hide" id="input-file-id" multiple type="file" />
-<!-- <label><button mat-flat-button color="primary">Choose Files</button></label> -->
-
-
-
-<div ng-app="myapp" ng-controller="AppCtrl" layout-margin layout-padding>
-     
-</div>
-
-
-<!-- 
-   <div>
-              <mat-form-field class="columns">
-                <mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.item(0).name}}</mat-label>
-                <ng-template #newFile>
-                    <mat-label>Choose file</mat-label>
-                </ng-template>
-                <input matInput disabled>
-                <button mat-icon-button matSuffix (click)="fileInput.click()">
-                    <mat-icon>attach_file</mat-icon>
-                </button>
-                <input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
-            </mat-form-field>
-            </div>
- -->

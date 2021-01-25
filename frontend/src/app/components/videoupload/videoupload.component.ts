@@ -12,10 +12,12 @@ export class VideouploadComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllCat().subscribe((res) => {
       this.categoryList = res;
-    })
-    
+    })    
   }
-  isOpen = false;
+  uploadFile($event) {
+    console.log($event.target.files[0]); // outputs the first file
+}
+  
 
   
 }
