@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   logout(): void {
-    if ( window.localStorage && (localStorage.getItem('token') || localStorage.getItem('token')) ){
+    if ( window.localStorage && (localStorage.getItem('token') || localStorage.getItem('user')) ){
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }

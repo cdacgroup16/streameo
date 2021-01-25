@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PlansService } from 'src/app/services/plans/plans.service';
 
 export interface PeriodicElement {
@@ -23,28 +24,31 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PlanComponent implements OnInit {
 
-  constructor(private service: PlansService) { }
-
-  planList: any;
-  ngOnInit(): void {
-    this.service.getAllPlans().subscribe((res) => {
-      this.planList = res;
-      res.forEach(plan => {
-        // console.log(plan);
-        localStorage.setItem("plan", JSON.stringify(plan));
-      });
-      // console.log(JSON.stringify(res));
-      // array.forEach(element => {
-
-      // });
-
-    })
-
-  }
-
+  constructor(private service: PlansService, private router: Router) { }
 
   displayedColumns: string[] = ['name', 'plan1', 'plan2', 'plan3'];
   dataSource = ELEMENT_DATA;
+
+  planList: any;
+  selectedPlan: string;
+  ngOnInit(): void {
+
+    this.service.getAllPlans().subscribe((res) => {
+      this.planList = res;
+      localStorage.setItem("plans", JSON.stringify(res));
+    })
+  }
+  BtnChange(event) {
+    this.selectedPlan = event.value;
+  };
+
+  onClick(): any {
+    // console.log(this.selectedPlan);
+    const url = '/checkout' + this.selectedPlan;
+    this.router.navigate(['/checkout', this.selectedPlan], {
+      queryParams: { 'id': this.selectedPlan }
+    });
+  }
 
 }
 

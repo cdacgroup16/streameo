@@ -6,8 +6,8 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
-import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
-import {SettingsComponent} from './components/settings/settings.component';
+import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 
@@ -42,18 +42,19 @@ const routes: Routes = [
     component: AboutComponent
   }
   ,
-{
-  path: 'checkout',
-    component: CheckoutComponent
-},
   {
-    path:'settings',
+    path: 'checkout/:id',
+    // path: '**',
+    component: CheckoutComponent
+  },
+  {
+    path: 'settings',
     component: SettingsComponent
   },
-{
-  path:'signup',
-  component: SignupComponent
-}
+  {
+    path: 'signup',
+    component: SignupComponent
+  }
 ];
 
 @NgModule({
