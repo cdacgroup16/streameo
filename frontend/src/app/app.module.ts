@@ -30,9 +30,14 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
+<<<<<<< HEAD
+import { SettingsComponent } from './components/settings/settings.component';
+import {MatTabsModule} from '@angular/material/tabs';
+=======
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 
+>>>>>>> 4b6d6b0d1c790ca33dec6e2c3229ced328bde537
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,9 +53,13 @@ import { SigninComponent } from './components/signin/signin.component';
     PlanComponent,
     CheckoutComponent,
     TermandconditionComponent,
+<<<<<<< HEAD
+    SettingsComponent
+=======
     LoginComponent,
     SignupComponent,
     SigninComponent
+>>>>>>> 4b6d6b0d1c790ca33dec6e2c3229ced328bde537
   ],
   imports: [
     BrowserModule,
@@ -72,7 +81,8 @@ import { SigninComponent } from './components/signin/signin.component';
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
