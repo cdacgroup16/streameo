@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button color="accent" (click)="sidenav.toggle()">
+      <i class="material-icons">menu</i>
+    </button>
+    <a mat-button color="link" [routerLink]="['/home']" class="logo">
+      <span>streameo </span>
+    </a>
+    <span class="example-spacer"></span>
+    <a
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/login']"
+      aria-label="Example icon with heart icon"
+    >
+      Login
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+    <ul class="side_bar">
+      <li>
+        <button mat-button [routerLink]="['/home']">home</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="['/plans']">plans</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="['/checkout']">checkout</button>
+      </li>
+
+      <li>
+        <button mat-button [routerLink]="['/signup']">signup</button>
+      </li>
+
+      <li><button mat-button [routerLink]="['/settings']">Settings</button></li>
+      <li><button mat-button [routerLink]="['/']">Video Upload</button></li>
+      <li><button mat-button [routerLink]="['/']">Categories</button></li>
+    </ul>
+
+    <ul class="side_bar bottom">
+      <li>
+        <button mat-button [routerLink]="['/about']">About Us</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="['/contact']">Contact Us</button>
+      </li>
+      <li>
+        <button mat-button [routerLink]="['/TandC']">Terms & Conditions</button>
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

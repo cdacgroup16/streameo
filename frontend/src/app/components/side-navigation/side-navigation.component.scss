@@ -1,0 +1,44 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  background-color: white;
+  width: 200px;
+}
+
+li {
+  list-style: none;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+ul {
+  padding: 0;
+}
+.side_bar button {
+  width: 100%;
+  text-align: left;
+  text-transform: capitalize;
+}
+.side_bar {
+  background-color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.logo {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+.bottom {
+  // margin-top: 10px;
+  border-top: 1px solid #ccc;
+  bottom: 0;
+  position: relative;
+  // padding-top: 20px;
+}
