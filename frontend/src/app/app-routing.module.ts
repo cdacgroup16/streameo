@@ -7,6 +7,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
+import {SettingsComponent} from './components/settings/settings.component';
 const routes: Routes = [
   {
     path: '',
@@ -41,7 +42,11 @@ const routes: Routes = [
 {
   path: 'checkout',
     component: CheckoutComponent
-}
+},
+  {
+    path:'settings',
+    component: SettingsComponent 
+  }
 ];
 
 @NgModule({
