@@ -4,6 +4,8 @@ const multer = require('multer')
 const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const path = require('path')
+const { promisify } = require('util')
+const fileInfo = promisify(fs.stat)
 
 // @desc    Gets a video by id
 // @route   req.param(:videoId)
@@ -72,6 +74,99 @@ exports.getPoster = asyncHandler(async (req, res) => {
   res.status(206)
   res.contentType(`image/${video.poster.type}`)
   readPoster.pipe(res)
+})
+
+// @desc    Gets a video's poster
+// @route   GET /api/videos/stream/:quality/:videoId
+// @access  Protected
+exports.getStream = asyncHandler(async (req, res) => {
+  const { quality, auth, video, headers } = req
+  const { subscription_plan: plan } = auth
+  const { range } = headers
+
+  const resHigh = parseInt(process.env.VIDEO_RESOLUTION_HIGH.split('x')[1]),
+    resMed = parseInt(process.env.VIDEO_RESOLUTION_MED.split('x')[1]),
+    resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
+
+  const streamHigh = (start, end) =>
+    fs.createReadStream(video.video.path_high, { start, end })
+  const streamMed = (start, end) =>
+    fs.createReadStream(video.video.path_med, { start, end })
+  const streamLow = (start, end) =>
+    fs.createReadStream(video.video.path_low, { start, end })
+
+  const type = video.video.type
+  const { size: sizeHigh } = await fileInfo(video.video.path_high)
+  const { size: sizeMed } = await fileInfo(video.video.path_med)
+  const { size: sizeLow } = await fileInfo(video.video.path_low)
+
+  if (
+    !quality &&
+    quality !== 'high' &&
+    quality !== 'med' &&
+    quality !== 'low'
+  ) {
+    res.status(403)
+    throw new Error('Invalid quality set in route')
+  }
+
+  if (!plan) {
+    res.status(403)
+    throw new Error("You're not subscribed to any plans")
+  }
+
+  // Send video stream as a response
+  const sendStream = (fileSize, fileType, readstream) => {
+    if (range) {
+      let [start, end] = range.replace(/bytes=/, '').split('-')
+      start = parseInt(start, 10)
+      end = end ? parseInt(end, 10) : fileSize - 1
+      res.writeHead(206, {
+        Content_Type: `video/${fileType}`,
+        'Content-Length': end - start + 1,
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+      })
+      readstream(start, end).pipe(res)
+      return
+    } else {
+      res.writeHead(206, {
+        Content_Type: `video/${fileType}`,
+        'Content-Length': fileSize,
+        'Content-Range': `bytes ${0}-${fileSize - 1}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+      })
+      readstream(0, fileSize - 1).pipe(res)
+    }
+  }
+
+  switch (quality) {
+    case 'high':
+      if (plan.max_quality < resHigh) {
+        res.status(403)
+        throw new Error("Your plan doesn't support this resolution")
+      }
+      sendStream(sizeHigh, type, streamHigh)
+      break
+    case 'med':
+      if (plan.max_quality < resMed) {
+        res.status(403)
+        throw new Error("Your plan doesn't support this resolution")
+      }
+      sendStream(sizeMed, type, streamMed)
+      break
+    case 'low':
+      if (plan.max_quality < resLow) {
+        res.status(403)
+        throw new Error("Your plan doesn't support this resolution")
+      }
+      sendStream(sizeLow, type, streamLow)
+      break
+
+    default:
+      res.status(400)
+      throw new Error('Error occured while getting stream')
+  }
 })
 
 // @desc    Gets all videos from database
