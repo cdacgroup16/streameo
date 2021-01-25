@@ -29,8 +29,19 @@ export class PlanComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllPlans().subscribe((res) => {
       this.planList = res;
+      res.forEach(plan => {
+        // console.log(plan);
+        localStorage.setItem("plan", JSON.stringify(plan));
+      });
+      // console.log(JSON.stringify(res));
+      // array.forEach(element => {
+
+      // });
+
     })
+
   }
+
 
   displayedColumns: string[] = ['name', 'plan1', 'plan2', 'plan3'];
   dataSource = ELEMENT_DATA;
