@@ -1,116 +1,61 @@
-<!-- 
-notes - test
-
-first we want id which we will get from dashboard 
-based on the id we show data 
-in table 
-update pass req 2 data 
- -->
-
- <!-- @entitydata -->
-<!-- 
-   id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  role: number;
-  stream_count: number;
-  profiles: any;
-  watch_history: any;
- -->
-<!-- testdata appered -->
-<!-- 
- <div>
-  <table border="1">
+<div class="setting">
+  <mat-toolbar>
+    <span class="center">
+      <button mat-icon-button>
+        <mat-icon>supervised_user_circle</mat-icon>
+      </button>
+    </span>
+    <span>User Detail</span>
+  </mat-toolbar>
+  <form class="form">
+    <table class="table" cellspacing="0">
       <tr>
-          <th>user ID</th>
-          <th>firstname</th>
-          <th>lastname </th>
-          <th>email</th>
-          <th>role</th>
-          <th>stream_count</th>
-          <th>profile</th>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="first name" value="export user.firstname">
+          </mat-form-field>
+        </td>
       </tr>
-      <tr *ngFor="let user of userList">
-          <td>{{user._id}}</td>
-          <td>
-              {{user.firstname}}
-          </td>	
-          <td>{{user.lastname}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.role}}</td>
-          <td>{{user.email}}</td>
-          <td> {{user.stream_count}} </td>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="last name" value="export user.lastname">
+          </mat-form-field>
+        </td>
       </tr>
-      <tr *ngFor="let user of userList">
-        <a href="#" (click)="getuserid(user._Id)">Edit</a>
-    </tr>
-  </table>
-</div> -->
-<!-- test done -->
-
-<!-- <div *ngIf="selectedUser."> -->
-  <!-- <p><span>{{selectedUser.email}}</span></p> -->
-<div class="setting" >
-<mat-toolbar>
-<span class="center">
-<button mat-icon-button><mat-icon>supervised_user_circle</mat-icon></button>
-</span>
-<span>User Detail</span>
-</mat-toolbar>
-<form class="form"  > 
-<table   class="table" cellspacing="0">
-  <tr>
-    <td>
-      <mat-form-field class="table">
-        <mat-label>First Name</mat-label>
-        <input matInput  placeholder="first name" value="export user.firstname"  >
-      </mat-form-field>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <mat-form-field class="table">
-        <mat-label>Last Name</mat-label>
-        <input matInput placeholder="last name" value="export user.lastname">
-      </mat-form-field>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <mat-form-field class="table">
-        <mat-label>Email </mat-label>
-        <input matInput disabled value="import user.email">
-      </mat-form-field>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <mat-form-field class="table">
-        <mat-label>Stream count</mat-label>
-        <input matInput disabled value="import stscount">
-      </mat-form-field>
-    </td>
-  </tr>
-  <tr>
-
-    <td>
-      <mat-form-field class="table">
-        <mat-label>Plan</mat-label>
-        <input matInput disabled value="plan import">
-      </mat-form-field>
-    </td>
-  </tr>
-  <tr>
-  <tr>
-    <td style="text-align: center;">
-      <span>
-        <button mat-flat-button color="primary" [routerLink]="['/Password']" >Update Password</button>
-        <button mat-flat-button color="primary" (click)="onsave()">Update Data</button>
-
-      </span>
-    </td>
-  </tr>
-</table>
-</form>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Email </mat-label>
+            <input matInput disabled value="import user.email">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Stream count</mat-label>
+            <input matInput disabled value="import stscount">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Plan</mat-label>
+            <input matInput disabled value="plan import">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+          <span>
+            <button mat-flat-button color="accent" (click)="onsave()">Update Details</button>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </form>
 </div>
