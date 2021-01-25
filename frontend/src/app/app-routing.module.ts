@@ -47,11 +47,11 @@ const routes: Routes = [
     component: CheckoutComponent
 },
   {
-    path:'settings',
+    path: 'settings',
     component: SettingsComponent
   },
 {
-  path:'signup',
+  path: 'signup',
   component: SignupComponent
 }
 ];
