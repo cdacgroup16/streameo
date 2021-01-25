@@ -1,9 +1,133 @@
-<p>settings works!</p>
-<!-- testdata appered -->
-<!-- test done -->
 
-<!-- <div *ngIf="selectedUser."> -->
-<!-- <p><span>{{selectedUser.email}}</span></p> -->
+<div class="setting">
+  <div>
+    <mat-toolbar>
+      <span class="center">
+        <button mat-icon-button>
+          <mat-icon>supervised_user_circle</mat-icon>
+        </button>
+      </span>
+      <span>settings</span>
+    </mat-toolbar>
+  </div>
+
+  <div>
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="User Deatils">
+        <div>
+          <form class="form">
+            <table class="table" cellspacing="0">
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>First Name</mat-label>
+                    <input
+                      matInput
+                      placeholder="first name"
+                      value="export user.firstname"
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Last Name</mat-label>
+                    <input
+                      matInput
+                      placeholder="last name"
+                      value="export user.lastname"
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Email </mat-label>
+                    <input matInput disabled value="import user.email" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Stream count</mat-label>
+                    <input matInput disabled value="import stscount" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Plan</mat-label>
+                    <input matInput disabled value="plan import" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td style="text-align: center">
+                  <span>
+                    <button mat-flat-button color="primary" (click)="onsave()">
+                      Update Details
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Password">
+        <form class="form">
+          <table class="table" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="table">
+                  <mat-label>Old Password</mat-label>
+                  <input
+                    matInput
+                    placeholder="Old Password"
+                    value="export old Password"
+                  />
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field class="table">
+                  <mat-label>New Password</mat-label>
+                  <input
+                    matInput
+                    placeholder="New Password"
+                    value="export new Password"
+                  />
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: center">
+                <span>
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    [routerLink]="['/reset-password']"
+                    (click)="onsave()"
+                  >
+                    Update Password
+                  </button>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <!-- 
 <div class="setting">
   <mat-toolbar>
     <span class="center">
@@ -13,73 +137,5 @@
     </span>
     <span>User Detail</span>
   </mat-toolbar>
-  <form class="form">
-    <table class="table" cellspacing="0">
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>First Name</mat-label>
-            <input
-              matInput
-              placeholder="first name"
-              value="export user.firstname"
-            />
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Last Name</mat-label>
-            <input
-              matInput
-              placeholder="last name"
-              value="export user.lastname"
-            />
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Email </mat-label>
-            <input matInput disabled value="import user.email" />
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Stream count</mat-label>
-            <input matInput disabled value="import stscount" />
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Plan</mat-label>
-            <input matInput disabled value="plan import" />
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr></tr>
-      <tr>
-        <td style="text-align: center">
-          <span>
-            <button
-              mat-flat-button
-              color="primary"
-              [routerLink]="['/reset-password']"
-            >
-              Update Password
-            </button>
-            <button mat-flat-button color="primary" (click)="onsave()">
-              Update Details
-            </button>
-          </span>
-        </td>
-      </tr>
-    </table>
-  </form>
+  </div> -->
 </div>
