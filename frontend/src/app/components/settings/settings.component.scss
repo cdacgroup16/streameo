@@ -1,0 +1,22 @@
+.form {
+  min-width: 150px;
+  max-width: 95%;
+  // width: 100%;
+  padding: 10px;
+}
+
+.table {
+  width: 100%;
+}
+
+td {
+  // padding-right: 8px;
+  width: 100%;
+}
+.setting {
+  margin: 0 auto;
+  width: 50%;
+  border-radius: 2px;
+  box-shadow: 0px 6px 6px 4px #ccc;
+  transition: 15s ease-in;
+}
