@@ -72,12 +72,21 @@
   [cdkConnectedOverlayOpen]="isOpen"
 >
   <ul class="example-list">
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
+    <span *ngFor="let category of categoryList">
+      <span value="{{category._id}}" >
+        <span class="planName">{{category.name | titlecase}} <br></span>
+      </span>
+  </span>
   </ul>
 </ng-template>
 </div>
+
+
+
+
+  
+
+
 
 
 
