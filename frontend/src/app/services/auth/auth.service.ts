@@ -9,14 +9,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signup(signup) {
+  signup({ firstname, email, password }) {
     const tempUrl = this.url + "/signup";
-    return this.http.post(tempUrl, signup);
+    return this.http.post(tempUrl, { firstname, email, password });
   }
-  signin(signin) {
+
+  signin({ email, password }) {
     const tempUrl = this.url + "/signin";
-    return this.http.post(tempUrl, signin)
+    return this.http.post(tempUrl, { email, password })
   }
+
   logout(id) {
     return localStorage.removeItem(id);
   }
