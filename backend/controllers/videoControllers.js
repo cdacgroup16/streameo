@@ -5,6 +5,11 @@ const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const path = require('path')
 const { promisify } = require('util')
+const User = require('../models/user')
+const {
+  countStreamsAndUpdateWatchHistory,
+  countViews,
+} = require('../middlewares/videoMiddlewares')
 const fileInfo = promisify(fs.stat)
 
 // @desc    Gets a video by id
@@ -88,13 +93,6 @@ exports.getStream = asyncHandler(async (req, res) => {
     resMed = parseInt(process.env.VIDEO_RESOLUTION_MED.split('x')[1]),
     resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
 
-  const streamHigh = (start, end) =>
-    fs.createReadStream(video.video.path_high, { start, end })
-  const streamMed = (start, end) =>
-    fs.createReadStream(video.video.path_med, { start, end })
-  const streamLow = (start, end) =>
-    fs.createReadStream(video.video.path_low, { start, end })
-
   const type = video.video.type
   const { size: sizeHigh } = await fileInfo(video.video.path_high)
   const { size: sizeMed } = await fileInfo(video.video.path_med)
@@ -115,6 +113,40 @@ exports.getStream = asyncHandler(async (req, res) => {
     throw new Error("You're not subscribed to any plans")
   }
 
+  // ReadStreams for videos
+  const streamHigh = (start, end) =>
+    fs
+      .createReadStream(video.video.path_high, { start, end })
+      .once('data', () => {
+        countStreamsAndUpdateWatchHistory(req, res, 1)
+        countViews(req)
+      })
+      .on('close', () => {
+        countStreamsAndUpdateWatchHistory(req, res, -1)
+      })
+
+  const streamMed = (start, end) =>
+    fs
+      .createReadStream(video.video.path_med, { start, end })
+      .once('data', () => {
+        countStreamsAndUpdateWatchHistory(req, res, 1)
+        countViews(req)
+      })
+      .on('close', () => {
+        countStreamsAndUpdateWatchHistory(req, res, -1)
+      })
+
+  const streamLow = (start, end) =>
+    fs
+      .createReadStream(video.video.path_low, { start, end })
+      .once('data', () => {
+        countStreamsAndUpdateWatchHistory(req, res, 1)
+        countViews(req)
+      })
+      .on('close', () => {
+        countStreamsAndUpdateWatchHistory(req, res, -1)
+      })
+
   // Send video stream as a response
   const sendStream = (fileSize, fileType, readstream) => {
     if (range) {
@@ -128,7 +160,6 @@ exports.getStream = asyncHandler(async (req, res) => {
         'Accept-Ranges': 'bytes',
       })
       readstream(start, end).pipe(res)
-      return
     } else {
       res.writeHead(206, {
         Content_Type: `video/${fileType}`,
@@ -174,7 +205,8 @@ exports.getStream = asyncHandler(async (req, res) => {
 // @access  Pubic
 exports.getAllVideos = asyncHandler(async (req, res) => {
   let q = req.query
-  let filter = JSON.parse(q.filter) || {},
+
+  let filter = !!q ? q : JSON.parse(q.filter),
     limit = parseInt(q.limit) || 8,
     page = parseInt(q.page) || 0,
     sort = q.sort || '',

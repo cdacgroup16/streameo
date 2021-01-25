@@ -10,6 +10,7 @@ const {
   getStream,
 } = require('../controllers/videoControllers')
 const { isAdmin, isSignedIn } = require('../middlewares/authMiddlewares')
+const { checkStreamLimit } = require('../middlewares/videoMiddlewares')
 
 const router = express.Router()
 
@@ -25,7 +26,9 @@ router.route('/admin').get(isSignedIn, isAdmin, getAllVideos)
 
 router.route('/poster/:videoId').get(getPoster)
 
-router.route('/stream/:quality/:videoId').get(isSignedIn, getStream)
+router
+  .route('/stream/:quality/:videoId')
+  .get(isSignedIn, checkStreamLimit, getStream)
 
 router
   .route('/:videoId')
