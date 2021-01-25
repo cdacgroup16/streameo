@@ -31,7 +31,6 @@ exports.getUser = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('User not found!')
   }
-  user.stream_count = undefined
   res.json(user)
 })
 
@@ -54,10 +53,11 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 exports.createUser = asyncHandler(async (req, res) => {
-  let { firstname, lastname, email, password } = req.body
+  let { firstname, lastname, email, password, subscription_plan } = req.body
   firstname = firstname && firstname.toLowerCase()
   lastname = lastname && lastname.toLowerCase()
   email = email && email.toLowerCase()
+  const profiles = [firstname]
 
   const userExists = await User.findOne({ email })
 
@@ -71,6 +71,8 @@ exports.createUser = asyncHandler(async (req, res) => {
     lastname,
     email,
     password,
+    profiles,
+    subscription_plan,
   })
 
   if (user) {
