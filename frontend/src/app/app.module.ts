@@ -34,6 +34,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SigninComponent } from './components/signin/signin.component';
     SettingsComponent,
     LoginComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    VideomanagementComponent
   ],
   imports: [
     BrowserModule,
