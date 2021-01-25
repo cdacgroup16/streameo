@@ -8,6 +8,8 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import {TermandconditionComponent} from './components/termandcondition/termandcondition.component';
 import {SettingsComponent} from './components/settings/settings.component';
+import { SignupComponent } from './components/signup/signup.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -46,7 +48,11 @@ const routes: Routes = [
   {
     path:'settings',
     component: SettingsComponent 
-  }
+  },
+{
+  path:'signup',
+  component: SignupComponent
+}
 ];
 
 @NgModule({
