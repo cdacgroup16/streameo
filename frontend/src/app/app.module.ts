@@ -33,7 +33,7 @@ import { MatCardModule } from '@angular/material/card';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
-
+import {OverlayModule} from '@angular/cdk/overlay';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +74,8 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    OverlayModule
   ],
   providers: [],
   bootstrap: [AppComponent]

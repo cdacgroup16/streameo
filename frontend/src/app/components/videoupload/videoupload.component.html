@@ -1,3 +1,5 @@
+<!-- categoryList -->
+
 <div class="setting">
   <mat-toolbar>
     <span class="center">
@@ -37,9 +39,16 @@
         <td>
           <mat-form-field class="table">
             <mat-label>Category </mat-label>
-            <input matInput disabled value="select" />
+            <input matInput disabled value="" />
           </mat-form-field>
         </td>
+
+        <td style="text-align: right;">
+          <button mat-flat-button color="primary" (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+            {{isOpen ? "Close" : "Select"}}
+          </button>
+        </td>
+
       </tr>
 
       <tr></tr>
@@ -54,3 +63,40 @@
     </table>
   </form>
 </div>
+
+<div>
+<!-- This template displays the overlay content and is connected to the button -->
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+>
+  <ul class="example-list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+</ng-template>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div ng-app="CategoryList" ng-controller="myCtrl">
+ 
+<select ng-model="selectedName" ng-options="x for x in names">
+</select>
+ 
+</div>
+ 
+<script>
+ 
+var app = angular.module('CategoryList', []);
+app.controller('myCtrl', function($scope) {
+$scope.names = ["Demavand", "Pradeep", "Ashutosh"];
+});
+</script> -->
