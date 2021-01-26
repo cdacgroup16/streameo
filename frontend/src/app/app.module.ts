@@ -39,6 +39,7 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
 
 
 
@@ -64,7 +65,8 @@ import { ErrorComponent } from './components/error/error.component';
     VideouploadComponent,
     VideomanagementComponent,
     VideouploadComponent,
-    ErrorComponent
+    ErrorComponent,
+    CategorylistComponent
   ],
   imports: [
     BrowserModule,

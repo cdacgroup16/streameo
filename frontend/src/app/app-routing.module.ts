@@ -12,7 +12,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
-
+import {CategorylistComponent} from './components/categorylist/categorylist.component' ;
 const routes: Routes = [
   {
     path: '',
@@ -66,8 +66,12 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent
+  },
+  
+  {
+    path: 'categorylist',
+    component: CategorylistComponent
   }
-
 ];
 
 @NgModule({
