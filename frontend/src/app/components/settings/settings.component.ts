@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogExampleComponent } from 'src/app/dialog-example/dialog-example.component';
-import { User } from 'src/app/entities/users/user';
-import { jitOnlyGuardedExpression } from '@angular/compiler/src/render3/util';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,37 +8,48 @@ import { jitOnlyGuardedExpression } from '@angular/compiler/src/render3/util';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  constructor(private service: UsersService, public dialog: MatDialog) {}
+  constructor(private service: UsersService, private auth: AuthService) { }
 
-  userData: User;
-  selectedUser: any;
   firstname: string;
   lastname: string;
   email: string;
   password: string;
-  id = JSON.parse(localStorage.getItem('token'));
+  newPassword: any;
+
+  ActiveUser = JSON.parse(localStorage.getItem('user'));
 
   ngOnInit(): void {
-    console.log(this.id);
-    this.service.getUser(this.id).subscribe((res: any) => {
-      this.selectedUser = res;
-    });
+    this.firstname = this.ActiveUser.firstname;
+    this.lastname = this.ActiveUser.lastname;
+    this.email = this.ActiveUser.email;
   }
 
-  onSave() {
-    this.service.updateUser(this.selectedUser, this.userData).subscribe(
-      (res) => {
-        this.openDialog();
-      },
-      (error) => {
-        this.openDialog();
-      }
-    );
+  onSaveDetails() {
+    console.log(this.firstname);
+    console.log(this.lastname);
+    console.log(this.ActiveUser._id);
+
+    if (this.auth.isSignedIn()) {
+      let myuser = { firstname: this.firstname, lastname: this.lastname, password: this.password }
+      this.service.updateUser(this.ActiveUser._id, myuser).subscribe((res) => {
+        console.log("Updated");
+        ("Updated");
+      }), (err) => {
+        console.log("error" + err);
+      };
+    }
+
   }
-  //onSuccess(): void {
-  // alert();
-  //}
-  openDialog() {
-    this.dialog.open(DialogExampleComponent);
+
+  onUpdatePassword() {
+    console.log(this.password);
+    console.log(this.newPassword);
+    this.service.resetPassword(this.ActiveUser.id, this.newPassword, this.password).subscribe((res) => {
+      console.log("Password Updated Success");
+    }, (err) => {
+      console.error(err);
+    }
+    )
   }
+
 }

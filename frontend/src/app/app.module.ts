@@ -37,7 +37,6 @@ import { SigninComponent } from './components/signin/signin.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { DialogExampleComponent } from './dialog-example/dialog-example.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 
@@ -63,7 +62,6 @@ import { ErrorComponent } from './components/error/error.component';
     SignupComponent,
     SigninComponent,
     VideouploadComponent,
-    DialogExampleComponent,
     VideomanagementComponent,
     VideouploadComponent,
     ErrorComponent
