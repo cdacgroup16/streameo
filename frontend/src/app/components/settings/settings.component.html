@@ -1,4 +1,3 @@
-
 <div class="setting">
   <div>
     <mat-toolbar>
@@ -13,7 +12,7 @@
 
   <div>
     <mat-tab-group mat-align-tabs="start">
-      <mat-tab label="User Deatils">
+      <mat-tab label="User Details">
         <div>
           <form class="form">
             <table class="table" cellspacing="0">
@@ -21,11 +20,7 @@
                 <td>
                   <mat-form-field class="table">
                     <mat-label>First Name</mat-label>
-                    <input
-                      matInput
-                      placeholder="first name"
-                      value="export user.firstname"
-                    />
+                    <input matInput placeholder="first name" name="firstname" [(ngModel)]="firstname" />
                   </mat-form-field>
                 </td>
               </tr>
@@ -33,11 +28,15 @@
                 <td>
                   <mat-form-field class="table">
                     <mat-label>Last Name</mat-label>
-                    <input
-                      matInput
-                      placeholder="last name"
-                      value="export user.lastname"
-                    />
+                    <input matInput placeholder="last name" name="lastname" [(ngModel)]="lastname" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="last name" name="password" [(ngModel)]="password" />
                   </mat-form-field>
                 </td>
               </tr>
@@ -45,31 +44,29 @@
                 <td>
                   <mat-form-field class="table">
                     <mat-label>Email </mat-label>
-                    <input matInput disabled value="import user.email" />
+                    <input matInput disabled [value]="email" />
                   </mat-form-field>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <mat-form-field class="table">
-                    <mat-label>Stream count</mat-label>
-                    <input matInput disabled value="import stscount" />
-                  </mat-form-field>
-                </td>
-              </tr>
+
               <tr>
                 <td>
                   <mat-form-field class="table">
                     <mat-label>Plan</mat-label>
                     <input matInput disabled value="plan import" />
+
                   </mat-form-field>
                 </td>
+                <td>
+                  <div class="plans link">
+                    <a href="#" mat-flat-button [routerLink]="['/plans']"> Browse Plans</a>
+                  </div>
+                </td>
               </tr>
-              <tr></tr>
               <tr>
                 <td style="text-align: center">
                   <span>
-                    <button mat-flat-button color="primary" (click)="onsave()">
+                    <button mat-flat-button color="primary" (click)="onSaveDetails()">
                       Update Details
                     </button>
                   </span>
@@ -78,20 +75,22 @@
             </table>
           </form>
         </div>
+        <h1 mat-dialog-title>Status</h1>
+        <div mat-dialog-content>User Update Success.</div>
+        <div mat-dialog-actions>
+          <button mat-button mat-dialog-close>Close</button>
+        </div>
       </mat-tab>
 
-      <mat-tab label="Password">
+      <mat-tab label="Change Password">
         <form class="form">
           <table class="table" cellspacing="0">
             <tr>
               <td>
                 <mat-form-field class="table">
                   <mat-label>Old Password</mat-label>
-                  <input
-                    matInput
-                    placeholder="Old Password"
-                    value="export old Password"
-                  />
+                  <input matInput type="password" placeholder="Old Password" name="password"
+                    [(ngModel)]="oldPassword" />
                 </mat-form-field>
               </td>
             </tr>
@@ -99,23 +98,16 @@
               <td>
                 <mat-form-field class="table">
                   <mat-label>New Password</mat-label>
-                  <input
-                    matInput
-                    placeholder="New Password"
-                    value="export new Password"
-                  />
+                  <input matInput type="password" placeholder="New Password" name="newPassword"
+                    [(ngModel)]="newPassword" />
                 </mat-form-field>
               </td>
             </tr>
             <tr>
               <td style="text-align: center">
                 <span>
-                  <button
-                    mat-flat-button
-                    color="primary"
-                    [routerLink]="['/reset-password']"
-                    (click)="onsave()"
-                  >
+                  <button mat-flat-button color="primary" [routerLink]="['/reset-password']"
+                    (click)="onUpdatePassword()">
                     Update Password
                   </button>
                 </span>
@@ -127,7 +119,7 @@
     </mat-tab-group>
   </div>
 
-  <!-- 
+  <!--
 <div class="setting">
   <mat-toolbar>
     <span class="center">
