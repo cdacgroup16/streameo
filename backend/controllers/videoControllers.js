@@ -95,8 +95,8 @@ exports.getPoster = asyncHandler(async (req, res) => {
 // @route   GET /api/videos/stream/:quality/:videoId
 // @access  Protected
 exports.getStream = asyncHandler(async (req, res) => {
-  const { quality, user, video, headers } = req
-  const { subscription_plan: plan } = user
+  const { quality, auth, video, headers } = req
+  const { subscription_plan: plan } = auth
   const { range } = headers
 
   const resHigh = parseInt(process.env.VIDEO_RESOLUTION_HIGH.split('x')[1]),
@@ -104,7 +104,6 @@ exports.getStream = asyncHandler(async (req, res) => {
     resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
 
   // FOR TESTING PURPOSE ONLY
-
   if (process.env.TESTING_MEDIA === true) {
     video.video.path_high = path.join(
       __dirname,

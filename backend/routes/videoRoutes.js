@@ -1,4 +1,6 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
 const {
   createVideo,
   getVideoById,
@@ -9,7 +11,11 @@ const {
   getPoster,
   getStream,
 } = require('../controllers/videoControllers')
-const { isAdmin, isSignedIn } = require('../middlewares/authMiddlewares')
+const {
+  isAdmin,
+  isSignedIn,
+  checkTokenForStream,
+} = require('../middlewares/authMiddlewares')
 const { checkStreamLimit } = require('../middlewares/videoMiddlewares')
 const { getUserById } = require('../controllers/userControllers')
 
@@ -17,6 +23,9 @@ const router = express.Router()
 
 router.param('videoId', getVideoById)
 router.param('userId', getUserById)
+
+router.param('token', checkTokenForStream)
+
 router.param('quality', (req, res, next, quality) => {
   req.quality = quality
   next()
@@ -28,7 +37,7 @@ router.route('/admin').get(isSignedIn, isAdmin, getAllVideos)
 
 router.route('/poster/:videoId').get(getPoster)
 
-router.route('/stream/:quality/:videoId/:userId').get(getStream)
+router.route('/stream/:quality/:videoId/:token').get(getStream)
 
 router
   .route('/:videoId')
