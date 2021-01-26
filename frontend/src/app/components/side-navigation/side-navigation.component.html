@@ -5,7 +5,10 @@
     </button>
     <a mat-button color="link" [routerLink]="['/home']" class="logo">
       <span>streameo </span>
+
     </a>
+    <!-- <span> </span> -->
+    <span> {{childData}}</span>
     <span class="example-spacer"></span>
 
     <a mat-raised-button color="accent" [routerLink]="['/login']" aria-label="Example icon with heart icon"
@@ -18,6 +21,7 @@
     <h1 (changestate)=RecieveState($event)> hi</h1>
   </mat-toolbar-row>
 </mat-toolbar>
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">
     <ul class="side_bar">
@@ -50,7 +54,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <router-outlet (notify)="parentMethod($event)"></router-outlet>
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

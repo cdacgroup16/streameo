@@ -11,5 +11,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  childData: string;
 
+  parentMethod(data) {
+    this.childData = data;
+    console.log(data);
+  }
 }

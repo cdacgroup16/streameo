@@ -40,5 +40,11 @@ export class SideNavigationComponent implements OnInit {
     }
   }
 
+  childData: string;
+
+  parentMethod(data) {
+    this.childData = data;
+    console.log(data);
+  }
 
 }
