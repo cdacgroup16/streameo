@@ -31,7 +31,9 @@ export class SigninComponent implements OnInit {
       this.user = user;
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', JSON.stringify(this.user));
+      console.log("User Logged in");
       this.router.navigate(['/home']);
+
     },
       err => {
         console.error('Login failed \n', err.error?.message);

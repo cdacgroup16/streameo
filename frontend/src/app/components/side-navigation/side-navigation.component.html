@@ -7,8 +7,8 @@
       <span>streameo </span>
 
     </a>
-    <!-- <span> </span> -->
-    <span> {{childData}}</span>
+    <span> </span>
+    <!-- <h1> {{childData}}</h1> -->
     <span class="example-spacer"></span>
 
     <a mat-raised-button color="accent" [routerLink]="['/login']" aria-label="Example icon with heart icon"
@@ -16,9 +16,9 @@
       login
     </a>
     <a mat-raised-button color="warn" (click)="logout()" aria-label="Example icon with heart icon" *ngIf="(logoutbtn)">
-      Logout
+      logout
     </a>
-    <h1 (changestate)=RecieveState($event)> hi</h1>
+
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -54,7 +54,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet (notify)="parentMethod($event)"></router-outlet>
+    <router-outlet></router-outlet>
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
@@ -45,7 +44,6 @@ import { ErrorComponent } from './components/error/error.component';
     AppComponent,
     CarouselComponent,
     HomeComponent,
-    LoginComponent,
     PlansComponent,
     DashboardComponent,
     FooterComponent,
@@ -56,7 +54,7 @@ import { ErrorComponent } from './components/error/error.component';
     CheckoutComponent,
     TermandconditionComponent,
     SettingsComponent,
-    LoginComponent,
+    // LoginComponent,
     SignupComponent,
     SigninComponent,
     VideomanagementComponent,

@@ -15,9 +15,15 @@ export class SideNavigationComponent implements OnInit {
   opened = false;
   loginbtn = true;
   logoutbtn = false;
-  local = localStorage.getItem("token");
+  // style = "display:none";
+  admin = false;
+  // login = false;
+  // login = true;
+  isLogin = false;
+  // local = this.auth.isSignedIn();
   logout() {
     this.auth.logout();
+
     this.router.navigate(['/login']);
     // window.location.reload();
   }
@@ -25,26 +31,15 @@ export class SideNavigationComponent implements OnInit {
   RecieveState(newItem: boolean) {
     console.log(newItem);
   }
-
   ngOnInit(): void {
-
-    console.log(this.local);
-
-    if ((this.local) != undefined) {
-      let load = false;
-
+    if ((this.auth.isSignedIn())) {
+      // let load = false;
       this.loginbtn = false;
       this.logoutbtn = true;
-
       // console.log(local);
     }
   }
 
-  childData: string;
 
-  parentMethod(data) {
-    this.childData = data;
-    console.log(data);
-  }
 
 }
