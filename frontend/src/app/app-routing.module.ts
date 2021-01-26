@@ -13,6 +13,10 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
 import {CategorylistComponent} from './components/categorylist/categorylist.component' ;
+import {AddcategoriesComponent} from './components/addcategories/addcategories.component';
+
+
+
 const routes: Routes = [
   {
     path: '',
@@ -71,6 +75,11 @@ const routes: Routes = [
   {
     path: 'categorylist',
     component: CategorylistComponent
+  },
+  
+  {
+    path: 'addcategory',
+    component: AddcategoriesComponent
   }
 ];
 
