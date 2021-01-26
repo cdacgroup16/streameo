@@ -38,6 +38,7 @@ import { VideomanagementComponent } from './components/videomanagement/videomana
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
 
 
 
@@ -63,7 +64,8 @@ import { PlanlistComponent } from './components/planlist/planlist.component';
     VideomanagementComponent,
     VideouploadComponent,
     ErrorComponent,
-    PlanlistComponent
+    PlanlistComponent,
+    AddplansComponent
   ],
   imports: [
     BrowserModule,
