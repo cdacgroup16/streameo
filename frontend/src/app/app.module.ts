@@ -34,10 +34,14 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogExampleComponent } from './dialog-example/dialog-example.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorComponent } from './components/error/error.component';
+
+
 
 @NgModule({
   declarations: [
@@ -60,6 +64,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     SigninComponent,
     VideouploadComponent,
     DialogExampleComponent,
+    VideomanagementComponent,
+    VideouploadComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -85,8 +92,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     OverlayModule,
     MatTabsModule,
     MatDialogModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
