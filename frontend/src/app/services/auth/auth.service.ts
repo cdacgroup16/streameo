@@ -11,11 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
-  signup(payload): Observable<any> {
-=======
-  signup( payload: any): Observable<any> {
->>>>>>> 020754825b5991fa81a5c7bdfd7e99e38e81eb66
+  signup(payload: any): Observable<any> {
     const tempUrl = this.url + "/signup";
     return this.http.post(tempUrl, payload);
   }
