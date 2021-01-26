@@ -241,12 +241,11 @@ exports.getStream = asyncHandler(async (req, res) => {
 exports.getAllVideos = asyncHandler(async (req, res) => {
   let q = req.query
 
-  let filter = !!q ? q : JSON.parse(q.filter),
+  let filter = !q.filter ? q.filter : JSON.parse(q.filter),
     limit = parseInt(q.limit) || 8,
     page = parseInt(q.page) || 0,
     sort = q.sort || '',
     skip = page * limit
-
   const videos = await Video.find(filter)
     .populate('category', '_id name')
     .limit(limit)
