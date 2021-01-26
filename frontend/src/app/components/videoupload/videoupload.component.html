@@ -1,0 +1,62 @@
+<div class="setting">
+  <mat-toolbar>
+    <span class="center">
+      <button mat-icon-button>
+        <mat-icon>settings_input_svideo</mat-icon>
+      </button>
+    </span>
+    <span>Video Upload Dashboard</span>
+  </mat-toolbar>
+  <form class="form">
+    <table class="table" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Title Of Video</mat-label>
+            <input
+              matInput
+              placeholder="Video Name"
+              value="export Video name"
+            />
+          </mat-form-field>
+        </td>
+        <td>
+          <div style="text-align: center">
+            <input hidden type="file" #uploader (change)="uploadFile($event)" />
+            <button mat-flat-button color="warn" (click)="uploader.click()">
+              Upload File
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Video Discription</mat-label>
+            <input
+              matInput
+              placeholder="Discription"
+              value="export Discription"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Category </mat-label>
+            <input matInput value="" />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td style="text-align: center">
+          <span>
+            <button mat-flat-button color="primary">Add Video</button>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
