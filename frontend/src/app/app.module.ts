@@ -37,6 +37,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { ErrorComponent } from './components/error/error.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
 
 
 
@@ -61,7 +62,8 @@ import { ErrorComponent } from './components/error/error.component';
     SigninComponent,
     VideomanagementComponent,
     VideouploadComponent,
-    ErrorComponent
+    ErrorComponent,
+    PlanlistComponent
   ],
   imports: [
     BrowserModule,

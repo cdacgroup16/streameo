@@ -12,7 +12,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
-
+import { componentFactoryName } from '@angular/compiler';
+import {PlanlistComponent} from './components/planlist/planlist.component';
 const routes: Routes = [
   {
     path: '',
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent
+  },
+  {
+    path: 'planlist',
+    component: PlanlistComponent
   }
 
 ];
