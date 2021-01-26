@@ -31,17 +31,17 @@ export class AuthService {
     return
   }
 
-  isSignedIn(): Boolean {
+  isSignedIn(): any {
     if (window.localStorage && localStorage.getItem('token')) {
-      return true;
+      return JSON.parse(localStorage.getItem('token'));
     }
     return false;
   }
 
-  isAdmin(): Boolean {
+  isAdmin(): any {
     if (window.localStorage && localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user'))
-      return user.role === 1 ? true : false;
+      return user.role === 1 ? JSON.parse(localStorage.getItem('token')) : false;
     }
     return false
   }
