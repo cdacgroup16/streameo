@@ -28,7 +28,9 @@ export class UsersService {
   }
 
   resetPassword(id, newPassword, oldPassword): any {
+    const token = this.auth.isSignedIn();
+    const headers = { 'Authorization': "Bearer " + token };
     const rstUrl = this.url + "/reset-password/" + id;
-    return this.http.put(rstUrl, { newPassword, oldPassword });
+    return this.http.put(rstUrl, { newPassword, oldPassword }, { headers });
   }
 }

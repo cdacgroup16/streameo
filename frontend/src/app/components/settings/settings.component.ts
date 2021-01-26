@@ -14,7 +14,8 @@ export class SettingsComponent implements OnInit {
   lastname: string;
   email: string;
   password: string;
-  newPassword: any;
+
+
 
   ActiveUser = JSON.parse(localStorage.getItem('user'));
 
@@ -33,7 +34,6 @@ export class SettingsComponent implements OnInit {
       let myuser = { firstname: this.firstname, lastname: this.lastname, password: this.password }
       this.service.updateUser(this.ActiveUser._id, myuser).subscribe((res) => {
         console.log("Updated");
-        ("Updated");
       }), (err) => {
         console.log("error" + err);
       };
@@ -41,15 +41,20 @@ export class SettingsComponent implements OnInit {
 
   }
 
+  oldPassword: string;
+  newPassword: any;
+
   onUpdatePassword() {
-    console.log(this.password);
-    console.log(this.newPassword);
-    this.service.resetPassword(this.ActiveUser.id, this.newPassword, this.password).subscribe((res) => {
-      console.log("Password Updated Success");
-    }, (err) => {
-      console.error(err);
+    if (this.auth.isSignedIn()) {
+      console.log(this.oldPassword);
+      console.log(this.newPassword);
+      this.service.resetPassword(this.ActiveUser._id, this.newPassword, this.oldPassword).subscribe((res) => {
+        console.log("Password Updated Success");
+      }, (err) => {
+        console.error(err);
+      }
+      )
     }
-    )
   }
 
 }
