@@ -11,6 +11,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
+import { ErrorComponent } from './components/error/error.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -40,11 +42,9 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
-  }
-  ,
+  },
   {
     path: 'checkout/:id',
-    // path: '**',
     component: CheckoutComponent
   },
   {
@@ -62,6 +62,10 @@ const routes: Routes = [
   {
     path: 'videoupload',
     component: VideouploadComponent
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
   }
 
 ];
