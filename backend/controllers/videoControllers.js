@@ -74,14 +74,15 @@ exports.getPoster = asyncHandler(async (req, res) => {
     throw new Error("The video with the provided id doesn't exists!")
   }
   // FOR TESTING PURPOSE ONLY
-
-  video.poster.path = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'posters',
-    'temp.jpg'
-  )
+  if (process.env.TESTING_MEDIA === true) {
+    video.poster.path = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'posters',
+      'temp.jpg'
+    )
+  }
 
   const readPoster = fs.createReadStream(video.poster.path)
 
@@ -94,8 +95,8 @@ exports.getPoster = asyncHandler(async (req, res) => {
 // @route   GET /api/videos/stream/:quality/:videoId
 // @access  Protected
 exports.getStream = asyncHandler(async (req, res) => {
-  const { quality, auth, video, headers } = req
-  const { subscription_plan: plan } = auth
+  const { quality, user, video, headers } = req
+  const { subscription_plan: plan } = user
   const { range } = headers
 
   const resHigh = parseInt(process.env.VIDEO_RESOLUTION_HIGH.split('x')[1]),
@@ -104,27 +105,30 @@ exports.getStream = asyncHandler(async (req, res) => {
 
   // FOR TESTING PURPOSE ONLY
 
-  video.video.path_high = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'videos',
-    'tempHigh.mp4'
-  )
-  video.video.path_med = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'videos',
-    'tempMed.mp4'
-  )
-  video.video.path_high = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'videos',
-    'tempLow.mp4'
-  )
+  if (process.env.TESTING_MEDIA === true) {
+    video.video.path_high = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'videos',
+      'tempHigh.mp4'
+    )
+    video.video.path_med = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'videos',
+      'tempMed.mp4'
+    )
+    video.video.path_high = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'videos',
+      'tempLow.mp4'
+    )
+  }
+
   const type = video.video.type
   const { size: sizeHigh } = await fileInfo(video.video.path_high)
   const { size: sizeMed } = await fileInfo(video.video.path_med)

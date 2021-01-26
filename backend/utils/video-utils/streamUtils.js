@@ -27,7 +27,8 @@ exports.countStreamsAndUpdateWatchHistory = (req, res, incNumber) => {
 }
 
 exports.AddToWatchHistory = (req) => {
-  const user = req.auth
+  // const user = req.auth
+  const user = req.user
   const plan = user.subscription_plan
   const video = req.video
   User.updateOne(
@@ -43,7 +44,7 @@ exports.AddToWatchHistory = (req) => {
 }
 
 exports.countViews = (req) => {
-  const user = req.auth
+  const user = req.user
   const plan = user.subscription_plan
   const video = req.video
 
