@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { User } from '../../entities/users/user';
 
 @Component({
   selector: 'app-signup',
@@ -8,13 +9,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
- firstname: string;
- lastname: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
   confirmPassword: string;
-  subscription_plan : string;
-  user: any;
+  subscription_plan: string;
+  user: User;
 
 
   constructor(private auth: AuthService, private router: Router) { }
@@ -22,25 +23,25 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit = () => {
-    this.user = {
+    const payload = {
       firstname: this.firstname,
       lastname: this.lastname,
-      email:  this.email,
+      email: this.email,
       password: this.password,
       subscription_plan: this.subscription_plan
 
     }
-    this.auth.signup(this.user).subscribe(data => {
+    this.auth.signup(payload).subscribe(data => {
 
-      const {  token, user} = data;
-       this.user = user;
-       localStorage.setItem('token', JSON.stringify(token));
+      const { token, user } = data;
+      this.user = user;
+      localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', JSON.stringify(this.user));
       this.router.navigate(['/home']);
     },
-    err => {
-      console.error('Signup failed \n', err.error?.message);
-    });
+      err => {
+        console.error('Signup failed \n', err.error?.message);
+      });
   }
 
 }
