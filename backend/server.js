@@ -18,6 +18,7 @@ connectMongoDB()
 
 // Built-in middlwares
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 // Handle requests
 app.get('/', (req, res) => {

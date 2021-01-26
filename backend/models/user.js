@@ -40,17 +40,22 @@ const userSchema = new mongoose.Schema(
     stream_count: {
       type: Number,
       default: 0,
+      min: 0,
     },
-    validity: {
-      type: Date,
+    balance: {
+      type: Number,
+      default: 0,
+      min: 0,
     },
     profiles: {
       type: Array,
-      default: [],
     },
-    watch_history: {
-      type: [{ type: ObjectId, ref: 'Video' }],
-    },
+    watch_history: [
+      {
+        type: ObjectId,
+        ref: 'Video',
+      },
+    ],
   },
   { timestamps: true }
 )
