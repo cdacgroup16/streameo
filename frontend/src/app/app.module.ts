@@ -31,11 +31,11 @@ import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
 import { SettingsComponent } from './components/settings/settings.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
-import {OverlayModule} from '@angular/cdk/overlay';
 
 
 
@@ -58,6 +58,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     LoginComponent,
     SignupComponent,
     SigninComponent,
+    VideomanagementComponent,
     VideouploadComponent
   ],
   imports: [
@@ -81,7 +82,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatRadioModule,
     MatInputModule,
     MatCardModule,
-    OverlayModule,
     MatTabsModule
   ],
   providers: [],

@@ -13,11 +13,16 @@
         <td>
           <mat-form-field class="table">
             <mat-label>Title Of Video</mat-label>
-            <input
-              matInput
-              placeholder="Video Name"
-              value="export Video name"
-            />
+            <input matInput placeholder="Video Name" value="export Video name" />
+          </mat-form-field>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="table">
+            <mat-label>Video Discription</mat-label>
+            <input matInput placeholder="Discription" value="export Discription" />
           </mat-form-field>
         </td>
         <td>
@@ -27,18 +32,6 @@
               Upload File
             </button>
           </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Video Discription</mat-label>
-            <input
-              matInput
-              placeholder="Discription"
-              value="export Discription"
-            />
-          </mat-form-field>
         </td>
       </tr>
       <tr>
@@ -55,6 +48,12 @@
           <span>
             <button mat-flat-button color="primary">Add Video</button>
           </span>
+        </td>
+        <td>
+          <a href="" mat-flat-button [routerLink]="['/videomanagement']" routerLinkActive="router-link-active"
+            color="accent"> Check
+            Uploaded
+            Videos</a>
         </td>
       </tr>
     </table>
