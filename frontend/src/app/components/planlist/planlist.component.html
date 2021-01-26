@@ -15,7 +15,7 @@
           color="primary"
           aria-label="Example icon button with a home icon"
         >
-          <mat-icon >add</mat-icon>
+          <mat-icon [routerLink]="['/addplans']" >add</mat-icon>
         </button>
     </tr>
   </table>
@@ -49,7 +49,7 @@
           color="primary"
           aria-label="Example icon button with a home icon"
         >
-          <mat-icon>edit</mat-icon>
+          <mat-icon [routerLink]="['/editplans']" >edit</mat-icon>
         </button>
       </td>
       <td style="text-align: center">
@@ -58,7 +58,7 @@
           color="warn"
           aria-label="Example icon button with a home icon"
         >
-          <mat-icon>delete</mat-icon>
+          <mat-icon (click)="remove()">delete</mat-icon>
         </button>
       </td>
     </tr>

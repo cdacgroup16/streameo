@@ -77,7 +77,7 @@ const routes: Routes = [
   {
     path: 'addplans',
     component: AddplansComponent
-  }
+  },
   {
     path: 'editplans',
     component: EditplanComponent

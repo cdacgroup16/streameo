@@ -14,6 +14,6 @@ export class PlanlistComponent implements OnInit {
     this.service.getAllPlans().subscribe((res) => {
       this.planList = res;
   })
+  
 }
-
 }
