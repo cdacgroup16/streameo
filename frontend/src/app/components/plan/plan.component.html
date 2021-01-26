@@ -1,6 +1,12 @@
 <!-- table component  -->
 <div class="mytable">
-  <h1>Subscribe to get more out of Streameo</h1>
+  <!-- <h1>Subscribe to get more out of Streameo</h1> -->
+  <mat-toolbar class="component_head">
+    <span class="float-right" >
+      <i class="material-icons">subscriptions</i>
+    </span>
+    <span>Subscribe to get more out of Streameo</span>
+  </mat-toolbar>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
