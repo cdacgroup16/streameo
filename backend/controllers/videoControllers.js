@@ -101,7 +101,8 @@ exports.getStream = asyncHandler(async (req, res) => {
     resMed = parseInt(process.env.VIDEO_RESOLUTION_MED.split('x')[1]),
     resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
 
-  // Change this for testing
+  // FOR TESTING PURPOSE ONLY
+
   video.video.path_high = path.join(
     __dirname,
     '..',
