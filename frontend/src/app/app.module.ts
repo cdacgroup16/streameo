@@ -36,6 +36,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
@@ -61,6 +63,7 @@ import { UserlistComponent } from './components/userlist/userlist.component';
     LoginComponent,
     SignupComponent,
     SigninComponent,
+    VideouploadComponent,
     VideomanagementComponent,
     VideouploadComponent,
     ErrorComponent,
@@ -88,9 +91,12 @@ import { UserlistComponent } from './components/userlist/userlist.component';
     MatRadioModule,
     MatInputModule,
     MatCardModule,
+    OverlayModule,
+    MatTabsModule,
+    MatDialogModule,
     MatTabsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
