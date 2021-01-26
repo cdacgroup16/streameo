@@ -1,65 +1,36 @@
 <div class="checkout">
-  
   <mat-toolbar>
-  <table>
-    <tr>
-      <td>
-        <span>
-          <mat-icon>subscriptions</mat-icon>
-          Plan Management Dashboard
-        </span>
-      </td>
-      <td>
-        <button 
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon >add</mat-icon>
-        </button>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>
+          <span>
+            <mat-icon>supervised_user_circle</mat-icon>
+            User Management Dashboard
+          </span>
+        </td>
+      </tr>
+    </table>
   </mat-toolbar>
-    <table class="example-full-width" cellspacing="2" style="text-align: left">
-    <th>Plan Id</th>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Concurent Stream</th>
-    <th>Validity</th>
-    <th>Max Quality</th>
-    <th>Edit</th>
+  <table class="example-full-width" cellspacing="2" style="text-align: left">
+    <th>User Id</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>Plans</th>
     <th>Delete</th>
 
-    <tr *ngFor="let item of planList">
+    <tr *ngFor="let item of userList">
       <td>
         <mat-label>{{ item._id }}</mat-label>
       </td>
       <td>
-        <mat-label>{{ item.name }} </mat-label>
+        <mat-label>{{ item.firstname }} </mat-label>
       </td>
       <td>
-        <mat-label>{{ item.price }}</mat-label>
+        <mat-label>{{ item.lastname }}</mat-label>
       </td>
-      <td>{{ item.concurrent_streams }}</td>
-      <td>{{ item.validity }}</td>
-      <td>{{ item.max_quality }}</td>
-      <td style="text-align: center">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-      <td style="text-align: center">
-        <button
-          mat-icon-button
-          color="warn"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+      <td>
+        <mat-label>{{ item.email }}</mat-label>
       </td>
     </tr>
   </table>
