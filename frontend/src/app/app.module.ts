@@ -31,13 +31,13 @@ import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { MatCardModule } from '@angular/material/card';
 import { SettingsComponent } from './components/settings/settings.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
-import {OverlayModule} from '@angular/cdk/overlay';
-
-
+import { OverlayModule } from '@angular/cdk/overlay';
+import { DialogExampleComponent } from './dialog-example/dialog-example.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     LoginComponent,
     SignupComponent,
     SigninComponent,
-    VideouploadComponent
+    VideouploadComponent,
+    DialogExampleComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,9 +83,10 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatInputModule,
     MatCardModule,
     OverlayModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
