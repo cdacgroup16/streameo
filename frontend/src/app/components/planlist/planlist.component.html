@@ -1,1 +1,54 @@
-<p>planlist works!</p>
+<div class="checkout">
+  <mat-toolbar>
+    <span>
+      <i class="material-icons">list</i>
+      Plan Management Dashboard
+    </span>
+  </mat-toolbar>
+  <br />
+  <div *ngFor="let item of planList">
+    <table class="example-full-width" cellspacing="2" style="text-align: left">
+      <th>Plan Id</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Concurent Stream</th>
+      <th>Validity</th>
+      <th>Max Quality</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <tr>
+        <td>
+          <mat-label>{{ item._id }}</mat-label>
+        </td>
+        <td>
+          <mat-label>{{ item.name }} </mat-label>
+        </td>
+        <td>
+          <mat-label>{{ item.price }}</mat-label>
+        </td>
+        <td>{{ item.concurrent_streams }}</td>
+        <td>{{ item.validity }}</td>
+        <td>{{ item.max_quality }}</td>
+        <td style="text-align: center">
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="Example icon button with a home icon"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td style="text-align: center">
+          <button
+            mat-icon-button
+            color="warn"
+            aria-label="Example icon button with a home icon"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+      <br />
+    </table>
+  </div>
+</div>
