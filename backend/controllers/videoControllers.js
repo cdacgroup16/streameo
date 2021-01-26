@@ -73,7 +73,8 @@ exports.getPoster = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error("The video with the provided id doesn't exists!")
   }
-  // Change this for testing
+  // FOR TESTING PURPOSE ONLY
+
   video.poster.path = path.join(
     __dirname,
     '..',
