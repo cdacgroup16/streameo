@@ -5,11 +5,10 @@ const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const path = require('path')
 const { promisify } = require('util')
-const User = require('../models/user')
 const {
-  countStreamsAndUpdateWatchHistory,
   countViews,
-} = require('../middlewares/videoMiddlewares')
+  AddToWatchHistory,
+} = require('../utils/video-utils/streamUtils')
 const fileInfo = promisify(fs.stat)
 
 // @desc    Gets a video by id
@@ -118,33 +117,24 @@ exports.getStream = asyncHandler(async (req, res) => {
     fs
       .createReadStream(video.video.path_high, { start, end })
       .once('data', () => {
-        countStreamsAndUpdateWatchHistory(req, res, 1)
+        AddToWatchHistory(req)
         countViews(req)
-      })
-      .on('close', () => {
-        countStreamsAndUpdateWatchHistory(req, res, -1)
       })
 
   const streamMed = (start, end) =>
     fs
       .createReadStream(video.video.path_med, { start, end })
       .once('data', () => {
-        countStreamsAndUpdateWatchHistory(req, res, 1)
+        AddToWatchHistory(req)
         countViews(req)
-      })
-      .on('close', () => {
-        countStreamsAndUpdateWatchHistory(req, res, -1)
       })
 
   const streamLow = (start, end) =>
     fs
       .createReadStream(video.video.path_low, { start, end })
       .once('data', () => {
-        countStreamsAndUpdateWatchHistory(req, res, 1)
+        AddToWatchHistory(req)
         countViews(req)
-      })
-      .on('close', () => {
-        countStreamsAndUpdateWatchHistory(req, res, -1)
       })
 
   // Send video stream as a response
@@ -177,21 +167,33 @@ exports.getStream = asyncHandler(async (req, res) => {
         res.status(403)
         throw new Error("Your plan doesn't support this resolution")
       }
-      sendStream(sizeHigh, type, streamHigh)
+      try {
+        sendStream(sizeHigh, type, streamHigh)
+      } catch (error) {
+        process.env.NODE_ENV !== 'production' && console.error(error)
+      }
       break
     case 'med':
       if (plan.max_quality < resMed) {
         res.status(403)
         throw new Error("Your plan doesn't support this resolution")
       }
-      sendStream(sizeMed, type, streamMed)
+      try {
+        sendStream(sizeMed, type, streamMed)
+      } catch (error) {
+        process.env.NODE_ENV !== 'production' && console.error(error)
+      }
       break
     case 'low':
       if (plan.max_quality < resLow) {
         res.status(403)
         throw new Error("Your plan doesn't support this resolution")
       }
-      sendStream(sizeLow, type, streamLow)
+      try {
+        sendStream(sizeLow, type, streamLow)
+      } catch (error) {
+        process.env.NODE_ENV !== 'production' && console.error(error)
+      }
       break
 
     default:
@@ -668,11 +670,10 @@ const processVideo = (files, videoDataFromDB) => {
     .size(process.env.VIDEO_RESOLUTION_HIGH)
 
     .on('start', function (commandLine) {
-      // console.log('Spawned Ffmpeg with command: ' + commandLine)
       Video.updateOne({ _id }, { 'video.processed': 'running' }).exec(
         (err, data) => {
           if (err) {
-            console.error(err)
+            process.env.NODE_ENV !== 'production' && console.error(err)
           }
         }
       )
@@ -687,12 +688,14 @@ const processVideo = (files, videoDataFromDB) => {
     })
 
     .on('error', function (err) {
-      console.log('Error Message: ' + err.message)
-      console.log('Error Stack: ' + err.stack)
+      process.env.NODE_ENV !== 'production' &&
+        console.log('Error Message: ' + err.message)
+      process.env.NODE_ENV !== 'production' &&
+        console.log('Error Stack: ' + err.stack)
       Video.updateOne({ _id }, { 'video.processed': 'failed' }).exec(
         (err, data) => {
           if (err) {
-            console.error(err)
+            process.env.NODE_ENV !== 'production' && console.error(err)
           }
         }
       )
@@ -711,7 +714,8 @@ const processVideo = (files, videoDataFromDB) => {
     })
 
     .on('end', function () {
-      console.log('\nProcessing finished !')
+      process.env.NODE_ENV !== 'production' &&
+        console.log('\nProcessing finished !')
       if (fs.existsSync(posterPath)) {
         fs.renameSync(posterPath, posterDestination)
       }
@@ -733,10 +737,11 @@ const processVideo = (files, videoDataFromDB) => {
         }
       ).exec((err, data) => {
         if (err) {
-          console.error(err)
+          process.env.NODE_ENV !== 'production' && console.error(err)
         }
         if (data.nModified > 0) {
-          console.log('Video details updated')
+          process.env.NODE_ENV !== 'production' &&
+            console.log('Video details updated')
         }
       })
     })
