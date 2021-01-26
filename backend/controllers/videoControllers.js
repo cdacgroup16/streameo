@@ -73,6 +73,16 @@ exports.getPoster = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error("The video with the provided id doesn't exists!")
   }
+  // FOR TESTING PURPOSE ONLY
+
+  video.poster.path = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'posters',
+    'temp.jpg'
+  )
+
   const readPoster = fs.createReadStream(video.poster.path)
 
   res.status(206)
@@ -92,6 +102,29 @@ exports.getStream = asyncHandler(async (req, res) => {
     resMed = parseInt(process.env.VIDEO_RESOLUTION_MED.split('x')[1]),
     resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
 
+  // FOR TESTING PURPOSE ONLY
+
+  video.video.path_high = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    'tempHigh.mp4'
+  )
+  video.video.path_med = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    'tempMed.mp4'
+  )
+  video.video.path_high = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    'tempLow.mp4'
+  )
   const type = video.video.type
   const { size: sizeHigh } = await fileInfo(video.video.path_high)
   const { size: sizeMed } = await fileInfo(video.video.path_med)
