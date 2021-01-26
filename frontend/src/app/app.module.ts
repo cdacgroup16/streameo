@@ -34,6 +34,10 @@ import { SettingsComponent } from './components/settings/settings.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { VideouploadComponent } from './components/videoupload/videoupload.component';
+import {OverlayModule} from '@angular/cdk/overlay';
+
+
 
 @NgModule({
   declarations: [
@@ -53,7 +57,8 @@ import { SigninComponent } from './components/signin/signin.component';
     SettingsComponent,
     LoginComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    VideouploadComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +81,7 @@ import { SigninComponent } from './components/signin/signin.component';
     MatRadioModule,
     MatInputModule,
     MatCardModule,
+    OverlayModule,
     MatTabsModule
   ],
   providers: [],
