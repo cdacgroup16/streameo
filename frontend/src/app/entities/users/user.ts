@@ -4,12 +4,23 @@ export class User {
   lastname: string;
   email: string;
   role: number;
+  // tslint:disable-next-line:variable-name
   stream_count: number;
   profiles: any;
+  // tslint:disable-next-line:variable-name
   watch_history: any;
 
 
-  constructor(id, firstname, lastname, email, role, stream_count, profiles, watch_history) {
+  // tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:max-line-length
+  constructor(id: string, firstname: string, lastname: string, email: string, role: number, stream_count: number, profiles: any, watch_history :any) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
