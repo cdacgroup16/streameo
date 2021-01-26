@@ -13,6 +13,7 @@ export class CategorylistComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllCat().subscribe((res) => {
       this.categoryList = res;
-  }
+  })
+}
 
 }
