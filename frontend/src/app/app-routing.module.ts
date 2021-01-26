@@ -10,7 +10,6 @@ import { TermandconditionComponent } from './components/termandcondition/termand
 import { SettingsComponent } from './components/settings/settings.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
-import { SigninComponent } from './components/signin/signin.component';
 
 const routes: Routes = [
   {
@@ -59,10 +58,6 @@ const routes: Routes = [
   {
     path: 'videoupload',
     component: VideouploadComponent
-  },
-  {
-    path: 'signin',
-    component: SigninComponent
   }
 
 ];

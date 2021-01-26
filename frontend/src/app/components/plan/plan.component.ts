@@ -36,7 +36,10 @@ export class PlanComponent implements OnInit {
     this.service.getAllPlans().subscribe((res) => {
       this.planList = res;
       localStorage.setItem("plans", JSON.stringify(res));
-    })
+    },
+      err => {
+        console.log('Signup failed \n', err.error?.message);
+      })
   }
   BtnChange(event) {
     this.selectedPlan = event.value;
