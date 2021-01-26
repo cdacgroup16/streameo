@@ -41,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
 import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
 
 
 
@@ -68,7 +69,8 @@ import { AddplansComponent } from './components/addplans/addplans.component';
     VideouploadComponent,
     ErrorComponent,
     PlanlistComponent,
-    AddplansComponent
+    AddplansComponent,
+    EditplanComponent
   ],
   imports: [
     BrowserModule,
