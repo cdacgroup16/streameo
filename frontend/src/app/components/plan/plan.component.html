@@ -35,16 +35,18 @@
   <p></p>
 </span>
 <div class="radio_group">
+
   <mat-radio-group aria-label="Select an option">
     <span *ngFor="let item of planList">
-      <mat-radio-button value="{{item._id}}" class="Radio_btn">
+      <mat-radio-button value="{{item._id}}" class="Radio_btn" (change)="BtnChange($event)">
         <span class="planName">{{item.name | titlecase}} </span>
         <span class="planPrice">{{item.price | currency:'Rs.'}}</span>
       </mat-radio-button>
     </span>
   </mat-radio-group>
+
   <div>
 
-    <button mat-raised-button color="warn">Proceed to Checkout</button>
+    <button (click)="onClick()" mat-raised-button color="warn">Proceed to Checkout</button>
   </div>
 </div>
