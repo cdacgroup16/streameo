@@ -44,7 +44,6 @@ const routes: Routes = [
   ,
   {
     path: 'checkout/:id',
-    // path: '**',
     component: CheckoutComponent
   },
   {
