@@ -27,8 +27,6 @@ export class CheckoutComponent implements OnInit {
         if (el._id == this.id) {
           this.plan = el;
         }
-        console.log(this.plan);
-
       });
     },
       err => {
