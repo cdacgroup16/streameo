@@ -52,14 +52,8 @@ const userSchema = new mongoose.Schema(
     },
     watch_history: [
       {
-        _id: {
-          type: ObjectId,
-          ref: 'Video',
-        },
-        timestamp: {
-          type: Date,
-          default: Date.now(),
-        },
+        type: ObjectId,
+        ref: 'Video',
       },
     ],
   },
