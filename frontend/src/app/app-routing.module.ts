@@ -14,6 +14,7 @@ import { VideomanagementComponent } from './components/videomanagement/videomana
 import { ErrorComponent } from './components/error/error.component';
 import { componentFactoryName } from '@angular/compiler';
 import {PlanlistComponent} from './components/planlist/planlist.component';
+import {UserlistComponent} from './components/userlist/userlist.component' ;
 const routes: Routes = [
   {
     path: '',
@@ -71,7 +72,11 @@ const routes: Routes = [
   {
     path: 'planlist',
     component: PlanlistComponent
-  }
+  },
+  {
+    path: 'userlist',
+    component: UserlistComponent
+  },
 
 ];
 
