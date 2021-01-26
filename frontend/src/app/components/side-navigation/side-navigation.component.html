@@ -7,14 +7,15 @@
       <span>streameo </span>
     </a>
     <span class="example-spacer"></span>
-    <a
-      mat-raised-button
-      color="accent"
-      [routerLink]="['/login']"
-      aria-label="Example icon with heart icon"
-    >
-      Login
+
+    <a mat-raised-button color="accent" [routerLink]="['/login']" aria-label="Example icon with heart icon"
+      *ngIf="(loginbtn)">
+      login
     </a>
+    <a mat-raised-button color="warn" (click)="logout()" aria-label="Example icon with heart icon" *ngIf="(logoutbtn)">
+      Logout
+    </a>
+    <h1 (changestate)=RecieveState($event)> hi</h1>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
