@@ -18,7 +18,6 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.router.queryParams.subscribe(params => {
       this.id = (params).id;
 
