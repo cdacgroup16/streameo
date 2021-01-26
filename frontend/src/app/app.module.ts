@@ -37,7 +37,8 @@ import { SigninComponent } from './components/signin/signin.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { ErrorComponent } from './components/error/error.component';
-
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { VideoComponent } from './components/pages/video/video.component';
 
 
 @NgModule({
@@ -61,7 +62,9 @@ import { ErrorComponent } from './components/error/error.component';
     SigninComponent,
     VideomanagementComponent,
     VideouploadComponent,
-    ErrorComponent
+    ErrorComponent,
+    VideoPlayerComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
