@@ -12,9 +12,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
-import {CategorylistComponent} from './components/categorylist/categorylist.component' ;
-import {AddcategoriesComponent} from './components/addcategories/addcategories.component';
-import {EditcategoryComponent} from './components/editcategory/editcategory.component'
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component'
 
 // import { componentFactoryName } from '@angular/compiler';
 import { UserlistComponent } from './components/userlist/userlist.component';
@@ -77,12 +77,12 @@ const routes: Routes = [
     path: 'error',
     component: ErrorComponent
   },
-  
+
   {
     path: 'categorylist',
     component: CategorylistComponent
   },
-  
+
   {
     path: 'addcategory',
     component: AddcategoriesComponent
@@ -90,10 +90,12 @@ const routes: Routes = [
   {
     path: 'editcategory/:id',
     component: EditcategoryComponent
+  },
   {
     path: 'planlist',
     component: PlanlistComponent
-  },
+  }
+  ,
   {
     path: 'userlist',
     component: UserlistComponent
