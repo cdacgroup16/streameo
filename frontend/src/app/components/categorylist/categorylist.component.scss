@@ -1,0 +1,33 @@
+.example-section {
+  margin: 12px 0;
+}
+.example-full-width {
+  width: 100%;
+}
+.checkout {
+  margin: 0 auto;
+  width: 80%;
+  border-radius: 2px;
+  box-shadow: 0px 6px 6px 4px #ccc;
+  transition: 15s ease-in;
+}
+table {
+  width: 100%;
+}
+.example-full-width tr {
+  border: 5px solid black;
+  padding: 5px 0;
+}
+th,
+td {
+  text-align: center;
+  text-transform: capitalize;
+}
+mat-toolbar span {
+  text-align: center;
+  width: 100%;
+}
+mat-toolbar i {
+  vertical-align: middle;
+  padding: 0 5px;
+}

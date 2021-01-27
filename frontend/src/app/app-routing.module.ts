@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AboutComponent } from './components/about/about.component';
@@ -12,6 +12,16 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component'
+
+// import { componentFactoryName } from '@angular/compiler';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
+import { VideoComponent } from 'src/app/components/pages/video/video.component'
 
 const routes: Routes = [
   {
@@ -66,8 +76,43 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent
-  }
+  },
 
+  {
+    path: 'categorylist',
+    component: CategorylistComponent
+  },
+
+  {
+    path: 'addcategory',
+    component: AddcategoriesComponent
+  },
+  {
+    path: 'editcategory/:id',
+    component: EditcategoryComponent
+  },
+  {
+    path: 'planlist',
+    component: PlanlistComponent
+  }
+  ,
+  {
+    path: 'userlist',
+    component: UserlistComponent
+  },
+  {
+    path: 'addplans',
+    component: AddplansComponent
+  },
+  {
+    path: 'editplans/:id',
+    component: EditplanComponent
+  },
+  {
+
+    path: 'video',
+    component: VideoComponent
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,19 @@
+<div class="addcategory" style="margin: 4rem auto">
+  <mat-card id="card" style="text-align: center; width: 50vw; margin: 0 auto">
+    <mat-toolbar>
+      <span class="float-right">
+        <mat-icon>category</mat-icon>
+      </span>
+      <span>Add Category</span>
+    </mat-toolbar>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Category Name</mat-label>
+        <input matInput type="text" name="name" [(ngModel)]="name" />
+      </mat-form-field><br />
+      <button mat-raised-button color="accent" style="margin-right: 5px" (click)="onSubmit()">
+        Add Category
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

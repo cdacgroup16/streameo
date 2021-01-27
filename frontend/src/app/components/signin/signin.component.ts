@@ -38,9 +38,6 @@ export class SigninComponent implements OnInit {
       err => {
         console.error('Login failed \n', err.error?.message);
       });
-
-
-
   }
 
 }

@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -35,8 +37,19 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
 
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { VideoComponent } from './components/pages/video/video.component';
 
 
 @NgModule({
@@ -57,9 +70,19 @@ import { ErrorComponent } from './components/error/error.component';
     // LoginComponent,
     SignupComponent,
     SigninComponent,
+    VideouploadComponent,
     VideomanagementComponent,
     VideouploadComponent,
-    ErrorComponent
+    ErrorComponent,
+    CategorylistComponent,
+    AddcategoriesComponent,
+    EditcategoryComponent,
+    PlanlistComponent,
+    UserlistComponent,
+    AddplansComponent,
+    EditplanComponent,
+    VideoPlayerComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
@@ -81,10 +104,13 @@ import { ErrorComponent } from './components/error/error.component';
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule,
+    MatChipsModule,
+    MatSelectModule,
+    OverlayModule,
+    MatDialogModule,
     MatTabsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
