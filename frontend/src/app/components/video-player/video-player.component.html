@@ -1,1 +1,27 @@
-<p>video-player works!</p>
+<div class="video-player">
+  <video
+    id="video"
+    width="900"
+    height="500"
+    controlsList="nodownload"
+    controls
+    [src]="this.videoStream"
+    class="player"
+  >
+    Your browser does not support HTML video.
+  </video>
+  <div class="quality-selector">
+    <mat-form-field appearance="fill" color="accent">
+      <mat-label>Quality</mat-label>
+      <mat-select
+        [(ngModel)]="quality"
+        (selectionChange)="this.setVideoStream = this.quality"
+        value="low"
+      >
+        <mat-option selected value="low"> Low </mat-option>
+        <mat-option value="med"> Med </mat-option>
+        <mat-option value="high"> High </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

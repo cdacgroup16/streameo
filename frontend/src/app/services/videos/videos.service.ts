@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Video } from 'src/app/entities/videos/video';
 import { environment } from 'src/environments/environment'
 import { AuthService } from '../auth/auth.service';
 
@@ -10,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class VideosService {
-  url: string = `${environment.backendApi}/videos`
+  url: string = `${environment.backendApi}/api/videos`
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -50,19 +49,6 @@ export class VideosService {
     return this.http.get(this.url + '/' + id + + '/admin', { headers })
   }
 
-  getVideoStream(videoId, quality): Observable<any> {
-    if (this.auth.isSignedIn()) {
-      return
-    }
-    const token = this.auth.isSignedIn();
-    const headers = {
-      'Content-Type': 'application/json',
-      'Accept': '*/*',
-      'Authorization': `Bearer ${token}`
-    }
-    return this.http.get(this.url + `/stream/${quality}/${videoId}`)
-  }
-
   // createVideo(formData): Observable<any> {
   //   if (!this.auth.isAdmin()) {
   //     return
@@ -99,7 +85,7 @@ export class VideosService {
       'Accept': 'application/json',
       'Authorization': `Bearer ${token}`
     }
-    return this.http.delete(this.url + videoId)
+    return this.http.delete(this.url + videoId, { headers })
   }
 }
 
