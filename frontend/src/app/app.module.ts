@@ -15,7 +15,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
@@ -51,14 +50,12 @@ import { EditplanComponent } from './components/editplan/editplan.component';
 
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { VideoComponent } from './components/pages/video/video.component';
-
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
     HomeComponent,
-    LoginComponent,
     PlansComponent,
     DashboardComponent,
     FooterComponent,
@@ -69,7 +66,7 @@ import { VideoComponent } from './components/pages/video/video.component';
     CheckoutComponent,
     TermandconditionComponent,
     SettingsComponent,
-    LoginComponent,
+    // LoginComponent,
     SignupComponent,
     SigninComponent,
     VideouploadComponent,
@@ -110,7 +107,8 @@ import { VideoComponent } from './components/pages/video/video.component';
     MatSelectModule,
     OverlayModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

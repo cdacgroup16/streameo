@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/users/user';
-
+// import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -18,7 +19,7 @@ export class SignupComponent implements OnInit {
   user: User;
 
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -37,10 +38,12 @@ export class SignupComponent implements OnInit {
       this.user = user;
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', JSON.stringify(this.user));
+      this.snack.open("Signed Up Success", "dismiss");
       this.router.navigate(['/home']);
     },
       err => {
-        console.error('Signup failed \n', err.error?.message);
+        this.snack.open("Signup Failed" + err.message , "Dismiss");
+        // console.error('Signup failed \n', err.error?.message);
       });
   }
 
