@@ -82,7 +82,7 @@ const routes: Routes = [
     component: AddcategoriesComponent
   },
   {
-    path: 'editcategory',
+    path: 'editcategory/:id',
     component: EditcategoryComponent
   }
 ];

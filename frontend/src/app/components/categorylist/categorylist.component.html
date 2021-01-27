@@ -39,7 +39,7 @@
           color="primary"
           aria-label="Example icon button with a home icon"
         >
-          <mat-icon [routerLink]="['/editcategory']">edit</mat-icon>
+          <mat-icon (click) = onEdit(item._id)>edit</mat-icon>
         </button>
       </td>
       <td style="text-align: center">
