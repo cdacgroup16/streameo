@@ -1,107 +1,36 @@
-<p>contactus works!</p>
 <p>
   <mat-toolbar style="text-align: center;">
     <span style="margin: auto;">Contact Us</span>
   </mat-toolbar>
 </p>
-<div style="display: flex; flex-direction:row;">
-    <div >
+<div class="team_wrapper">
+  <div class="Team_card" *ngFor="let team of team">
     <mat-card>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Rishab Aggarwal</mat-card-title>
-          <mat-card-subtitle>Web Developer</mat-card-subtitle>      
-        </mat-card-header>
-        <img mat-card-image src="./assets/images/Green_Lantern.jpg">
-        <mat-card-content>
-          <p>
-            Scrum master <br>
-            Frontend man
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-icon-button><mat-icon>facebook</mat-icon></button>
-          <button mat-icon-button><mat-icon svgIcon="GITHUB" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></button> 
-          <button mat-icon-button><mat-icon svgIcon="LINKDIN" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></button> 
-          <div class="spacing"></div>
-          <button mat-icon-button><mat-icon>publish</mat-icon></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div>
-      <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Rishab Aggarwal</mat-card-title>
-            <mat-card-subtitle>Web Developer</mat-card-subtitle>      
-          </mat-card-header>
-          <img mat-card-image src="./assets/images/Green_Lantern.jpg">
-          <mat-card-content>
-            <p>
-              Scrum master <br>
-              Frontend man
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-icon-button><mat-icon>facebook</mat-icon></button>
-          <button mat-icon-button><mat-icon svgIcon="GITHUB" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></button>
-          <button mat-icon-button><mat-icon svgIcon="LINKDIN" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></button> 
-            <div class="spacing"></div>
-            <button mat-icon-button><mat-icon>publish</mat-icon></button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div>
-        <mat-card>
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Rishab Aggarwal</mat-card-title>
-              <mat-card-subtitle>Web Developer</mat-card-subtitle>      
-            </mat-card-header>
-            <img mat-card-image src="./assets/images/Green_Lantern.jpg">
-            <mat-card-content>
-              <p>
-                Rishab@gmail.com
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-icon-button><mat-icon>facebook</mat-icon></button>
-          <button mat-icon-button><mat-icon svgIcon="GITHUB" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></button>
-          <button mat-icon-button><mat-icon svgIcon="LINKDIN" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></button> 
-              <div class="spacing"></div>
-              <button mat-icon-button><mat-icon>publish</mat-icon></button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        <div>
-          <mat-card>
-              <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Rishab Aggarwal</mat-card-title>
-                <mat-card-subtitle>Web Developer</mat-card-subtitle>      
-              </mat-card-header>
-              <img mat-card-image src="./assets/images/Green_Lantern.jpg">
-              <mat-card-content>
-                <p>
-                  Scrum master <br>
-                  Frontend man
-                </p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-icon-button><mat-icon>facebook</mat-icon></button>
-                <button mat-icon-button><mat-icon svgIcon="GITHUB" aria-hidden="false" aria-label="github SVG icon"></mat-icon></button>
-                <button mat-icon-button><mat-icon svgIcon="LINKDIN" aria-hidden="false" aria-label="linkdin SVG icon"></mat-icon></button> 
-                <div class="spacing"></div>
-                <button mat-icon-button><mat-icon>publish</mat-icon></button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
-
-       
-        
+      <mat-card-header>
+        <div mat-card-avatar class="{{team.class}}"> </div>
+        <mat-card-title>{{team.name}}</mat-card-title>
+        <mat-card-subtitle>{{team.designation}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="(team.image)" width="200px">
+      <mat-card-content>{{team.desc}}
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-icon-button href="{{team.fb}}">
+          <mat-icon>facebook</mat-icon>
+        </a>
+        <a mat-icon-button href="{{team.git}}">
+          <mat-icon svgIcon="GITHUB" aria-hidden="false" aria-label="icon"></mat-icon>
+        </a>
+        <a mat-icon-button href="{{team.linkedin}}">
+          <mat-icon svgIcon="LINKDIN" aria-hidden="false" aria-label="icon"></mat-icon>
+        </a>
+        <a mat-icon-button href="mailto:{{team.mail}}">
+          <mat-icon>mail</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
 
 
-        
-        
+</div>

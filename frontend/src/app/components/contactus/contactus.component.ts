@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 const GITHUB = `
 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -21,15 +21,19 @@ const LINKDIN = `
 `;
 
 
-
 @Component({
   selector: 'app-contactus',
   templateUrl: './contactus.component.html',
   styleUrls: ['./contactus.component.scss']
 })
 export class ContactusComponent implements OnInit {
+  team: any = [
+    { name: "Adarsh Pandey", class: "adarsh", avatar: "assets/images/team/Adarsh_Pandey.JPG", image: "assets/images/team/Adarsh_Pandey.JPG", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920000 ", designation: "Developer", git: "/", mail: "/", fb: "/", linkedin: "/" },
+    { name: "Rishabh Aggarwal", class: "rishabh", avatar: "assets/images/team/rishabh_avater.jpg", image: "assets/images/team/rishabh_aggarwal.jpeg", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920076 ", designation: "Developer", git: "https://github.com/rishcodelib", mail: "rishabhaggarwal23@gmail.com", fb: "https://www.facebook.com/iam.rishabhhh", linkedin: "http://www.linkedin.com/in/iamrishabhh" },
+    { name: "Deepak Thakur", class: "deepak", avatar: "assets/images/team/rishabh.jpg", image: "/", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920000 ", designation: "Developer", git: "/", mail: "/", fb: "/", linkedin: "/" },
+    { name: "Pranjali Inglae", class: "pranjali", avatar: "assets/images/team/rishabh.jpg", image: "/", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920000 ", designation: "Developer", git: "/", mail: "/", fb: "/", linkedin: "/" }];
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) { 
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('GITHUB', sanitizer.bypassSecurityTrustHtml(GITHUB));
     iconRegistry.addSvgIconLiteral('LINKDIN', sanitizer.bypassSecurityTrustHtml(LINKDIN));
   }
@@ -37,7 +41,7 @@ export class ContactusComponent implements OnInit {
   ngOnInit(): void {
   }
 }
-  
 
 
-  
+
+

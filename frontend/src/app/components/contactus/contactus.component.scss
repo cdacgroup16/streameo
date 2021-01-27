@@ -1,19 +1,55 @@
-.mat-card{
-  max-width:400px;
-  margin: auto;
+.team_wrapper {
+  width: 100%;
+  // max-height: 600px;
+  text-align: center;
+  // overflow: hidden;
 }
-.mat-card-avatar{
-  //background-image: url('./assets/images/Green_Lantern.jpg');
+.mat-card img {
+  width: 200px;
+}
+.mat-card {
+  max-width: 300px;
+  margin: auto;
+  // height: 250px;
+  // margin: 0 5px;
+}
+// .mat-card-avatar {
+//   background-image: url("./assets/images/Green_Lantern.jpg");
+//   background-size: cover;
+// }
+
+.adarsh {
+  background-image: url("./../../../assets/images/team/Adarsh_Pandey.JPG");
+  background-size: cover;
+}
+.rishabh {
+  background-image: url("./../../../assets/images/team/rishabh_avatar.jpg");
+  background-size: cover;
+}
+.deepak {
+  background-image: url("./../../../assets/images/team/rishabh_avatar.JPG");
+  background-size: cover;
+}
+.pranjali {
+  background-image: url("./../../../assets/images/team/rishabh_avatar.JPG");
   background-size: cover;
 }
 
-.mat-card-actions{
+.Team_card {
+  width: 23%;
+  display: inline-block;
+  margin: 2px 4px;
+  height: 275px;
+}
+.mat-card-actions .mat-card-actions {
   display: flex;
+  width: 100%;
+  text-align: center;
 }
 
-.mat-card-actions .spacing {
-  width: 100%;
-}
+// .mat-card-actions .spacing {
+//   width: 100%;
+// }
 
 .tabler-icons {
   display: flex;
@@ -25,7 +61,7 @@
   width: 10rem;
   font-size: 12px;
   text-align: center;
-  padding: .5rem .25rem 2rem;
+  padding: 0.5rem 0.25rem 2rem;
 }
 
 .tabler-icon i {
@@ -42,10 +78,25 @@
 
 .tabler-icon strong {
   display: block;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .tabler-icon-codes {
   line-height: 2em;
 }
-
+@media (max-width: 425px) {
+  .Team_card {
+    width: 100%;
+    display: block;
+    margin: 0px;
+    font-size: small;
+    // height: 275px;
+  }
+  .mar-card {
+    padding: 10px;
+    margin: 10px;
+  }
+  .mat-card img {
+    width: 50px;
+  }
+}
