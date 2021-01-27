@@ -7,17 +7,20 @@
       <span>streameo </span>
 
     </a>
-    <span> </span>
-    <!-- <h1> {{childData}}</h1> -->
     <span class="example-spacer"></span>
 
-    <a mat-raised-button color="accent" [routerLink]="['/login']" aria-label="Example icon with heart icon"
-      *ngIf="(loginbtn)">
+
+    <a mat-flat-button color="primary" [routerLink]="['/login']" aria-label="Example icon with heart icon"
+      *ngIf="!loggedin()" style="text-transform: capitalize; font-weight: 600;">
       login
     </a>
-    <a mat-raised-button color="warn" (click)="logout()" aria-label="Example icon with heart icon" *ngIf="(logoutbtn)">
-      logout
-    </a>
+
+    <div *ngIf="loggedin() ">
+      <a mat-flat-button color="primary" (click)="logout()" aria-label="Example icon with heart icon"
+        style="text-transform: capitalize; font-weight: 600;">
+        logout
+      </a>
+    </div>
 
   </mat-toolbar-row>
 </mat-toolbar>
@@ -28,16 +31,22 @@
       <li>
         <button mat-button [routerLink]="['/home']">home</button>
       </li>
-      <li>
-        <button mat-button [routerLink]="['/plans']">plans</button>
+      <li >
+        <button mat-button [routerLink]="['/plans']">View Plans</button>
       </li>
-      <li>
-        <button mat-button [routerLink]="['/signup']">signup</button>
+      <li *ngIf="admin()">
+        <button mat-button [routerLink]="['/planlist']">Plan List</button>
+      </li>
+      <li *ngIf="admin()">
+        <button mat-button [routerLink]="['/userlist']">User List</button>
       </li>
 
-      <li><button mat-button [routerLink]="['/settings']">Settings</button></li>
-      <li><button mat-button [routerLink]="['/videoupload']">Video Upload</button></li>
-      <li><button mat-button [routerLink]="['/']">Categories</button></li>
+      <li *ngIf="!loggedin()"> <button mat-button [routerLink]="['/signup']">signup</button> </li>
+      <li *ngIf="loggedin()"><button mat-button [routerLink]="['/']">Categories</button></li>
+
+      <li *ngIf="admin()"><button mat-button [routerLink]="['/videoupload']">Video Upload</button></li>
+
+      <li *ngIf="loggedin()"><button mat-button [routerLink]="['/settings']">Settings</button></li>
     </ul>
 
     <ul class="side_bar bottom">

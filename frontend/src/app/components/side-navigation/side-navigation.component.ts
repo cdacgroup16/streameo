@@ -1,4 +1,5 @@
 
+import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
@@ -13,31 +14,23 @@ export class SideNavigationComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   opened = false;
-  loginbtn = true;
-  logoutbtn = false;
-  // style = "display:none";
-  admin = false;
-  // login = false;
-  // login = true;
-  isLogin = false;
-  // local = this.auth.isSignedIn();
+
+  loggedin() {
+    return this.auth.isSignedIn()
+  }
+  admin() {
+    return this.auth.isAdmin();
+  }
   logout() {
     this.auth.logout();
-
-    this.router.navigate(['/login']);
-    // window.location.reload();
+    this.router.navigate(['/home']);
+ 
   }
+ 
 
-  RecieveState(newItem: boolean) {
-    console.log(newItem);
-  }
+  
   ngOnInit(): void {
-    if ((this.auth.isSignedIn())) {
-      // let load = false;
-      this.loginbtn = false;
-      this.logoutbtn = true;
-      // console.log(local);
-    }
+   
   }
 
 
