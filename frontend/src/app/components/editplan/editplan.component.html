@@ -1,0 +1,37 @@
+<div class="plansadd" style="margin: 4rem auto">
+  <mat-card id="card" style="text-align: center; width: 50vw; margin: 0 auto">
+    <mat-toolbar>
+      <span class="float-right">
+        <mat-icon>subscriptions</mat-icon>
+      </span>
+      <span>Edit Plan</span>
+    </mat-toolbar>
+
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Plan Name</mat-label>
+        <input matInput  type="text" name="name" [(ngModel)]="planDetails.name" />
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput type="number" name="price"   [(ngModel)]="planDetails.price" />
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>concurrent_streams</mat-label>
+        <input matInput type="number" name="concurrent_streams"
+            [(ngModel)]="planDetails.concurrent_streams" />
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>validity</mat-label>
+        <input matInput type="number" name="validity"  [(ngModel)]="planDetails.validity"  />
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>max_quality</mat-label>
+        <input matInput type=" max_quality"   [(ngModel)]="planDetails.max_quality" />
+      </mat-form-field><br />
+      <button (click)=" onSubmit()" mat-raised-button color="accent" style="margin-right: 5px">
+        Edit plan
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
