@@ -13,9 +13,9 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
 import { componentFactoryName } from '@angular/compiler';
-import {PlanlistComponent} from './components/planlist/planlist.component';
-import {AddplansComponent} from './components/addplans/addplans.component';
-import {EditplanComponent} from './components/editplan/editplan.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
 const routes: Routes = [
   {
     path: '',
@@ -79,7 +79,7 @@ const routes: Routes = [
     component: AddplansComponent
   },
   {
-    path: 'editplans',
+    path: 'editplans/:id',
     component: EditplanComponent
   }
 ];

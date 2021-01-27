@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Plans } from '../../entities/plans/plans';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PlansService } from 'src/app/services/plans/plans.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-editplan',
@@ -10,38 +12,46 @@ import { Router } from '@angular/router';
 })
 export class EditplanComponent implements OnInit {
 
-  name: String;
-  price :number;
-  concurrent_streams :number;
-  validity: number;
-  max_quality:number;
-  plansadd : Plans;
-  constructor(private  auth:AuthService, private router: Router) { }
+
+  _id: string;
+  planDetails: Plans;
+
+  constructor(private auth: AuthService, private router: Router, private act: ActivatedRoute, private plan: PlansService) { }
 
   ngOnInit(): void {
+    this.act.params.subscribe(params => {
+      this._id = params.id;
+      console.log(this._id);
+
+      this.plan.getPlan(this._id).subscribe((res) => {
+        this.planDetails = res;
+      },
+        (err) => {
+          console.log("error", err.err?.message);
+        });
+    })
+
   }
-  onSubmit(){
-    console.log(this.plansadd);
-    const payload = {
-    name: this.name,
-    price: this.price,
-    concurrent_streams: this.concurrent_streams,
-    validity: this.validity,
-    max_quality: this.max_quality
-}
-this.auth.signup(payload).subscribe(data => {
 
-  const { plansadd } = data;
-  this.plansadd = plansadd;
-  localStorage.setItem('plansadd', JSON.stringify(this.plansadd));
-  this.router.navigate(['/planlist']);
-},
-  err => {
-    console.error('plansadd failed \n', err.error?.message);
-  });
+  onSubmit() {
+    // console.log(this.planDetails);
+    if (this.auth.isSignedIn()) {
+      this.plan.updatePlan(this._id, this.planDetails).subscribe((res) => {
+        ;
+        console.log("Updated");
+      },
+        (err) => {
+          console.log("error", err);
 
+        });
+    }
+    else {
+      console.log("not Signed In");
 
-}
+    }
+
+  }
+
 }
 
 

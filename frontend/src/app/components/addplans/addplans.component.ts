@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Plans } from '../../entities/plans/plans';
 import { Router } from '@angular/router';
+import { PlansService } from 'src/app/services/plans/plans.service';
 
 @Component({
   selector: 'app-addplans',
@@ -10,38 +11,46 @@ import { Router } from '@angular/router';
 })
 export class AddplansComponent implements OnInit {
 
-  name: String;
-  price :number;
-  concurrent_streams :number;
-  validity: number;
-  max_quality:number;
-  plansadd : Plans;
+  constructor(private auth: AuthService, private router: Router, private plan: PlansService) { }
 
-  constructor(private  auth:AuthService, private router: Router) { }
- 
-  
+  name: string;
+  price: Number;
+  concurrent_streams: Number;
+  validity: Number;
+  max_quality: Number;
+  plansadd: any;
 
   ngOnInit(): void {
-    
+
   }
-  onSubmit(){
-      console.log(this.plansadd);
-      const payload = {
+  onSubmit() {
+    const payload = {
       name: this.name,
       price: this.price,
       concurrent_streams: this.concurrent_streams,
       validity: this.validity,
       max_quality: this.max_quality
-  }
-  this.auth.signup(payload).subscribe(data => {
+    }
+    console.log(payload);
+    if (this.auth.isSignedIn()) {
+      this.plan.postNewPlan(payload).subscribe((res) => {
+        console.log(res)
+      }, (err) => {
+        console.log("error", err);
+      })
+    }
+    else {
+      console.log("user not signed in");
+    }
+    // this.auth.signup(payload).subscribe(data => {
 
-    const { plansadd } = data;
-    this.plansadd = plansadd;
-    localStorage.setItem('plansadd', JSON.stringify(this.plansadd));
-    this.router.navigate(['/planlist']);
-  },
-    err => {
-      console.error('plansadd failed \n', err.error?.message);
-    });
-}
+    //   const { plansadd } = data;
+    //   this.plansadd = plansadd;
+    //   localStorage.setItem('plansadd', JSON.stringify(this.plansadd));
+    //   this.router.navigate(['/planlist']);
+    // },
+    //   err => {
+    //     console.error('plansadd failed \n', err.error?.message);
+    //   });
+  }
 }
