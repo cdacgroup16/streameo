@@ -18,11 +18,12 @@ export class AddcategoriesComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.name);
+    // console.log(this.name);
     if (this.auth.isSignedIn) {
       this.service.postNewCat({ name: this.name }).subscribe((res) => {
         this.name = res;
         console.log(this.name);
+        this.router.navigate(['/categorylist']);
       }, (err) => {
         console.log(err);
       });
@@ -30,6 +31,7 @@ export class AddcategoriesComponent implements OnInit {
     else {
       "not Signed in.";
     }
+
   }
 
 

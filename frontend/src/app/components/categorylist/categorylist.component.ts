@@ -19,8 +19,17 @@ export class CategorylistComponent implements OnInit {
     })
   }
   onEdit(id) {
+
     let url = "/editcategory/" + id;
     this.route.navigate([url]);
+  }
+  onDelete(id) {
+    this.service.delCat(id).subscribe((res) => {
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+    })
+    window.location.reload();
   }
 
 }

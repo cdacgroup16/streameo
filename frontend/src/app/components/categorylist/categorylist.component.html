@@ -9,11 +9,7 @@
           </span>
         </td>
         <td>
-          <button
-            mat-icon-button
-            color="primary"
-            aria-label="Example icon button with a home icon"
-          >
+          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
             <mat-icon [routerLink]="['/addcategory']">add</mat-icon>
           </button>
         </td>
@@ -34,20 +30,13 @@
         <mat-label>{{ item.name }} </mat-label>
       </td>
       <td style="text-align: center">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon (click) = onEdit(item._id)>edit</mat-icon>
+        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+          <mat-icon (click)=onEdit(item._id)>edit</mat-icon>
         </button>
       </td>
       <td style="text-align: center">
-        <button
-          mat-icon-button
-          color="warn"
-          aria-label="Example icon button with a home icon"
-        >
+        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+          (click)=onDelete((item._id))>
           <mat-icon>delete</mat-icon>
         </button>
       </td>

@@ -24,6 +24,7 @@ export class EditcategoryComponent implements OnInit {
       this.id = res.id;
       this.serv.updateCat(this.id, { name: this.name }).subscribe((res) => {
         console.log(res);
+        this.router.navigate(['/categorylist']);
       }, (err) => {
         console.log(err);
 

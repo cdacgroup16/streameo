@@ -36,7 +36,7 @@ export class CategoriesService {
 
   delCat(id): any {
     const tempUrl = this.url + "/" + id;
-    return this.http.delete(tempUrl);
+    return this.http.delete(tempUrl, { headers: this.header });
   }
 
 }
