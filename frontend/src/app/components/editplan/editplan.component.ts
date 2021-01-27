@@ -4,6 +4,7 @@ import { Plans } from '../../entities/plans/plans';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlansService } from 'src/app/services/plans/plans.service';
 import { ThrowStmt } from '@angular/compiler';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-editplan',
@@ -16,7 +17,7 @@ export class EditplanComponent implements OnInit {
   _id: string;
   planDetails: Plans;
 
-  constructor(private auth: AuthService, private router: Router, private act: ActivatedRoute, private plan: PlansService) { }
+  constructor(private auth: AuthService, private router: Router, private act: ActivatedRoute, private plan: PlansService, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
     this.act.params.subscribe(params => {
@@ -37,10 +38,12 @@ export class EditplanComponent implements OnInit {
     // console.log(this.planDetails);
     if (this.auth.isSignedIn()) {
       this.plan.updatePlan(this._id, this.planDetails).subscribe((res) => {
-        ;
+
         console.log("Updated");
+        this.snack.open("Plan Updated Success", "Dismiss");
       },
         (err) => {
+          this.snack.open("Erroe " + err.error?.message, "Dismiss");
           console.log("error", err);
 
         });
