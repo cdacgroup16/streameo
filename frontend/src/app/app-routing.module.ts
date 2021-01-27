@@ -16,6 +16,8 @@ import { componentFactoryName } from '@angular/compiler';
 import { PlanlistComponent } from './components/planlist/planlist.component';
 import { AddplansComponent } from './components/addplans/addplans.component';
 import { EditplanComponent } from './components/editplan/editplan.component';
+import { VideoComponent } from 'src/app/components/pages/video/video.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -77,10 +79,14 @@ const routes: Routes = [
   {
     path: 'addplans',
     component: AddplansComponent
-  },
-  {
+  }, {
     path: 'editplans/:id',
     component: EditplanComponent
+  },
+  {
+
+    path: 'video',
+    component: VideoComponent
   }
 ];
 

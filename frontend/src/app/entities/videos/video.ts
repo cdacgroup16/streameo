@@ -2,6 +2,7 @@ import { Categories } from "../categories/categories"
 import { User } from "../users/user"
 
 export class Video {
+  _id: string
   title: string
   description: string
   duration: number

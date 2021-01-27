@@ -1,0 +1,14 @@
+.video-player-wrapper {
+  font-size: 0.9rem;
+}
+
+.player {
+  width: 70vw;
+  margin: 0 auto;
+}
+
+@media (max-width: 730px) {
+  .video-player-wrapper {
+    font-size: 0.7rem;
+  }
+}
