@@ -1,11 +1,11 @@
 export class Categories {
-  id: string;
+  _id: string;
   name: string;
   /**
    *
    */
   constructor(id, name) {
-    this.id = id;
+    this._id = id;
     this.name = name;
   }
 }
