@@ -8,7 +8,7 @@ const { validatePassword } = require('../utils/validation')
 // @access  Protected
 exports.getUserById = async (req, res, next, id) => {
   try {
-    const user = await User.findById(id)
+    const user = await User.findById(id).populate('subscription_plan')
     if (!user) {
       res.status(400)
       throw new Error('User not found!')
@@ -31,7 +31,6 @@ exports.getUser = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('User not found!')
   }
-  user.stream_count = undefined
   res.json(user)
 })
 
@@ -54,10 +53,11 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 exports.createUser = asyncHandler(async (req, res) => {
-  let { firstname, lastname, email, password } = req.body
+  let { firstname, lastname, email, password, subscription_plan } = req.body
   firstname = firstname && firstname.toLowerCase()
   lastname = lastname && lastname.toLowerCase()
   email = email && email.toLowerCase()
+  const profiles = [firstname]
 
   const userExists = await User.findOne({ email })
 
@@ -71,6 +71,8 @@ exports.createUser = asyncHandler(async (req, res) => {
     lastname,
     email,
     password,
+    profiles,
+    subscription_plan,
   })
 
   if (user) {
@@ -89,6 +91,13 @@ exports.createUser = asyncHandler(async (req, res) => {
 // @access  Protected
 exports.updateUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
+  const { password } = req.body
+
+  if (!password) {
+    res.status(403)
+    throw new Error('Password is required for this action')
+  }
+
   let newUserData = req.body
   if (user) {
     user.firstname = newUserData.firstname || user.firstname

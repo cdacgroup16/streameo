@@ -1,23 +1,48 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  url = "http://localhost:5000/";
+  url: string = environment.backendApi + '/api';
 
   constructor(private http: HttpClient) { }
 
-  signup(signup) {
+  signup(payload: any): Observable<any> {
     const tempUrl = this.url + "/signup";
-    return this.http.post(tempUrl, signup);
+    return this.http.post(tempUrl, payload);
   }
-  signin(signin) {
+
+  signin(email: string, password: string): Observable<any> {
     const tempUrl = this.url + "/signin";
-    return this.http.post(tempUrl, signin)
+    return this.http.post(tempUrl, { email, password });
   }
-  logout(id) {
-    return localStorage.removeItem(id);
+
+  logout(): void {
+    if (window.localStorage && localStorage.getItem('token')) {
+      localStorage.removeItem('token');
+    }
+    if (window.localStorage && localStorage.getItem('user')) {
+      localStorage.removeItem('user');
+    }
+    return
+  }
+
+  isSignedIn(): any {
+    if (window.localStorage && localStorage.getItem('token')) {
+      return JSON.parse(localStorage.getItem('token'));
+    }
+    return false;
+  }
+
+  isAdmin(): any {
+    if (window.localStorage && localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user'))
+      return user.role === 1 ? JSON.parse(localStorage.getItem('token')) : false;
+    }
+    return false
   }
 }

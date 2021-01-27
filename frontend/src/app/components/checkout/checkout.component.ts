@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Plans } from '../../entities/plans/plans';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JsonpClientBackend } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout',
@@ -7,9 +11,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: ActivatedRoute, private myroute: Router, private snack: MatSnackBar) { }
+
+  plan: Plans;
+  id: any;
+  Quantity: any;
 
   ngOnInit(): void {
+
+    this.router.queryParams.subscribe(params => {
+      this.id = (params).id;
+
+      const getData = JSON.parse(window.localStorage.getItem("plans"));
+      getData.forEach(el => {
+        if (el._id == this.id) {
+          this.plan = el;
+        }
+      });
+    },
+      err => {
+        this.snack.open("Error" + err.error?.message, "Dismiss", { duration: 1000 });
+        console.error('Error ', err.err?.message);
+        this.myroute.navigate(['/plans']);
+      });
+  }
+  Pay() {
+    let mon = 30;
+    let res: number = mon * this.Quantity
+    console.log(this.plan.id);
+    console.log("Month" + res);
+    this.snack.open("Plan Purchased", "Dismiss", { duration: 1000 });
+    alert("Month  : " + res + " Plan ID IS: " + JSON.stringify(this.plan));
+    window.localStorage.removeItem("plans");
   }
 
 }

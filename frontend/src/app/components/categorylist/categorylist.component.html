@@ -1,0 +1,45 @@
+<div class="checkout">
+  <mat-toolbar>
+    <table>
+      <tr>
+        <td>
+          <span>
+            <mat-icon>category</mat-icon>
+            Category Management Dashboard
+          </span>
+        </td>
+        <td>
+          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+            <mat-icon [routerLink]="['/addcategory']">add</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </mat-toolbar>
+  <table class="example-full-width" cellspacing="2" style="text-align: left">
+    <th>Category Id</th>
+    <th>Category Name</th>
+    <th>Edit</th>
+    <th>Delete</th>
+
+    <tr *ngFor="let item of categoryList">
+      <td>
+        <mat-label>{{ item._id }}</mat-label>
+      </td>
+      <td>
+        <mat-label>{{ item.name }} </mat-label>
+      </td>
+      <td style="text-align: center">
+        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+          <mat-icon (click)=onEdit(item._id)>edit</mat-icon>
+        </button>
+      </td>
+      <td style="text-align: center">
+        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+          (click)=onDelete((item._id))>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

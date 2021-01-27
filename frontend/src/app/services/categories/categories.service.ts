@@ -1,13 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
-  url: string = "http://localhost:5000/api/categories"
+  url: string = environment.backendApi + '/api/categories' 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
+  token = this.auth.isSignedIn();
+  header = { 'Authorization': "Bearer " + this.token };
+
 
   getAllCat(): any {
     return this.http.get(this.url);
@@ -21,16 +26,18 @@ export class CategoriesService {
 
 
   postNewCat(cObj): any {
-    return this.http.post(this.url, cObj);
+
+    return this.http.post(this.url, cObj, { headers: this.header });
   }
 
-  updateCat(cObj): any {
-    return this.http.put(this.url, cObj);
+  updateCat(id, name): any {
+    let tempurl = this.url + '/' + id;
+    return this.http.put(tempurl, name, { headers: this.header });
   }
 
   delCat(id): any {
     const tempUrl = this.url + "/" + id;
-    return this.http.delete(tempUrl);
+    return this.http.delete(tempUrl, { headers: this.header });
   }
 
 }

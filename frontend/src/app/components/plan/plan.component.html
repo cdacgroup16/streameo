@@ -1,6 +1,12 @@
 <!-- table component  -->
 <div class="mytable">
-  <h1>Subscribe to get more out of Streameo</h1>
+  <!-- <h1>Subscribe to get more out of Streameo</h1> -->
+  <mat-toolbar class="component_head">
+    <span class="float-right" >
+      <i class="material-icons">subscriptions</i>
+    </span>
+    <span>Subscribe to get more out of Streameo</span>
+  </mat-toolbar>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
@@ -35,16 +41,18 @@
   <p></p>
 </span>
 <div class="radio_group">
+
   <mat-radio-group aria-label="Select an option">
     <span *ngFor="let item of planList">
-      <mat-radio-button value="{{item._id}}" class="Radio_btn">
+      <mat-radio-button value="{{item._id}}" class="Radio_btn" (change)="BtnChange($event)">
         <span class="planName">{{item.name | titlecase}} </span>
         <span class="planPrice">{{item.price | currency:'Rs.'}}</span>
       </mat-radio-button>
     </span>
   </mat-radio-group>
+
   <div>
 
-    <button mat-raised-button color="warn">Proceed to Checkout</button>
+    <button (click)="onClick()" mat-raised-button color="warn">Proceed to Checkout</button>
   </div>
 </div>

@@ -8,8 +8,7 @@ export class User {
   profiles: any;
   watch_history: any;
 
-
-  constructor(id, firstname, lastname, email, role, stream_count, profiles, watch_history) {
+  constructor(id: string, firstname: string, lastname: string, email: string, role: number, stream_count: number, profiles: any, watch_history: any) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;

@@ -9,12 +9,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
@@ -32,14 +32,31 @@ import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { MatCardModule } from '@angular/material/card';
+import { SettingsComponent } from './components/settings/settings.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SignupComponent } from './components/signup/signup.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
+import { VideouploadComponent } from './components/videoupload/videoupload.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorComponent } from './components/error/error.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
 
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { VideoComponent } from './components/pages/video/video.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     CarouselComponent,
     HomeComponent,
-    LoginComponent,
     PlansComponent,
     DashboardComponent,
     FooterComponent,
@@ -49,8 +66,25 @@ import { MatCardModule } from '@angular/material/card';
     PlanComponent,
     CheckoutComponent,
     TermandconditionComponent,
-    ContactusComponent
-    
+    ContactusComponent,
+
+    SettingsComponent,
+    // LoginComponent,
+    SignupComponent,
+    SigninComponent,
+    VideouploadComponent,
+    VideomanagementComponent,
+    VideouploadComponent,
+    ErrorComponent,
+    CategorylistComponent,
+    AddcategoriesComponent,
+    EditcategoryComponent,
+    PlanlistComponent,
+    UserlistComponent,
+    AddplansComponent,
+    EditplanComponent,
+    VideoPlayerComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +105,15 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule,
+    MatSelectModule,
+    OverlayModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [],
-  bootstrap: [AppComponent, NavigationComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

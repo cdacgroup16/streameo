@@ -1,0 +1,129 @@
+<div class="setting">
+  <div>
+    <mat-toolbar>
+      <span class="center">
+        <button mat-icon-button>
+          <mat-icon>supervised_user_circle</mat-icon>
+        </button>
+      </span>
+      <span>settings</span>
+    </mat-toolbar>
+  </div>
+
+  <div>
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="User Details">
+        <div>
+          <form class="form">
+            <table class="table" cellspacing="0">
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="first name" name="firstname" [(ngModel)]="firstname" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="last name" name="lastname" [(ngModel)]="lastname" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="last name" name="password" [(ngModel)]="password" />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Email </mat-label>
+                    <input matInput disabled [value]="email" />
+                  </mat-form-field>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <mat-form-field class="table">
+                    <mat-label>Plan</mat-label>
+                    <input matInput disabled value="plan import" />
+
+                  </mat-form-field>
+                </td>
+                <td>
+                  <div class="plans link">
+                    <a href="#" mat-flat-button [routerLink]="['/plans']"> Browse Plans</a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: center">
+                  <span>
+                    <button mat-flat-button color="primary" (click)="onSaveDetails()">
+                      Update Details
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+
+      </mat-tab>
+
+      <mat-tab label="Change Password">
+        <form class="form">
+          <table class="table" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="table">
+                  <mat-label>Old Password</mat-label>
+                  <input matInput type="password" placeholder="Old Password" name="password"
+                    [(ngModel)]="oldPassword" />
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field class="table">
+                  <mat-label>New Password</mat-label>
+                  <input matInput type="password" placeholder="New Password" name="newPassword"
+                    [(ngModel)]="newPassword" />
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: center">
+                <span>
+                  <button mat-flat-button color="primary" [routerLink]="['/reset-password']"
+                    (click)="onUpdatePassword()">
+                    Update Password
+                  </button>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <!--
+<div class="setting">
+  <mat-toolbar>
+    <span class="center">
+      <button mat-icon-button>
+        <mat-icon>supervised_user_circle</mat-icon>
+      </button>
+    </span>
+    <span>User Detail</span>
+  </mat-toolbar>
+  </div> -->
+</div>

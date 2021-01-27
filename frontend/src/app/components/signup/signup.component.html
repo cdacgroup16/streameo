@@ -1,0 +1,36 @@
+<div class="signup" style="margin: 4rem auto;">
+  <mat-card id="card" style="text-align: center; ">
+    <mat-toolbar style="text-align: center;">
+      <span >
+        <i class="material-icons">how_to_reg</i>
+      </span>
+      <span>Signup</span>
+    </mat-toolbar>
+    
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput type="First Name" [(ngModel)]="firstname" />
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput type="Last Name" [(ngModel)]="lastname"/>
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email"/>
+      </mat-form-field><br />
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="password" />
+      </mat-form-field><br />
+      <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" [(ngModel)]="confirmPassword"/>
+      </mat-form-field><br />
+      <button (click)="onSubmit()" mat-raised-button color="accent" style="margin-right:5px;">Signup</button>
+      <!-- <button mat-raised-button color="accent"  [[routerLink]="['/']" routerLinkActive="router-link-active" ] style="margin-right:5px;">Reset</button> -->
+    </mat-card-content>
+  </mat-card>
+</div>

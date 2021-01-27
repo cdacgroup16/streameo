@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Video } from 'src/app/entities/videos/video';
+import { VideosService } from 'src/app/services/videos/videos.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-slider-component',
@@ -6,26 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slider-component.component.scss']
 })
 export class SliderComponentComponent implements OnInit {
+  url: string = environment.backendApi;
+  @Input() filter: any = {};
+  videos: Video[] = [];
+  images: any[] = [];
 
-  constructor() { }
+  constructor(private vidService: VideosService) { }
 
   ngOnInit(): void {
-
-
-
+    this.getVideos();
   }
 
+  getVideos = () => {
+    this.vidService.getVideos(this.filter).subscribe(res => {
+      this.videos = res;
+      this.setImages();
+    })
+  }
 
-  images = [
-    { path: './assets/images/Green_Lantern.jpg' },
-    { path: './assets/images/riseOfEmpire.jpg' },
-    { path: './assets/images/Thor.jpg' },
-    { path: './assets/images/Thor.jpg' },
-    { path: './assets/images/Thor.jpg' },
-    { path: './assets/images/Thor.jpg' },
-    { path: './assets/images/Thor.jpg' },
-    { path: './assets/images/Thor.jpg' },
-    { path: './assets/images/Wakanda.jpg' }
-  ];
-
+  setImages() {
+    this.videos.forEach(video => {
+      this.images.push({ path: this.url + video?.poster?.src })
+    })
+  }
 }

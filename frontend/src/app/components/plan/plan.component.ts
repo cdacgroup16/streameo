@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { PlansService } from 'src/app/services/plans/plans.service';
 
 export interface PeriodicElement {
@@ -23,17 +25,39 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PlanComponent implements OnInit {
 
-  constructor(private service: PlansService) { }
-
-  planList: any;
-  ngOnInit(): void {
-    this.service.getAllPlans().subscribe((res) => {
-      this.planList = res;
-    })
-  }
+  constructor(private service: PlansService, private router: Router, private auth: AuthService) { }
 
   displayedColumns: string[] = ['name', 'plan1', 'plan2', 'plan3'];
   dataSource = ELEMENT_DATA;
+
+  planList: any;
+  selectedPlan: string;
+  ngOnInit(): void {
+
+    this.service.getAllPlans().subscribe((res) => {
+      this.planList = res;
+      localStorage.setItem("plans", JSON.stringify(res));
+    },
+      err => {
+        console.log('Signup failed \n', err.error?.message);
+      })
+  }
+  BtnChange(event) {
+    this.selectedPlan = event.value;
+  };
+
+  onClick(): any {
+    // console.log(this.selectedPlan);
+    if (this.auth.isSignedIn()) {
+      const url = '/checkout' + this.selectedPlan;
+      this.router.navigate(['/checkout', this.selectedPlan], {
+        queryParams: { 'id': this.selectedPlan }
+      });
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+  }
 
 }
 

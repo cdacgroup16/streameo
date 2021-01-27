@@ -1,8 +1,4 @@
 <div class="checkout">
-
-
-
-
   <mat-toolbar>
     <span class="float-right">
       <i class="material-icons">shopping_cart</i>
@@ -15,14 +11,14 @@
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Plan name</mat-label>
-            <input matInput disabled value="GOLD PLAN ">
+            <input matInput disabled value="{{plan.name}}">
           </mat-form-field>
         </td>
 
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Amount</mat-label>
-            <input matInput disabled value="500">
+            <input matInput disabled value="{{plan.price}}">
           </mat-form-field>
         </td>
       </tr>
@@ -31,14 +27,14 @@
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Streams</mat-label>
-            <input matInput disabled value="4">
+            <input matInput disabled value="{{plan.concurrent_streams}}">
           </mat-form-field>
         </td>
 
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Max-Quality</mat-label>
-            <input matInput disabled value="1080p ">
+            <input matInput disabled value="{{plan.max_quality}} ">
           </mat-form-field>
         </td>
       </tr>
@@ -46,11 +42,11 @@
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Select Quantity (Per Month)</mat-label>
-            <input matInput>
+            <input matInput type="number" [(ngModel)]="Quantity" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         </td>
         <td style="text-align: right;">
-          <button mat-flat-button color="primary">Proceed to Payment</button>
+          <button (click)="Pay()" mat-flat-button color="primary">Proceed to Payment</button>
         </td>
 
 

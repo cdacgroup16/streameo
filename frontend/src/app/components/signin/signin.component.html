@@ -1,0 +1,23 @@
+<div class="Login" style="margin: 4rem auto;">
+  <mat-card id="card" style="text-align: center; width: 50%; margin: 0 auto">
+    <mat-card-title>
+      <b>Login</b>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" />
+      </mat-form-field><br />
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="password" />
+      </mat-form-field><br />
+      <button (click)="onSubmit()" color="accent" mat-flat-button type="submit" style="width: 50%;">login</button>
+      <div class="signup link">
+        Not a member? <a href="#" [routerLink]="['/signup']"> Sign Up</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
