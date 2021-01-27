@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  url: string = environment.backendApi;
+  url: string = environment.backendApi + '/api';
 
   constructor(private http: HttpClient) { }
 

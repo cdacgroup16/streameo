@@ -18,8 +18,6 @@ export class SliderComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVideos();
-    console.log(this.filter);
-
   }
 
   getVideos = () => {
