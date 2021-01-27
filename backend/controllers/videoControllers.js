@@ -73,6 +73,7 @@ exports.getPoster = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error("The video with the provided id doesn't exists!")
   }
+
   // FOR TESTING PURPOSE ONLY
   if (process.env.TESTING_MEDIA === 'true') {
     video.poster.path = path.join(
@@ -82,6 +83,11 @@ exports.getPoster = asyncHandler(async (req, res) => {
       'posters',
       'temp.jpg'
     )
+  }
+  // Check file exists
+  if (!fs.existsSync(video.poster.path)) {
+    res.status(404)
+    throw new Error("Poster you requested doesn't exists!")
   }
 
   const readPoster = fs.createReadStream(video.poster.path)
@@ -126,6 +132,16 @@ exports.getStream = asyncHandler(async (req, res) => {
       'videos',
       'tempLow.mp4'
     )
+  }
+
+  // Check file exists
+  if (
+    !fs.existsSync(
+      video.video.path_low || video.video.path_med || video.video.path_high
+    )
+  ) {
+    res.status(404)
+    throw new Error("Video you requested doesn't exists!")
   }
 
   const type = video.video.type
