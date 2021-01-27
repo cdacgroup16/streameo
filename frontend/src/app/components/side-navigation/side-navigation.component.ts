@@ -14,6 +14,13 @@ export class SideNavigationComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   opened = false;
+  // username: string;
+  // name = this.username.firstname;
+  username: string ;
+  ngOnInit(): void {
+   this.username = JSON.parse(localStorage.getItem('user')).firstname;
+   console.log(this.username);
+  }
 
   loggedin() {
     return this.auth.isSignedIn()
@@ -24,14 +31,12 @@ export class SideNavigationComponent implements OnInit {
   logout() {
     this.auth.logout();
     this.router.navigate(['/home']);
- 
-  }
- 
 
-  
-  ngOnInit(): void {
-   
   }
+
+
+
+
 
 
 

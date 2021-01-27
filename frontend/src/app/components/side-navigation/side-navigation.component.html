@@ -8,7 +8,7 @@
 
     </a>
     <span class="example-spacer"></span>
-
+    <span *ngIf="loggedin()" style="text-transform: capitalize;font-size: medium;">Hi {{username}}</span>
 
     <a mat-flat-button color="primary" [routerLink]="['/login']" aria-label="Example icon with heart icon"
       *ngIf="!loggedin()" style="text-transform: capitalize; font-weight: 600;">
@@ -31,7 +31,7 @@
       <li>
         <button mat-button [routerLink]="['/home']">home</button>
       </li>
-      <li >
+      <li>
         <button mat-button [routerLink]="['/plans']">View Plans</button>
       </li>
       <li *ngIf="admin()">
