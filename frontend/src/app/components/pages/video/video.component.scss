@@ -6,6 +6,10 @@
   justify-content: center;
   align-items: center;
   background-color: lightgrey;
+  margin-bottom: 2rem;
+  border: 0.1rem solid lightgray;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .video-player {
@@ -14,7 +18,14 @@
 
 .video-details {
   width: 100%;
+  mat-card {
+    height: 40vh;
+  }
 }
 
-.card {
+@media (max-width: 730px) {
+  body {
+    font-size: 0.5rem;
+    background-color: black;
+  }
 }
