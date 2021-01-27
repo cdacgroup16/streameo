@@ -1,26 +1,22 @@
 <div class="checkout">
-  
+
   <mat-toolbar>
-  <table>
-    <tr>
-      <td>
-        <span>
-          <mat-icon>subscriptions</mat-icon>
-          Plan Management Dashboard
-        </span>
-      </td>
-      <td>
-        <button 
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon >add</mat-icon>
-        </button>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <td>
+          <span>
+            <mat-icon>subscriptions</mat-icon>
+            Plan Management Dashboard
+          </span>
+        </td>
+        <td>
+          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+            <mat-icon [routerLink]="['/addplans']">add</mat-icon>
+          </button>
+      </tr>
+    </table>
   </mat-toolbar>
-    <table class="example-full-width" cellspacing="2" style="text-align: left">
+  <table class="example-full-width" cellspacing="2" style="text-align: left">
     <th>Plan Id</th>
     <th>Name</th>
     <th>Price</th>
@@ -44,22 +40,14 @@
       <td>{{ item.validity }}</td>
       <td>{{ item.max_quality }}</td>
       <td style="text-align: center">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon>edit</mat-icon>
+        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+          <mat-icon (click)="onEdit(item._id)">edit</mat-icon>
         </button>
       </td>
       <td style="text-align: center">
-        <button
-          mat-icon-button
-          color="warn"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+        <a mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+          <mat-icon (click)="remove(item._id)">delete</mat-icon>
+        </a>
       </td>
     </tr>
   </table>

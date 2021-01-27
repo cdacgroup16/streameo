@@ -1,1 +1,21 @@
-<p>video works!</p>
+<div class="main">
+  <div class="row video-player">
+    <app-video-player></app-video-player>
+  </div>
+  <div class="row video-details">
+    <mat-card>
+      <mat-card-title>{{ video?.title | titlecase }}</mat-card-title>
+      <mat-card-subtitle>Views: {{ video?.views }}</mat-card-subtitle>
+      <mat-chip-list aria-label="video tags">
+        <mat-chip *ngFor="let tag of video?.tags">{{ tag }}</mat-chip>
+      </mat-chip-list>
+      <br />
+      <mat-card-content
+        ><strong>Description:</strong> {{ video?.description }} <br />
+        <strong>Category:</strong>
+        {{ video?.category?.name | titlecase }}<br />
+        <strong>Language:</strong> {{ video?.language }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

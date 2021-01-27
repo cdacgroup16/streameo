@@ -41,22 +41,3 @@ exports.AddToWatchHistory = (req) => {
     }
   })
 }
-
-exports.countViews = (req) => {
-  const user = req.auth
-  const plan = user.subscription_plan
-  const video = req.video
-
-  if (user.stream_count < plan.concurrent_streams) {
-    Video.updateOne(
-      { _id: video._id },
-      {
-        $inc: { views: 1 },
-      }
-    ).exec((err, data) => {
-      if (err) {
-        process.env.NODE_ENV !== 'production' && console.error(err)
-      }
-    })
-  }
-}

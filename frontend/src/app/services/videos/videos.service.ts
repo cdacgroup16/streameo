@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Video } from 'src/app/entities/videos/video';
 import { environment } from 'src/environments/environment'
 import { AuthService } from '../auth/auth.service';
 
@@ -10,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class VideosService {
-  url: string = `${environment.backendApi}/videos`
+  url: string = `${environment.backendApi}/api/videos`
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -24,7 +23,10 @@ export class VideosService {
   }
 
   getVideosAdmin(queryPaylaod = {}): Observable<any> {
-    const token = this.auth.isAdmin().subscribe(token => { return token })
+    if (!this.auth.isAdmin()) {
+      return
+    }
+    const token = this.auth.isAdmin()
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -35,13 +37,55 @@ export class VideosService {
   }
 
   getVideoByIdAdmin(id): Observable<any> {
-    const token = this.auth.isAdmin().subscribe(token => { return token })
+    if (!this.auth.isAdmin()) {
+      return
+    }
+    const token = this.auth.isAdmin()
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': `Bearer ${token}`
     }
     return this.http.get(this.url + '/' + id + + '/admin', { headers })
+  }
+
+  // createVideo(formData): Observable<any> {
+  //   if (!this.auth.isAdmin()) {
+  //     return
+  //   }
+  //   const token = this.auth.isAdmin()
+  //   const headers = {
+  //     'Content-Type': 'multipart/form-data',
+  //     'Accept': 'application/json',
+  //     'Authorization': `Bearer ${token}`
+  //   }
+  //   return this.http.post(this.url, formData, { headers })
+  // }
+
+  // updateVideo(videoId, formData): Observable<any> {
+  //   if (!this.auth.isAdmin()) {
+  //     return
+  //   }
+  //   const token = this.auth.isAdmin()
+  //   const headers = {
+  //     'Content-Type': 'multipart/form-data',
+  //     'Accept': 'application/json',
+  //     'Authorization': `Bearer ${token}`
+  //   }
+  //   return this.http.put(this.url + videoId, formData, { headers })
+  // }
+
+  removeVideo(videoId): Observable<any> {
+    if (!this.auth.isAdmin()) {
+      return
+    }
+    const token = this.auth.isAdmin()
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+    return this.http.delete(this.url + videoId, { headers })
   }
 }
 

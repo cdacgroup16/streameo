@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -41,7 +43,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
 
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { VideoComponent } from './components/pages/video/video.component';
 
 
 @NgModule({
@@ -68,7 +74,11 @@ import { UserlistComponent } from './components/userlist/userlist.component';
     VideouploadComponent,
     ErrorComponent,
     PlanlistComponent,
-    UserlistComponent
+    UserlistComponent,
+    AddplansComponent,
+    EditplanComponent,
+    VideoPlayerComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
@@ -90,9 +100,9 @@ import { UserlistComponent } from './components/userlist/userlist.component';
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule,
+    MatChipsModule,
+    MatSelectModule,
     OverlayModule,
-    MatTabsModule,
     MatDialogModule,
     MatTabsModule
   ],

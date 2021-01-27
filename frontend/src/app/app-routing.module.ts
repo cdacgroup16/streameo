@@ -12,9 +12,13 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
-import { componentFactoryName } from '@angular/compiler';
-import {PlanlistComponent} from './components/planlist/planlist.component';
-import {UserlistComponent} from './components/userlist/userlist.component' ;
+// import { componentFactoryName } from '@angular/compiler';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
+import { VideoComponent } from 'src/app/components/pages/video/video.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -77,7 +81,19 @@ const routes: Routes = [
     path: 'userlist',
     component: UserlistComponent
   },
+  {
+    path: 'addplans',
+    component: AddplansComponent
+  },
+  {
+    path: 'editplans/:id',
+    component: EditplanComponent
+  },
+  {
 
+    path: 'video',
+    component: VideoComponent
+  }
 ];
 
 @NgModule({

@@ -74,14 +74,15 @@ exports.getPoster = asyncHandler(async (req, res) => {
     throw new Error("The video with the provided id doesn't exists!")
   }
   // FOR TESTING PURPOSE ONLY
-
-  video.poster.path = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'posters',
-    'temp.jpg'
-  )
+  if (process.env.TESTING_MEDIA === true) {
+    video.poster.path = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'posters',
+      'temp.jpg'
+    )
+  }
 
   const readPoster = fs.createReadStream(video.poster.path)
 
@@ -103,28 +104,30 @@ exports.getStream = asyncHandler(async (req, res) => {
     resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
 
   // FOR TESTING PURPOSE ONLY
+  if (process.env.TESTING_MEDIA === true) {
+    video.video.path_high = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'videos',
+      'tempHigh.mp4'
+    )
+    video.video.path_med = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'videos',
+      'tempMed.mp4'
+    )
+    video.video.path_high = path.join(
+      __dirname,
+      '..',
+      'assets',
+      'videos',
+      'tempLow.mp4'
+    )
+  }
 
-  video.video.path_high = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'videos',
-    'tempHigh.mp4'
-  )
-  video.video.path_med = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'videos',
-    'tempMed.mp4'
-  )
-  video.video.path_high = path.join(
-    __dirname,
-    '..',
-    'assets',
-    'videos',
-    'tempLow.mp4'
-  )
   const type = video.video.type
   const { size: sizeHigh } = await fileInfo(video.video.path_high)
   const { size: sizeMed } = await fileInfo(video.video.path_med)
@@ -151,7 +154,6 @@ exports.getStream = asyncHandler(async (req, res) => {
       .createReadStream(video.video.path_high, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
-        countViews(req)
       })
 
   const streamMed = (start, end) =>
@@ -159,7 +161,6 @@ exports.getStream = asyncHandler(async (req, res) => {
       .createReadStream(video.video.path_med, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
-        countViews(req)
       })
 
   const streamLow = (start, end) =>
@@ -167,7 +168,6 @@ exports.getStream = asyncHandler(async (req, res) => {
       .createReadStream(video.video.path_low, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
-        countViews(req)
       })
 
   // Send video stream as a response
