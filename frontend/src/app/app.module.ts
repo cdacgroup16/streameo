@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -39,7 +41,8 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
-
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { VideoComponent } from './components/pages/video/video.component';
 
 
 @NgModule({
@@ -64,7 +67,9 @@ import { ErrorComponent } from './components/error/error.component';
     VideouploadComponent,
     VideomanagementComponent,
     VideouploadComponent,
-    ErrorComponent
+    ErrorComponent,
+    VideoPlayerComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
@@ -86,9 +91,9 @@ import { ErrorComponent } from './components/error/error.component';
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule,
+    MatChipsModule,
+    MatSelectModule,
     OverlayModule,
-    MatTabsModule,
     MatDialogModule,
     MatTabsModule
   ],
