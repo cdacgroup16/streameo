@@ -40,10 +40,10 @@ export class EditplanComponent implements OnInit {
       this.plan.updatePlan(this._id, this.planDetails).subscribe((res) => {
 
         console.log("Updated");
-        this.snack.open("Plan Updated Success", "Dismiss");
+        this.snack.open("Plan Updated Success", "Dismiss" ,{ duration: 1000 });
       },
         (err) => {
-          this.snack.open("Erroe " + err.error?.message, "Dismiss");
+          this.snack.open("Erroe " + err.error?.message, "Dismiss",{ duration: 1000 });
           console.log("error", err);
 
         });

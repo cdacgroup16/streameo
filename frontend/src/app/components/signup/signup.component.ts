@@ -38,11 +38,11 @@ export class SignupComponent implements OnInit {
       this.user = user;
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', JSON.stringify(this.user));
-      this.snack.open("Signed Up Success", "dismiss");
+      this.snack.open("Signed Up Success", "dismiss", { duration: 1000 });
       this.router.navigate(['/home']);
     },
       err => {
-        this.snack.open("Signup Failed" + err.message , "Dismiss");
+        this.snack.open("Signup Failed" + err.error?.message, "Dismiss", { duration: 1000 });
         // console.error('Signup failed \n', err.error?.message);
       });
   }

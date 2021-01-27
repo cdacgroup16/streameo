@@ -30,7 +30,7 @@ export class CheckoutComponent implements OnInit {
       });
     },
       err => {
-        this.snack.open("Error" + err.error?.message , "Dismiss");
+        this.snack.open("Error" + err.error?.message, "Dismiss", { duration: 1000 });
         console.error('Error ', err.err?.message);
         this.myroute.navigate(['/plans']);
       });
@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit {
     let res: number = mon * this.Quantity
     console.log(this.plan.id);
     console.log("Month" + res);
-    this.snack.open("Plan Purchased" , "Dismiss");
+    this.snack.open("Plan Purchased", "Dismiss", { duration: 1000 });
     alert("Month  : " + res + " Plan ID IS: " + JSON.stringify(this.plan));
     window.localStorage.removeItem("plans");
   }

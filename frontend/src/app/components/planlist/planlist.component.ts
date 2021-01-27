@@ -33,10 +33,10 @@ export class PlanlistComponent implements OnInit {
   remove(_id: number) {
     console.log(_id);
     this.service.deletePlan(_id).subscribe((res) => {
-      this.snack.open(_id + "Removed Success", "Dismiss");
+      this.snack.open(_id + "Removed Success", "Dismiss",{ duration: 1000 });
       console.log(res);
     }), (err) => {
-      this.snack.open("Remove Failed" + err.error?.message, "Dismiss");
+      this.snack.open("Remove Failed" + err.error?.message, "Dismiss",{ duration: 1000 });
       console.log(err);
     };
   }

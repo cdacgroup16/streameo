@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Categories } from 'src/app/entities/categories/categories';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
@@ -10,7 +11,8 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 })
 export class CategorylistComponent implements OnInit {
 
-  constructor(private service: CategoriesService, private route: Router) { }
+
+  constructor(private service: CategoriesService, private route: Router, private snack: MatSnackBar) { }
   categoryList: any;
   id: Categories;
   ngOnInit(): void {
@@ -19,14 +21,15 @@ export class CategorylistComponent implements OnInit {
     })
   }
   onEdit(id) {
-
     let url = "/editcategory/" + id;
     this.route.navigate([url]);
   }
   onDelete(id) {
     this.service.delCat(id).subscribe((res) => {
-      console.log(res);
+      this.snack.open("Delete Success", "Dismiss", { duration: 1000 });
+      // console.log(res);
     }, (err) => {
+      this.snack.open("Delete Failed" + err.error?.message, "Dismiss", { duration: 1000 });
       console.log(err);
     })
     window.location.reload();
