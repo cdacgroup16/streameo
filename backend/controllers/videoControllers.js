@@ -154,7 +154,6 @@ exports.getStream = asyncHandler(async (req, res) => {
       .createReadStream(video.video.path_high, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
-        countViews(req)
       })
 
   const streamMed = (start, end) =>
@@ -162,7 +161,6 @@ exports.getStream = asyncHandler(async (req, res) => {
       .createReadStream(video.video.path_med, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
-        countViews(req)
       })
 
   const streamLow = (start, end) =>
@@ -170,7 +168,6 @@ exports.getStream = asyncHandler(async (req, res) => {
       .createReadStream(video.video.path_low, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
-        countViews(req)
       })
 
   // Send video stream as a response
