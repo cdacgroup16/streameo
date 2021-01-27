@@ -12,7 +12,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
-import { componentFactoryName } from '@angular/compiler';
+// import { componentFactoryName } from '@angular/compiler';
+import { UserlistComponent } from './components/userlist/userlist.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
 import { AddplansComponent } from './components/addplans/addplans.component';
 import { EditplanComponent } from './components/editplan/editplan.component';
@@ -77,9 +78,14 @@ const routes: Routes = [
     component: PlanlistComponent
   },
   {
+    path: 'userlist',
+    component: UserlistComponent
+  },
+  {
     path: 'addplans',
     component: AddplansComponent
-  }, {
+  },
+  {
     path: 'editplans/:id',
     component: EditplanComponent
   },

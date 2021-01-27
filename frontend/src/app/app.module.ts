@@ -42,6 +42,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 import { AddplansComponent } from './components/addplans/addplans.component';
 import { EditplanComponent } from './components/editplan/editplan.component';
 
@@ -73,6 +74,7 @@ import { VideoComponent } from './components/pages/video/video.component';
     VideouploadComponent,
     ErrorComponent,
     PlanlistComponent,
+    UserlistComponent,
     AddplansComponent,
     EditplanComponent,
     VideoPlayerComponent,
