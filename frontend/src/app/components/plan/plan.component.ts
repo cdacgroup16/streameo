@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { PlansService } from 'src/app/services/plans/plans.service';
 
 export interface PeriodicElement {
@@ -24,7 +25,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PlanComponent implements OnInit {
 
-  constructor(private service: PlansService, private router: Router) { }
+  constructor(private service: PlansService, private router: Router, private auth: AuthService) { }
 
   displayedColumns: string[] = ['name', 'plan1', 'plan2', 'plan3'];
   dataSource = ELEMENT_DATA;
@@ -47,10 +48,15 @@ export class PlanComponent implements OnInit {
 
   onClick(): any {
     // console.log(this.selectedPlan);
-    const url = '/checkout' + this.selectedPlan;
-    this.router.navigate(['/checkout', this.selectedPlan], {
-      queryParams: { 'id': this.selectedPlan }
-    });
+    if (this.auth.isSignedIn()) {
+      const url = '/checkout' + this.selectedPlan;
+      this.router.navigate(['/checkout', this.selectedPlan], {
+        queryParams: { 'id': this.selectedPlan }
+      });
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

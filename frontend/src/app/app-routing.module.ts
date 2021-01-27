@@ -1,10 +1,9 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -12,6 +11,16 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { ErrorComponent } from './components/error/error.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component'
+
+// import { componentFactoryName } from '@angular/compiler';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
 import { VideoComponent } from 'src/app/components/pages/video/video.component'
 
 const routes: Routes = [
@@ -26,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: SigninComponent,
   },
   {
     path: 'plans',
@@ -68,11 +77,42 @@ const routes: Routes = [
     path: 'error',
     component: ErrorComponent
   },
+
   {
+    path: 'categorylist',
+    component: CategorylistComponent
+  },
+
+  {
+    path: 'addcategory',
+    component: AddcategoriesComponent
+  },
+  {
+    path: 'editcategory/:id',
+    component: EditcategoryComponent
+  },
+  {
+    path: 'planlist',
+    component: PlanlistComponent
+  }
+  ,
+  {
+    path: 'userlist',
+    component: UserlistComponent
+  },
+  {
+    path: 'addplans',
+    component: AddplansComponent
+  },
+  {
+    path: 'editplans/:id',
+    component: EditplanComponent
+  },
+  {
+
     path: 'video',
     component: VideoComponent
   }
-
 ];
 
 @NgModule({

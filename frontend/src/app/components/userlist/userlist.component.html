@@ -1,0 +1,37 @@
+<div class="checkout">
+  <mat-toolbar>
+    <table>
+      <tr>
+        <td>
+          <span>
+            <mat-icon>supervised_user_circle</mat-icon>
+            User Management Dashboard
+          </span>
+        </td>
+      </tr>
+    </table>
+  </mat-toolbar>
+  <table class="example-full-width" cellspacing="2" style="text-align: left">
+    <th>User Id</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>Plans</th>
+    <th>Delete</th>
+
+    <tr *ngFor="let item of userList">
+      <td>
+        <mat-label>{{ item._id }}</mat-label>
+      </td>
+      <td>
+        <mat-label>{{ item.firstname }} </mat-label>
+      </td>
+      <td>
+        <mat-label>{{ item.lastname }}</mat-label>
+      </td>
+      <td>
+        <mat-label>{{ item.email }}</mat-label>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -15,7 +15,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
@@ -41,16 +40,22 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
+
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { VideoComponent } from './components/pages/video/video.component';
-
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
     HomeComponent,
-    LoginComponent,
     PlansComponent,
     DashboardComponent,
     FooterComponent,
@@ -61,13 +66,20 @@ import { VideoComponent } from './components/pages/video/video.component';
     CheckoutComponent,
     TermandconditionComponent,
     SettingsComponent,
-    LoginComponent,
+    // LoginComponent,
     SignupComponent,
     SigninComponent,
     VideouploadComponent,
     VideomanagementComponent,
     VideouploadComponent,
     ErrorComponent,
+    CategorylistComponent,
+    AddcategoriesComponent,
+    EditcategoryComponent,
+    PlanlistComponent,
+    UserlistComponent,
+    AddplansComponent,
+    EditplanComponent,
     VideoPlayerComponent,
     VideoComponent
   ],
@@ -95,7 +107,8 @@ import { VideoComponent } from './components/pages/video/video.component';
     MatSelectModule,
     OverlayModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

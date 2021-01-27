@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+
+import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_FACTORY } from '@angular/cdk/overlay/overlay-directives';
+import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-side-navigation',
@@ -7,10 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
   opened = false;
+  // username: string;
+  // name = this.username.firstname;
+  username: string ;
+  ngOnInit(): void {
+   this.username = JSON.parse(localStorage.getItem('user')).firstname;
+   console.log(this.username);
+  }
+
+  loggedin() {
+    return this.auth.isSignedIn()
+  }
+  admin() {
+    return this.auth.isAdmin();
+  }
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/home']);
+
+  }
+
+
+
+
+
+
 
 }
