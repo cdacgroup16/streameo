@@ -38,6 +38,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { VideomanagementComponent } from './components/videomanagement/videomanagement.component';
 import { VideouploadComponent } from './components/videoupload/videoupload.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { VideoComponent } from './components/pages/video/video.component';
@@ -62,6 +64,7 @@ import { VideoComponent } from './components/pages/video/video.component';
     LoginComponent,
     SignupComponent,
     SigninComponent,
+    VideouploadComponent,
     VideomanagementComponent,
     VideouploadComponent,
     ErrorComponent,
@@ -88,12 +91,13 @@ import { VideoComponent } from './components/pages/video/video.component';
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatCardModule,
-    MatTabsModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    OverlayModule,
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
