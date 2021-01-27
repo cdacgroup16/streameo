@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class PlansService {
 
-  url: string = "http://localhost:5000/api/plans";
+  url: string = environment.backendApi + '/api/plans';
   token: any;
   header: any;
 

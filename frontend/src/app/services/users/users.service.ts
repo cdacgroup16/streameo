@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
 })
 
 export class UsersService {
-  url = "http://localhost:5000/api/users";
+  url = environment.backendApi + '/api/users';
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
