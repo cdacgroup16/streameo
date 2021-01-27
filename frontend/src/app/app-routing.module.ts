@@ -14,7 +14,7 @@ import { VideomanagementComponent } from './components/videomanagement/videomana
 import { ErrorComponent } from './components/error/error.component';
 import {CategorylistComponent} from './components/categorylist/categorylist.component' ;
 import {AddcategoriesComponent} from './components/addcategories/addcategories.component';
-
+import {EditcategoryComponent} from './components/editcategory/editcategory.component'
 
 
 const routes: Routes = [
@@ -80,6 +80,10 @@ const routes: Routes = [
   {
     path: 'addcategory',
     component: AddcategoriesComponent
+  },
+  {
+    path: 'editcategory',
+    component: EditcategoryComponent
   }
 ];
 

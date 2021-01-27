@@ -41,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
 import { CategorylistComponent } from './components/categorylist/categorylist.component';
 import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component';
 
 
 
@@ -68,7 +69,8 @@ import { AddcategoriesComponent } from './components/addcategories/addcategories
     VideouploadComponent,
     ErrorComponent,
     CategorylistComponent,
-    AddcategoriesComponent
+    AddcategoriesComponent,
+    EditcategoryComponent
   ],
   imports: [
     BrowserModule,

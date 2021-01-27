@@ -17,8 +17,5 @@ export class AddcategoriesComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.addcategory);
-    const payload = {
-    name: this.name,
-    }
   }
 }
