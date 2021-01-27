@@ -50,3 +50,29 @@ exports.isAdmin = asyncHandler(async (req, res, next) => {
   }
   next()
 })
+
+exports.checkTokenForStream = async (req, res, next, token) => {
+  try {
+    if (!token) {
+      res.status(401)
+      new Error('Authentication failed: Token not found')
+      return
+    }
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET)
+    const user = await User.findById(decoded.id).populate('subscription_plan')
+    if (!user) {
+      res.status(404)
+      throw new Error('User not found!')
+    }
+
+    user.salt = undefined
+    user.hashed_password = undefined
+    req.auth = user
+    next()
+    return
+  } catch (error) {
+    res.status(403)
+    next(error)
+    return
+  }
+}

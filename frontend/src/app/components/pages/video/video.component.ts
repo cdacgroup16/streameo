@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Video } from 'src/app/entities/videos/video';
 import { VideosService } from 'src/app/services/videos/videos.service';
 
@@ -8,18 +9,19 @@ import { VideosService } from 'src/app/services/videos/videos.service';
   styleUrls: ['./video.component.scss']
 })
 export class VideoComponent implements OnInit {
+  videoId: string
   video: Video
 
-  constructor(private videoService: VideosService) { }
+  constructor(private videoService: VideosService, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    // this.videoService.getVideos().subscribe(data => {
-    //   this.video = data[0]
-    // }, (console.error))
-    // this.videoService.getVideosAdmin().subscribe(data => {
-    //   console.log(data);
-    // }, (console.error))
-    // this.videoService.getVideosAdmin
+    this.route.queryParams.subscribe(data => {
+      this.videoId = data.videoId
+    }, err => console.error(err))
+    this.videoService.getVideoById(this.videoId).subscribe(data => {
+      this.video = data
+    }, err => console.error(err))
   }
 
 }

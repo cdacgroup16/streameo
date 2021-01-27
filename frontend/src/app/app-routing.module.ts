@@ -16,6 +16,12 @@ import {CategorylistComponent} from './components/categorylist/categorylist.comp
 import {AddcategoriesComponent} from './components/addcategories/addcategories.component';
 import {EditcategoryComponent} from './components/editcategory/editcategory.component'
 
+// import { componentFactoryName } from '@angular/compiler';
+import { UserlistComponent } from './components/userlist/userlist.component';
+import { PlanlistComponent } from './components/planlist/planlist.component';
+import { AddplansComponent } from './components/addplans/addplans.component';
+import { EditplanComponent } from './components/editplan/editplan.component';
+import { VideoComponent } from 'src/app/components/pages/video/video.component'
 
 const routes: Routes = [
   {
@@ -84,6 +90,26 @@ const routes: Routes = [
   {
     path: 'editcategory/:id',
     component: EditcategoryComponent
+  {
+    path: 'planlist',
+    component: PlanlistComponent
+  },
+  {
+    path: 'userlist',
+    component: UserlistComponent
+  },
+  {
+    path: 'addplans',
+    component: AddplansComponent
+  },
+  {
+    path: 'editplans/:id',
+    component: EditplanComponent
+  },
+  {
+
+    path: 'video',
+    component: VideoComponent
   }
 ];
 
