@@ -41,6 +41,9 @@ import { VideouploadComponent } from './components/videoupload/videoupload.compo
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './components/error/error.component';
+import { CategorylistComponent } from './components/categorylist/categorylist.component';
+import { AddcategoriesComponent } from './components/addcategories/addcategories.component';
+import { EditcategoryComponent } from './components/editcategory/editcategory.component';
 import { PlanlistComponent } from './components/planlist/planlist.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { AddplansComponent } from './components/addplans/addplans.component';
@@ -73,6 +76,9 @@ import { VideoComponent } from './components/pages/video/video.component';
     VideomanagementComponent,
     VideouploadComponent,
     ErrorComponent,
+    CategorylistComponent,
+    AddcategoriesComponent,
+    EditcategoryComponent,
     PlanlistComponent,
     UserlistComponent,
     AddplansComponent,
