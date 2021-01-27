@@ -34,12 +34,12 @@ export class SigninComponent implements OnInit {
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', JSON.stringify(this.user));
       console.log("User Logged in");
-      this.snack.open("Log in Success " , "Dismiss");
+      this.snack.open("Log in Success " , "Dismiss",{ duration: 1000 });
       this.router.navigate(['/home']);
 
     },
       err => {
-        this.snack.open("Login Failed" + err.error?.message , "Dismiss");
+        this.snack.open("Login Failed" + err.error?.message , "Dismiss",{ duration: 1000 });
         console.error('Login failed \n', err.error?.message);
       });
   }

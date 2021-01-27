@@ -34,10 +34,10 @@ export class SettingsComponent implements OnInit {
     if (this.auth.isSignedIn()) {
       let myuser = { firstname: this.firstname, lastname: this.lastname, password: this.password }
       this.service.updateUser(this.ActiveUser._id, myuser).subscribe((res) => {
-        this.snack.open("Updated Successfully", "Dismiss");
+        this.snack.open("Updated Successfully", "Dismiss", { duration: 1000 });
         console.log("Updated");
       }), (err) => {
-        this.snack.open(" error" + err.error?.message, "Dismiss");
+        this.snack.open(" error" + err.error?.message, "Dismiss", { duration: 1000 });
         console.log("error" + err);
       };
     } else {
@@ -54,10 +54,10 @@ export class SettingsComponent implements OnInit {
       console.log(this.oldPassword);
       console.log(this.newPassword);
       this.service.resetPassword(this.ActiveUser._id, this.newPassword, this.oldPassword).subscribe((res) => {
-        this.snack.open("Password Update Success ", "Dismiss");
+        this.snack.open("Password Update Success ", "Dismiss", { duration: 1000 });
         console.log("Password Updated Success");
       }, (err) => {
-        this.snack.open("UpdateFailed" + err.error?.message, "Dismiss");
+        this.snack.open("UpdateFailed" + err.error?.message, "Dismiss", { duration: 1000 });
         console.error(err);
       }
       )
