@@ -14,7 +14,7 @@ export class VideosService {
   constructor(private http: HttpClient, private auth: AuthService) { }
 
   getVideos(queryPaylaod = {}): Observable<any> {
-    const options = queryPaylaod ? { params: new HttpParams().set('query', JSON.stringify(queryPaylaod)) } : {}
+    const options = queryPaylaod ? { params: new HttpParams().set('filter', JSON.stringify(queryPaylaod)) } : {}
     return this.http.get(this.url, options)
   }
 

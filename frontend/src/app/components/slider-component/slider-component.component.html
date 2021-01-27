@@ -1,3 +1,14 @@
-
-<carousel [images]="images">
-</carousel>
+<carousel
+  [images]="images"
+  [cellsToShow]="6"
+  [margin]="2"
+  [arrowsTheme]="'dark'"
+  [cellWidth]="300"
+  [height]="200"
+  [overflowCellsLimit]="6"
+></carousel>
+<!-- <carousel *ngFor="let image of images" [width]="500">
+  <div>
+    <img [src]="image.path" />
+  </div>
+</carousel> -->
