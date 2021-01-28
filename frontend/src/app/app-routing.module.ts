@@ -117,6 +117,9 @@ const routes: Routes = [
   {
     path: 'contactus',
     component: ContactusComponent
+  }, {
+    path: 'termsandconditions',
+    component: TermandconditionComponent
   }
 ];
 

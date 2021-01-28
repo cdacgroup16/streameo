@@ -12,9 +12,9 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { name: 'Silver', plan1: "check", plan2: 'close', plan3: 'close' },
-  { name: 'Golden', plan1: 'check', plan2: 'close', plan3: 'close' },
-  { name: 'Platinum', plan1: 'check', plan2: 'check', plan3: 'check' },
+  { name: 'Bronze', plan1: "check", plan2: 'close', plan3: 'close' },
+  { name: 'Silver', plan1: 'check', plan2: 'check', plan3: 'close' },
+  { name: 'Gold', plan1: 'check', plan2: 'check', plan3: 'check' },
 ];
 
 
