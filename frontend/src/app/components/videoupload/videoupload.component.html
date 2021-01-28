@@ -1,61 +1,101 @@
-<div class="setting">
-  <mat-toolbar>
-    <span class="center">
-      <button mat-icon-button>
-        <mat-icon>settings_input_svideo</mat-icon>
-      </button>
-    </span>
-    <span>Video Upload Dashboard</span>
-  </mat-toolbar>
-  <form class="form">
-    <table class="table" cellspacing="0">
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Title Of Video</mat-label>
-            <input matInput placeholder="Video Name" value="export Video name" />
-          </mat-form-field>
-        </td>
+<div class="main">
+  <div class="setting">
+    <mat-toolbar>
+      <span class="center">
+        <button mat-icon-button>
+          <mat-icon>settings_input_svideo</mat-icon>
+        </button>
+      </span>
+      <span>Video Upload Dashboard</span>
+    </mat-toolbar>
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="video-file-field">
+        <label>Video File</label><br />
+        <input name="video" type="file" (change)="onVideoSelect($event)" />
+      </div>
+      <br />
+      <div class="video-file-field">
+        <label>Video Poster</label><br />
+        <input
+          name="poster"
+          type="file"
+          required
+          (change)="onPosterSelect($event)"
+        />
+      </div>
+      <br />
+      <mat-form-field class="table">
+        <mat-label>Title</mat-label>
+        <input
+          name="title"
+          formControlName="title"
+          matInput
+          required
+        /> </mat-form-field
+      ><br />
+      <mat-form-field class="table">
+        <mat-label>Discription</mat-label>
+        <input
+          name="description"
+          formControlName="description"
+          matInput
+          required
+        /> </mat-form-field
+      ><br />
+      <mat-form-field class="table">
+        <mat-label>Tags</mat-label>
+        <input
+          name="tags"
+          formControlName="tags"
+          matInput
+          required
+        /> </mat-form-field
+      ><br />
+      <mat-form-field class="table">
+        <mat-label>Languages</mat-label>
+        <input
+          name="language"
+          formControlName="language"
+          matInput
+          required
+        /> </mat-form-field
+      ><br />
+      <mat-form-field appearance="fill" *ngIf="!loadingResources">
+        <mat-label>Category</mat-label>
+        <mat-select name="category" formControlName="category" required>
+          <mat-option
+            *ngFor="let cat of categoryList"
+            [value]="cat._id"
+            selected
+            >{{ cat?.name }}</mat-option
+          >
+        </mat-select> </mat-form-field
+      ><br />
+      <mat-form-field appearance="fill">
+        <mat-label>Privacy</mat-label>
+        <mat-select name="privacy" formControlName="privacy" required>
+          <mat-option *ngFor="let p of privacyOptions" [value]="p">{{
+            p
+          }}</mat-option>
+        </mat-select> </mat-form-field
+      ><br />
 
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Video Discription</mat-label>
-            <input matInput placeholder="Discription" value="export Discription" />
-          </mat-form-field>
-        </td>
-        <td>
-          <div style="text-align: center">
-            <input hidden type="file" #uploader (change)="uploadFile($event)" />
-            <button mat-flat-button color="warn" (click)="uploader.click()">
-              Upload File
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="table">
-            <mat-label>Category </mat-label>
-            <input matInput value="" />
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr></tr>
-      <tr>
-        <td style="text-align: center">
-          <span>
-            <button mat-flat-button color="primary">Add Video</button>
-          </span>
-        </td>
-        <td>
-          <a href="" mat-flat-button [routerLink]="['/videomanagement']" routerLinkActive="router-link-active"
-            color="accent"> Check
-            Uploaded
-            Videos</a>
-        </td>
-      </tr>
-    </table>
-  </form>
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" type="submit">
+          Add Video
+        </button>
+        <button mat-raised-button color="warn" (click)="onReset()">
+          Reset
+        </button>
+        <a
+          mat-stroked-button
+          [routerLink]="['/videomanagement']"
+          routerLinkActive="router-link-active"
+          color="accent"
+        >
+          Manage Videos</a
+        >
+      </div>
+    </form>
+  </div>
 </div>
