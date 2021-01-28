@@ -18,9 +18,10 @@ export class VideomanagementComponent implements OnInit {
   }
 
   deleteVideoById(id) {
-    prompt('are you sure you want to delete this video?', 'No')
+    prompt('are you sure you want to delete this video?', 'YES');
     this.videoService.removeVideo(id).subscribe(res => {
-      this.snack.open(res, 'Dismiss', { duration: 3000 })
+      this.snack.open(res?.message, 'Dismiss', { duration: 3000 })
+      this.getAllVideos()
     }, err => {
       this.snack.open(err?.error?.message, "Dismiss", { duration: 3000 });
       console.error('Failed to get videos from the database \n', err?.error);

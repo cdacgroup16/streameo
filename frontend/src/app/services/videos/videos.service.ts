@@ -87,7 +87,7 @@ export class VideosService {
       'Accept': 'application/json',
       'Authorization': `Bearer ${token}`
     }
-    return this.http.delete(this.url + videoId, { headers })
+    return this.http.delete(this.url + '/' + videoId, { headers })
   }
 }
 

@@ -258,7 +258,7 @@ exports.getAllVideos = asyncHandler(async (req, res) => {
   let q = req.query
 
   let filter = !q.filter ? q.filter : JSON.parse(q.filter),
-    limit = parseInt(q.limit) || 8,
+    limit = parseInt(q.limit) || JSON.parse(process.env.GET_VIDEO_LIMIT),
     page = parseInt(q.page) || 0,
     sort = q.sort || '',
     skip = page * limit
