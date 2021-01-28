@@ -28,10 +28,13 @@ const LINKDIN = `
 })
 export class ContactusComponent implements OnInit {
   team: any = [
-    { name: "Adarsh Pandey", class: "adarsh", avatar: "assets/images/team/Adarsh_Pandey.JPG", image: "assets/images/team/Adarsh_Pandey.JPG", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920000 ", designation: "Developer", git: "/", mail: "/", fb: "/", linkedin: "/" },
-    { name: "Rishabh Aggarwal", class: "rishabh", avatar: "assets/images/team/rishabh_avater.jpg", image: "assets/images/team/rishabh_aggarwal.jpeg", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920076 ", designation: "Developer", git: "https://github.com/rishcodelib", mail: "rishabhaggarwal23@gmail.com", fb: "https://www.facebook.com/iam.rishabhhh", linkedin: "http://www.linkedin.com/in/iamrishabhh" },
-    { name: "Deepak Thakur", class: "deepak", avatar: "assets/images/team/rishabh.jpg", image: "/", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920000 ", designation: "Developer", git: "/", mail: "/", fb: "/", linkedin: "/" },
-    { name: "Pranjali Inglae", class: "pranjali", avatar: "assets/images/team/rishabh.jpg", image: "/", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920000 ", designation: "Developer", git: "/", mail: "/", fb: "/", linkedin: "/" }];
+    { name: "Adarsh Pandey", class: "adarsh", avatar: "assets/images/team/Adarsh_Pandey.JPG", image: "assets/images/team/Adarsh_Pandey.JPG", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920003 ", designation: "Developer", git: "https://github.com/aadarshp31", mail: "adarshpandey.in@gmail.com", fb: "", linkedin: "https://www.linkedin.com/in/aadarshp31/", web: "https://adarshpandey.in/" },
+
+    { name: "Rishabh Aggarwal", class: "rishabh", avatar: "assets/images/team/rishabh_avater.jpg", image: "assets/images/team/rishabh_aggarwal.jpeg", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920076 ", designation: "Developer", git: "https://github.com/rishcodelib", mail: "rishabhaggarwal23@gmail.com", fb: "https://www.facebook.com/iam.rishabhhh", linkedin: "http://www.linkedin.com/in/iamrishabhh", web: "https://www.rishabh-aggarwal.com" },
+
+    { name: "Deepak Thakur", class: "deepak", avatar: "assets/images/team/deepak.jpg", image: "assets/images/team/deepak.jpg", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920030 ", designation: "Developer", git: "https://github.com/thakurdeepak", mail: "ingale.pranjali4@gmail.com", fb: "", linkedin: "https://www.linkedin.com/in/deepak-thakur-617523190", web: "" },
+
+    { name: "Pranjali Inglae", class: "pranjali", avatar: "assets/images/team/pranjali.jpg", image: "assets/images/team/pranjali.jpg", desc: "Student  CDAC-ecity (Diploma in Advanced Computing), Bengaluru, Karnataka, India. Roll No.: 200251920040 ", designation: "Developer", git: "/", mail: "thakurdeepak675@gmail.com", fb: "", linkedin: "https://www.linkedin.com/in/pranjali-ingale-14522a127", web: "" }];
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('GITHUB', sanitizer.bypassSecurityTrustHtml(GITHUB));

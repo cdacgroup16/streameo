@@ -17,6 +17,11 @@
 //   background-image: url("./assets/images/Green_Lantern.jpg");
 //   background-size: cover;
 // }
+mat-card {
+ 
+  max-height: 500px;
+  min-height: 500px;
+}
 
 .adarsh {
   background-image: url("./../../../assets/images/team/Adarsh_Pandey.JPG");
@@ -27,11 +32,11 @@
   background-size: cover;
 }
 .deepak {
-  background-image: url("./../../../assets/images/team/rishabh_avatar.JPG");
+  background-image: url("./../../../assets/images/team/deepak.jpg");
   background-size: cover;
 }
 .pranjali {
-  background-image: url("./../../../assets/images/team/rishabh_avatar.JPG");
+  background-image: url("./../../../assets/images/team/pranjali.jpg");
   background-size: cover;
 }
 
@@ -40,6 +45,9 @@
   display: inline-block;
   margin: 2px 4px;
   height: 275px;
+}
+mat-card-actions {
+max-height: 400px;
 }
 .mat-card-actions .mat-card-actions {
   display: flex;
