@@ -38,6 +38,19 @@ export class AuthService {
     return false;
   }
 
+  isSubscribed(): any {
+    if (window.localStorage && localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user'));
+      if (user.subscription_plan) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    return false;
+  }
+
   isAdmin(): any {
     if (window.localStorage && localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user'))

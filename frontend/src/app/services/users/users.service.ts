@@ -17,8 +17,10 @@ export class UsersService {
   }
 
   getUser(id): any {
+    const token = this.auth.isSignedIn();
+    const headers = { 'Authorization': "Bearer " + token };
     const tempUrl = this.url + "/" + id;
-    return this.http.get(tempUrl);
+    return this.http.get(tempUrl, { headers });
   }
 
   updateUser(id, user): any {

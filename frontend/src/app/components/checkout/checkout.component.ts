@@ -3,6 +3,8 @@ import { Plans } from '../../entities/plans/plans';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JsonpClientBackend } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,13 +13,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private router: ActivatedRoute, private myroute: Router, private snack: MatSnackBar) { }
+  constructor(private router: ActivatedRoute, private myroute: Router, private snack: MatSnackBar, private auth: AuthService, private user: UsersService) { }
 
   plan: Plans;
   id: any;
   Quantity: any;
+  password: any;
+
+  subscription_plan: string;
 
   ngOnInit(): void {
+    // console.log(this.auth.isSubscribed());
 
     this.router.queryParams.subscribe(params => {
       this.id = (params).id;
@@ -35,14 +41,31 @@ export class CheckoutComponent implements OnInit {
         this.myroute.navigate(['/plans']);
       });
   }
+  userdata: any;
   Pay() {
     let mon = 30;
-    let res: number = mon * this.Quantity
-    console.log(this.plan.id);
-    console.log("Month" + res);
-    this.snack.open("Plan Purchased", "Dismiss", { duration: 1000 });
-    alert("Month  : " + res + " Plan ID IS: " + JSON.stringify(this.plan));
-    window.localStorage.removeItem("plans");
+    let res: number = mon * this.Quantity;
+
+    //get user id 
+    let userID = JSON.parse(localStorage.getItem('user'))._id;
+
+    //update user
+    this.user.updateUser(userID, { subscription_plan: this.id, password: this.password }).subscribe(
+      (res) => {
+        this.snack.open("Plan Purchased Successful", "Dismiss", { duration: 1000 });
+      },
+      (err) => {
+        this.snack.open("Plan Purchase Failed" + err.error?.message, "Dismiss", { duration: 1000 });
+        console.log(err ? err : err.message);
+      });
+
+    //get updated  details
+    this.user.getUser(userID).subscribe((res) => {
+      this.userdata = res;
+      localStorage.setItem('user', JSON.stringify(this.userdata));
+    }, (err) => {
+      this.snack.open("Update User " + err.error?.message, "Dismiss", { duration: 1000 });
+    });
   }
 
 }
