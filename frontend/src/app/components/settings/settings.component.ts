@@ -1,5 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users/users.service';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -9,7 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  constructor(private service: UsersService, private auth: AuthService, private snack: MatSnackBar) { }
+  constructor(private service: UsersService, private auth: AuthService, private snack: MatSnackBar, private router: Router) { }
 
   firstname: string;
   lastname: string;
@@ -21,6 +23,12 @@ export class SettingsComponent implements OnInit {
   ActiveUser = JSON.parse(localStorage.getItem('user'));
 
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.router.navigate(['/home'])
+      return
+    }
+
     this.firstname = this.ActiveUser.firstname;
     this.lastname = this.ActiveUser.lastname;
     this.email = this.ActiveUser.email;

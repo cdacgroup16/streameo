@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService} from 'src/app/services/users/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-userlist',
@@ -8,12 +11,18 @@ import { UsersService} from 'src/app/services/users/users.service';
 })
 export class UserlistComponent implements OnInit {
 
-  constructor(private service: UsersService) { }
+  constructor(private service: UsersService, private auth: AuthService, private router: Router, private snack: MatSnackBar) { }
   userList: any;
-  planList : any;
+  planList: any;
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn() && this.auth.isAdmin())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.router.navigate(['/home'])
+      return
+    }
+
     this.service.getAllUser().subscribe((res) => {
       this.userList = res;
-  })  
-}
+    })
+  }
 }

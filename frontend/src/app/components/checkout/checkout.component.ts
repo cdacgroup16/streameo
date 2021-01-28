@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+  
 
   constructor(private router: ActivatedRoute, private myroute: Router, private snack: MatSnackBar, private auth: AuthService, private user: UsersService) { }
 
@@ -24,6 +25,12 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.auth.isSubscribed());
+    if (!(this.auth.isSignedIn() )) {
+      this.snack.open('You\'re not an SignedIn', "Dismiss", { duration: 3000 });
+      this.myroute.navigate(['/home'])
+      return
+    }
+
 
     this.router.queryParams.subscribe(params => {
       this.id = (params).id;
@@ -42,13 +49,14 @@ export class CheckoutComponent implements OnInit {
       });
   }
   userdata: any;
+  
   Pay() {
     let mon = 30;
     let res: number = mon * this.Quantity;
-
+  
     //get user id 
     let userID = JSON.parse(localStorage.getItem('user'))._id;
-
+  
     //update user
     this.user.updateUser(userID, { subscription_plan: this.id, password: this.password }).subscribe(
       (res) => {
@@ -58,7 +66,7 @@ export class CheckoutComponent implements OnInit {
         this.snack.open("Plan Purchase Failed" + err.error?.message, "Dismiss", { duration: 1000 });
         console.log(err ? err : err.message);
       });
-
+  
     //get updated  details
     this.user.getUser(userID).subscribe((res) => {
       this.userdata = res;
@@ -67,5 +75,4 @@ export class CheckoutComponent implements OnInit {
       this.snack.open("Update User " + err.error?.message, "Dismiss", { duration: 1000 });
     });
   }
-
 }

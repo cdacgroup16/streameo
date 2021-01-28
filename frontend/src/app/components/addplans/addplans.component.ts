@@ -22,6 +22,11 @@ export class AddplansComponent implements OnInit {
   plansadd: any;
 
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn() && this.auth.isAdmin())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.router.navigate(['/home'])
+      return
+    }
 
   }
   onSubmit() {

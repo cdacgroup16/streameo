@@ -20,9 +20,15 @@ export class EditplanComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private act: ActivatedRoute, private plan: PlansService, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn() && this.auth.isAdmin())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.router.navigate(['/home'])
+      return
+    }
+
     this.act.params.subscribe(params => {
       this._id = params.id;
-      console.log(this._id);
+      // console.log(this._id);
 
       this.plan.getPlan(this._id).subscribe((res) => {
         this.planDetails = res;
@@ -40,10 +46,10 @@ export class EditplanComponent implements OnInit {
       this.plan.updatePlan(this._id, this.planDetails).subscribe((res) => {
 
         console.log("Updated");
-        this.snack.open("Plan Updated Success", "Dismiss" ,{ duration: 1000 });
+        this.snack.open("Plan Updated Success", "Dismiss", { duration: 1000 });
       },
         (err) => {
-          this.snack.open("Erroe " + err.error?.message, "Dismiss",{ duration: 1000 });
+          this.snack.open("Erroe " + err.error?.message, "Dismiss", { duration: 1000 });
           console.log("error", err);
 
         });
