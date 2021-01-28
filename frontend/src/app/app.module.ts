@@ -53,6 +53,7 @@ import { VideoPlayerComponent } from './components/video-player/video-player.com
 import { VideoComponent } from './components/pages/video/video.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { VideoCardComponent } from './components/video-card/video-card.component';
+import { UpdateVideoComponent } from './components/pages/update-video/update-video.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +87,8 @@ import { VideoCardComponent } from './components/video-card/video-card.component
     EditplanComponent,
     VideoPlayerComponent,
     VideoComponent,
-    VideoCardComponent
+    VideoCardComponent,
+    UpdateVideoComponent
   ],
   imports: [
     BrowserModule,
