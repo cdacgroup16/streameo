@@ -1,14 +1,40 @@
-<carousel
-  [images]="images"
-  [cellsToShow]="6"
-  [margin]="2"
-  [arrowsTheme]="'dark'"
-  [cellWidth]="300"
-  [height]="200"
-  [overflowCellsLimit]="6"
-></carousel>
-<!-- <carousel *ngFor="let image of images" [width]="500">
-  <div>
-    <img [src]="image.path" />
+<!-- <mat-grid-list [cols]="4">
+  <mat-grid-tile *ngFor="let video of videos">
+    <app-video-card [video]="video"></app-video-card>
+  </mat-grid-tile>
+</mat-grid-list> -->
+
+<div class="main">
+  <div *ngFor="let video of videos" class="card-group">
+    <app-video-card [video]="video"></app-video-card>
   </div>
+</div>
+
+<!-- <div *ngFor="let video of videos">
+  <app-video-card [video]="video"></app-video-card>
+</div> -->
+
+<!-- <div class="slider-wrapper">
+  <carousel
+    [cellsToShow]="4"
+    [margin]="2"
+    [arrowsTheme]="'dark'"
+    [overflowCellsLimit]="3"
+    [lightDOM]="true"
+    ><div>
+      {{ images && images }}
+      <img [src]="images['path']" />
+    </div>
+  </carousel>
+  <div>
+    {{ images }}
+    <img [src]="images['path']" />
+  </div>
+</div> -->
+<!-- [images]="images" -->
+<!-- [cellWidth]="300" -->
+<!-- [height]="200" -->
+
+<!-- <carousel *ngFor="let image of images" [width]="500">
+
 </carousel> -->

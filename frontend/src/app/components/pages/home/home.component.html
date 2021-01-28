@@ -1,10 +1,11 @@
 <!-- <app-side-navigation></app-side-navigation> -->
 <app-carousel></app-carousel>
 
-<div *ngFor="let cat of catList">
-  <h3>{{ cat?.name }}</h3>
-  <hr />
-  <app-slider-component
-    [filter]="{ active: true, category: cat._id }"
-  ></app-slider-component>
+<div class="main">
+  <div *ngFor="let cat of catList">
+    <h2>{{ cat?.name | titlecase }}</h2>
+    <app-slider-component
+      [filter]="{ active: true, category: cat?._id }"
+    ></app-slider-component>
+  </div>
 </div>
