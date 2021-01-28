@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { Categories } from 'src/app/entities/categories/categories';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-addcategories',
@@ -12,7 +13,7 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 export class AddcategoriesComponent implements OnInit {
 
   name: string;
-  constructor(private auth: AuthService, private router: Router, private service: CategoriesService) { }
+  constructor(private auth: AuthService, private router: Router, private service: CategoriesService, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -22,9 +23,11 @@ export class AddcategoriesComponent implements OnInit {
     if (this.auth.isSignedIn) {
       this.service.postNewCat({ name: this.name }).subscribe((res) => {
         this.name = res;
+        this.snack.open("Category Added", "Dismiss", { duration: 1000 });
         console.log(this.name);
         this.router.navigate(['/categorylist']);
       }, (err) => {
+        this.snack.open("Adding Failed" + err.error?.message , "Dismiss" , { duration: 1000 });
         console.log(err);
       });
     }

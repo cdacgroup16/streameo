@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Plans } from '../../entities/plans/plans';
 import { Router } from '@angular/router';
 import { PlansService } from 'src/app/services/plans/plans.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-addplans',
@@ -11,7 +12,7 @@ import { PlansService } from 'src/app/services/plans/plans.service';
 })
 export class AddplansComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router, private plan: PlansService) { }
+  constructor(private auth: AuthService, private router: Router, private plan: PlansService, private snack: MatSnackBar) { }
 
   name: string;
   price: Number;
@@ -35,7 +36,9 @@ export class AddplansComponent implements OnInit {
     if (this.auth.isSignedIn()) {
       this.plan.postNewPlan(payload).subscribe((res) => {
         console.log(res)
+        this.snack.open("Adding Success", "Dismiss", { duration: 1000 });
       }, (err) => {
+        this.snack.open("Adding Failed" + err.error?.message, "Dismiss", { duration: 1000 });
         console.log("error", err);
       })
     }
