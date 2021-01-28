@@ -43,7 +43,7 @@
       <li *ngIf="!loggedin()">
         <button mat-button [routerLink]="['/signup']">signup</button>
       </li>
-      <li *ngIf="loggedin()">
+      <li *ngIf="admin()">
         <button mat-button [routerLink]="['/categorylist']">Categories</button>
       </li>
 
@@ -64,7 +64,7 @@
         <button mat-button [routerLink]="['/contactus']">Contact Us</button>
       </li>
       <li>
-        <button mat-button [routerLink]="['/TandC']">Terms & Conditions</button>
+        <button mat-button [routerLink]="['/termsandconditions']">Terms & Conditions</button>
       </li>
     </ul>
   </mat-sidenav>
