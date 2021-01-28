@@ -30,6 +30,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatInputModule } from '@angular/material/input';
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
+import { ContactusComponent } from './components/contactus/contactus.component';
 import { MatCardModule } from '@angular/material/card';
 import { SettingsComponent } from './components/settings/settings.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -65,6 +66,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     PlanComponent,
     CheckoutComponent,
     TermandconditionComponent,
+    ContactusComponent,
+
     SettingsComponent,
     // LoginComponent,
     SignupComponent,

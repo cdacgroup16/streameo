@@ -5,6 +5,7 @@ import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { PlansComponent } from './components/pages/plans/plans.component';
+import { ContactusComponent } from './components/contactus/contactus.component'
 import { TermandconditionComponent } from './components/termandcondition/termandcondition.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -112,6 +113,10 @@ const routes: Routes = [
 
     path: 'video',
     component: VideoComponent
+  },
+  {
+    path: 'contactus',
+    component: ContactusComponent
   }
 ];
 
