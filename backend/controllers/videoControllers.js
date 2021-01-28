@@ -372,9 +372,11 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
       fs.unlinkSync(res.req.files.poster[0].path)
       fs.unlinkSync(res.req.files.video[0].path)
       return res.status(400).json({
-        message: `The poster size can't be more then ${parseInt(process.env.MAX_POSTER_SIZE) / 1024 / 1024
-          } MB and the video can't be more than ${parseInt(process.env.MAX_VIDEO_SIZE) / 1024 / 1024
-          } MB`,
+        message: `The poster size can't be more then ${
+          parseInt(process.env.MAX_POSTER_SIZE) / 1024 / 1024
+        } MB and the video can't be more than ${
+          parseInt(process.env.MAX_VIDEO_SIZE) / 1024 / 1024
+        } MB`,
       })
     }
 
@@ -587,7 +589,8 @@ const validateVideoInputFields = (req, res, next) => {
   if (!Video.schema.path('privacy').enumValues.includes(privacy)) {
     next(
       new Error(
-        `'privacy' must include one of the following: ${Video.schema.path('privacy').enumValues
+        `'privacy' must include one of the following: ${
+          Video.schema.path('privacy').enumValues
         }`
       )
     )
@@ -633,7 +636,8 @@ const validateVideoInputFieldsForUpdate = (req, res, next) => {
   if (privacy && !Video.schema.path('privacy').enumValues.includes(privacy)) {
     next(
       new Error(
-        `'privacy' must include one of the following: ${Video.schema.path('privacy').enumValues
+        `'privacy' must include one of the following: ${
+          Video.schema.path('privacy').enumValues
         }`
       )
     )
@@ -725,7 +729,8 @@ const processVideo = (files, videoDataFromDB) => {
 
     .on('progress', function (progress) {
       process.stdout.write(
-        `FFMPEG Processing: ${progress.percent && progress.percent.toFixed(2)
+        `FFMPEG Processing: ${
+          progress.percent && progress.percent.toFixed(2)
         } % done \r`
       )
     })
