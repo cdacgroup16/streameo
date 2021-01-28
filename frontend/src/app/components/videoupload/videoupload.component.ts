@@ -62,7 +62,6 @@ export class VideouploadComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('video', this.uploadForm.get('video').value);
-    formData.append('poster', 'This is my poster');
     formData.append('poster', this.uploadForm.get('poster').value);
     formData.append('title', this.uploadForm.get('title').value);
     formData.append('description', this.uploadForm.get('description').value);

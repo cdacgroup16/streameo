@@ -23,6 +23,7 @@ import { PlanlistComponent } from './components/planlist/planlist.component';
 import { AddplansComponent } from './components/addplans/addplans.component';
 import { EditplanComponent } from './components/editplan/editplan.component';
 import { VideoComponent } from 'src/app/components/pages/video/video.component'
+import { UpdateVideoComponent } from 'src/app/components/pages/update-video/update-video.component';
 
 const routes: Routes = [
   {
@@ -120,7 +121,11 @@ const routes: Routes = [
   }, {
     path: 'termsandconditions',
     component: TermandconditionComponent
-  }
+  },
+  {
+    path: 'updatevideo/:videoId',
+    component: UpdateVideoComponent,
+  },
 ];
 
 @NgModule({
