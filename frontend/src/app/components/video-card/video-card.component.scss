@@ -1,0 +1,30 @@
+.card {
+  display: block;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  width: 300px;
+  min-height: 200px;
+  cursor: pointer;
+
+  img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+  }
+
+  .views {
+    padding: 0px 10px;
+    font-weight: 700;
+    color: grey;
+  }
+  .title {
+    padding: 0px 10px;
+    font-weight: 700;
+    color: lightcoral;
+  }
+}
+
+.card:hover {
+  box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.6);
+  transition: all 0.1s ease-out;
+}

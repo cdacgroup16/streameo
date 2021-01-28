@@ -11,7 +11,6 @@ import { CategoriesService } from '../../../services/categories/categories.servi
 })
 export class HomeComponent implements OnInit {
   catList: Categories[];
-  vidList: Video[];
 
 
   constructor(private cat: CategoriesService, private vidService: VideosService) { }
@@ -19,17 +18,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories()
-    this.getAllVideos()
   }
 
   getAllCategories() {
     this.cat.getAllCat().subscribe((res) => {
       this.catList = res;
-    })
-  }
-  getAllVideos() {
-    this.vidService.getVideos().subscribe((res) => {
-      this.vidList = res;
     })
   }
 }

@@ -1,1 +1,9 @@
-
+.main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: scroll;
+  .card-group {
+    margin: 30px 7px;
+  }
+}
