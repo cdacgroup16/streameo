@@ -3,6 +3,9 @@
   // max-height: 600px;
   text-align: center;
   // overflow: hidden;
+  position: relative;
+  align-items: initial;
+  // display: inline-block;
 }
 .mat-card img {
   width: 200px;
@@ -18,9 +21,9 @@
 //   background-size: cover;
 // }
 mat-card {
- 
-  max-height: 500px;
-  min-height: 500px;
+  position: relative;
+  top: 0;
+  display: inline-block;
 }
 
 .adarsh {
@@ -47,7 +50,7 @@ mat-card {
   height: 275px;
 }
 mat-card-actions {
-max-height: 400px;
+  max-height: 400px;
 }
 .mat-card-actions .mat-card-actions {
   display: flex;
@@ -100,9 +103,29 @@ max-height: 400px;
     font-size: small;
     // height: 275px;
   }
-  .mar-card {
-    padding: 10px;
-    margin: 10px;
+  .mat-card {
+    padding: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    // margin: 10px;
+  }
+  .mat-card img {
+    width: 50px;
+  }
+}
+@media (max-width: 1024px) {
+  .Team_card {
+    width: 100%;
+    display: block;
+    margin: 0px;
+    font-size: small;
+    // height: 275px;
+  }
+  .mat-card {
+    padding: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    // margin: 10px;
   }
   .mat-card img {
     width: 50px;

@@ -75,11 +75,6 @@ const routes: Routes = [
     component: VideouploadComponent
   },
   {
-    path: 'error',
-    component: ErrorComponent
-  },
-
-  {
     path: 'categorylist',
     component: CategorylistComponent
   },
@@ -120,6 +115,9 @@ const routes: Routes = [
   }, {
     path: 'termsandconditions',
     component: TermandconditionComponent
+  }, {
+    path: '**',
+    component: ErrorComponent
   }
 ];
 

@@ -45,10 +45,20 @@
             <input matInput type="number" [(ngModel)]="Quantity" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         </td>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Enter Password</mat-label>
+            <input matInput type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </td>
+
+
+      </tr>
+      <tr>
+        <td></td>
         <td style="text-align: right;">
           <button (click)="Pay()" mat-flat-button color="primary">Proceed to Payment</button>
         </td>
-
 
       </tr>
 

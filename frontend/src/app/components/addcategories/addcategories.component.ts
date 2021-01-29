@@ -16,6 +16,11 @@ export class AddcategoriesComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private service: CategoriesService, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn() && this.auth.isAdmin())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.router.navigate(['/home'])
+      return
+    }
   }
 
   onSubmit() {
@@ -27,7 +32,7 @@ export class AddcategoriesComponent implements OnInit {
         console.log(this.name);
         this.router.navigate(['/categorylist']);
       }, (err) => {
-        this.snack.open("Adding Failed" + err.error?.message , "Dismiss" , { duration: 1000 });
+        this.snack.open("Adding Failed" + err.error?.message, "Dismiss", { duration: 1000 });
         console.log(err);
       });
     }

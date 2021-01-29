@@ -19,6 +19,11 @@ export class EditcategoryComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private ActiveRoute: ActivatedRoute, private serv: CategoriesService, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn() && this.auth.isAdmin())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.router.navigate(['/home'])
+      return
+    }
   }
   onSubmit() {
     this.ActiveRoute.params.subscribe((res) => {

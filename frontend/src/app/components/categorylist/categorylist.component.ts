@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Categories } from 'src/app/entities/categories/categories';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 
 @Component({
@@ -12,10 +13,16 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 export class CategorylistComponent implements OnInit {
 
 
-  constructor(private service: CategoriesService, private route: Router, private snack: MatSnackBar) { }
+  constructor(private service: CategoriesService, private route: Router, private snack: MatSnackBar, private auth: AuthService) { }
   categoryList: any;
   id: Categories;
   ngOnInit(): void {
+    if (!(this.auth.isSignedIn() && this.auth.isAdmin())) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
+      this.route.navigate(['/home'])
+      return
+    }
+
     this.service.getAllCat().subscribe((res) => {
       this.categoryList = res;
     })
