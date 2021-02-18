@@ -19,11 +19,11 @@ export class VideouploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.uploadForm = this.fb.group({
-      title: ['title', Validators.required],
-      description: ['desc', Validators.required],
-      category: ['cat1', Validators.required],
-      tags: ['tag1, tag2', Validators.required],
-      language: ['l1, l2', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      category: ['', Validators.required],
+      tags: ['', Validators.required],
+      language: ['', Validators.required],
       video: ['', Validators.required],
       poster: ['', Validators.required],
       privacy: ['public', Validators.required]
@@ -62,7 +62,6 @@ export class VideouploadComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('video', this.uploadForm.get('video').value);
-    formData.append('poster', 'This is my poster');
     formData.append('poster', this.uploadForm.get('poster').value);
     formData.append('title', this.uploadForm.get('title').value);
     formData.append('description', this.uploadForm.get('description').value);

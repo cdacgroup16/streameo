@@ -78,15 +78,16 @@ export class VideosService {
 
   removeVideo(videoId): Observable<any> {
     if (!this.auth.isAdmin()) {
+      this.snack.open('You\'re not an admin', "Dismiss", { duration: 3000 });
       return
     }
     const token = this.auth.isAdmin()
     const headers = {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': `Bearer ${token}`
     }
-    return this.http.delete(this.url + videoId, { headers })
+    return this.http.delete(this.url + '/' + videoId, { headers })
   }
 }
 
