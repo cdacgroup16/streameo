@@ -7,3 +7,7 @@
     margin: 30px 7px;
   }
 }
+
+.main::-webkit-scrollbar {
+  width: max-content;
+}
