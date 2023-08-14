@@ -14,7 +14,7 @@ const app = express()
 const SERVER_PORT = process.env.SERVER_PORT
 
 // Connect to Database
-connectMongoDB()
+await connectMongoDB()
 
 // Built-in middlwares
 app.use(express.json())

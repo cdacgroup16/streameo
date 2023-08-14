@@ -1,20 +1,20 @@
 const mongoose = require('mongoose')
 
-const connectMongoDB = () => {
-  mongoose
-    .connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    })
-    .then(conn => {
-      console.log(`MongoDB connected: ${conn.connection.host}`.brightCyan.bold)
-    })
-    .catch(err => {
-      console.error(`DB connection failed: ${err.message}`)
-      process.exit(1)
-    })
+async function connectMongoDB() {
+  try {
+    const conn = await mongoose
+      .connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+      });
+
+    console.log(`MongoDB connected: ${conn.connection.host}`.brightCyan.bold)
+  } catch (error) {
+    console.error(`DB connection failed: ${error.message}`)
+    process.exit(1)
+  }
 }
 
 module.exports = { connectMongoDB }
