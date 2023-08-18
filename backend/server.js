@@ -14,7 +14,6 @@ const app = express()
 const SERVER_PORT = process.env.SERVER_PORT
 
 // Connect to Database
-connectMongoDB()
 
 // Built-in middlwares
 app.use(express.json())
@@ -48,9 +47,11 @@ app.use(notFound)
 app.use(errorHandler)
 
 // Server Listenening
-app.listen(SERVER_PORT, () => {
-  console.log(
-    `Server is running in ${process.env.NODE_ENV} mode at port: ${SERVER_PORT}`
-      .white.bold
-  )
-})
+connectMongoDB().then((connection) => {
+  app.listen(SERVER_PORT, () => {
+    console.log(
+      `Server is running in ${process.env.NODE_ENV} mode at port: ${SERVER_PORT}`
+        .white.bold
+    )
+  })
+});
