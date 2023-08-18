@@ -74,9 +74,18 @@ exports.getPoster = asyncHandler(async (req, res) => {
     throw new Error("The video with the provided id doesn't exists!")
   }
 
+  // create poster path
+  let posterPath = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'posters',
+    video.poster.path
+  )
+
   // FOR TESTING PURPOSE ONLY
   if (process.env.TESTING_MEDIA === 'true') {
-    video.poster.path = path.join(
+    posterPath = path.join(
       __dirname,
       '..',
       'assets',
@@ -85,12 +94,12 @@ exports.getPoster = asyncHandler(async (req, res) => {
     )
   }
   // Check file exists
-  if (!fs.existsSync(video.poster.path)) {
+  if (!fs.existsSync(posterPath)) {
     res.status(404)
     throw new Error("Poster you requested doesn't exists!")
   }
 
-  const readPoster = fs.createReadStream(video.poster.path)
+  const readPoster = fs.createReadStream(posterPath)
 
   res.status(206)
   res.contentType(`image/${video.poster.type}`)
@@ -109,23 +118,46 @@ exports.getStream = asyncHandler(async (req, res) => {
     resMed = parseInt(process.env.VIDEO_RESOLUTION_MED.split('x')[1]),
     resLow = parseInt(process.env.VIDEO_RESOLUTION_LOW.split('x')[1])
 
+  // create video paths
+  let videoPathHigh = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    video.video.path_high
+  )
+  let videoPathMed = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    video.video.path_med
+  )
+  let videoPathLow = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    video.video.path_low
+  )
+
   // FOR TESTING PURPOSE ONLY
   if (process.env.TESTING_MEDIA === 'true') {
-    video.video.path_high = path.join(
+    videoPathHigh = path.join(
       __dirname,
       '..',
       'assets',
       'videos',
       'tempHigh.mp4'
     )
-    video.video.path_med = path.join(
+    videoPathMed = path.join(
       __dirname,
       '..',
       'assets',
       'videos',
       'tempMed.mp4'
     )
-    video.video.path_low = path.join(
+    videoPathLow = path.join(
       __dirname,
       '..',
       'assets',
@@ -137,7 +169,7 @@ exports.getStream = asyncHandler(async (req, res) => {
   // Check file exists
   if (
     !fs.existsSync(
-      video.video.path_low || video.video.path_med || video.video.path_high
+      videoPathLow || videoPathMed || videoPathHigh
     )
   ) {
     res.status(404)
@@ -145,9 +177,9 @@ exports.getStream = asyncHandler(async (req, res) => {
   }
 
   const type = video.video.type
-  const { size: sizeHigh } = await fileInfo(video.video.path_high)
-  const { size: sizeMed } = await fileInfo(video.video.path_med)
-  const { size: sizeLow } = await fileInfo(video.video.path_low)
+  const { size: sizeHigh } = await fileInfo(videoPathHigh)
+  const { size: sizeMed } = await fileInfo(videoPathMed)
+  const { size: sizeLow } = await fileInfo(videoPathLow)
 
   if (
     !quality &&
@@ -167,21 +199,21 @@ exports.getStream = asyncHandler(async (req, res) => {
   // ReadStreams for videos
   const streamHigh = (start, end) =>
     fs
-      .createReadStream(video.video.path_high, { start, end })
+      .createReadStream(videoPathHigh, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
       })
 
   const streamMed = (start, end) =>
     fs
-      .createReadStream(video.video.path_med, { start, end })
+      .createReadStream(videoPathMed, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
       })
 
   const streamLow = (start, end) =>
     fs
-      .createReadStream(video.video.path_low, { start, end })
+      .createReadStream(videoPathLow, { start, end })
       .once('data', () => {
         AddToWatchHistory(req)
       })
@@ -372,11 +404,9 @@ exports.createVideo = asyncHandler(async (req, res, next) => {
       fs.unlinkSync(res.req.files.poster[0].path)
       fs.unlinkSync(res.req.files.video[0].path)
       return res.status(400).json({
-        message: `The poster size can't be more then ${
-          parseInt(process.env.MAX_POSTER_SIZE) / 1024 / 1024
-        } MB and the video can't be more than ${
-          parseInt(process.env.MAX_VIDEO_SIZE) / 1024 / 1024
-        } MB`,
+        message: `The poster size can't be more then ${parseInt(process.env.MAX_POSTER_SIZE) / 1024 / 1024
+          } MB and the video can't be more than ${parseInt(process.env.MAX_VIDEO_SIZE) / 1024 / 1024
+          } MB`,
       })
     }
 
@@ -460,6 +490,14 @@ exports.updateVideoById = asyncHandler(async (req, res, next) => {
         'posters',
         Date.now() + '_' + poster.originalname
       )
+      // source poster path
+      const posterSource = path.join(
+        __dirname,
+        '..',
+        'assets',
+        'posters',
+        video.poster.path
+      )
 
       if (err) {
         res.status(400)
@@ -467,8 +505,8 @@ exports.updateVideoById = asyncHandler(async (req, res, next) => {
       }
 
       // Delete the previously existing poster here
-      if (fs.existsSync(req.video.poster.path)) {
-        fs.unlinkSync(req.video.poster.path)
+      if (fs.existsSync(posterSource)) {
+        fs.unlinkSync(posterSource)
       }
 
       // Move the upoaded poster to destination here
@@ -527,18 +565,50 @@ exports.removeVideoById = asyncHandler(async (req, res) => {
     throw new Error('Failed to delete the video with the given id')
   }
 
+  // create poster path
+  let posterPath = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'posters',
+    video.poster.path
+  )
+
+  // create video paths
+  let videoPathHigh = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    video.video.path_high
+  )
+  let videoPathMed = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    video.video.path_med
+  )
+  let videoPathLow = path.join(
+    __dirname,
+    '..',
+    'assets',
+    'videos',
+    video.video.path_low
+  )
+
   //Deleting stored files from the server
-  if (fs.existsSync(video.poster.path)) {
-    fs.unlinkSync(video.poster.path)
+  if (fs.existsSync(posterPath)) {
+    fs.unlinkSync(posterPath)
   }
-  if (fs.existsSync(video.video.path_low)) {
-    fs.unlinkSync(video.video.path_low)
+  if (fs.existsSync(videoPathLow)) {
+    fs.unlinkSync(videoPathLow)
   }
-  if (fs.existsSync(video.video.path_med)) {
-    fs.unlinkSync(video.video.path_med)
+  if (fs.existsSync(videoPathMed)) {
+    fs.unlinkSync(videoPathMed)
   }
-  if (fs.existsSync(video.video.path_high)) {
-    fs.unlinkSync(video.video.path_high)
+  if (fs.existsSync(videoPathHigh)) {
+    fs.unlinkSync(videoPathHigh)
   }
 
   res.json({
@@ -549,16 +619,16 @@ exports.removeVideoById = asyncHandler(async (req, res) => {
 // Helper functions
 const ensureFolderStructureForUploads = () => {
   if (!fs.existsSync(path.join(__dirname, '../', 'assets'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets'), 0744)
+    fs.mkdirSync(path.join(__dirname, '../', 'assets'));
   }
   if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'temp'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'temp'), 0744)
+    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'temp'));
   }
   if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'videos'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'videos'), 0744)
+    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'videos'));
   }
   if (!fs.existsSync(path.join(__dirname, '../', 'assets', 'posters'))) {
-    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'posters'), 0744)
+    fs.mkdirSync(path.join(__dirname, '../', 'assets', 'posters'));
   }
 }
 
@@ -589,8 +659,7 @@ const validateVideoInputFields = (req, res, next) => {
   if (!Video.schema.path('privacy').enumValues.includes(privacy)) {
     next(
       new Error(
-        `'privacy' must include one of the following: ${
-          Video.schema.path('privacy').enumValues
+        `'privacy' must include one of the following: ${Video.schema.path('privacy').enumValues
         }`
       )
     )
@@ -636,8 +705,7 @@ const validateVideoInputFieldsForUpdate = (req, res, next) => {
   if (privacy && !Video.schema.path('privacy').enumValues.includes(privacy)) {
     next(
       new Error(
-        `'privacy' must include one of the following: ${
-          Video.schema.path('privacy').enumValues
+        `'privacy' must include one of the following: ${Video.schema.path('privacy').enumValues
         }`
       )
     )
@@ -729,8 +797,7 @@ const processVideo = (files, videoDataFromDB) => {
 
     .on('progress', function (progress) {
       process.stdout.write(
-        `FFMPEG Processing: ${
-          progress.percent && progress.percent.toFixed(2)
+        `FFMPEG Processing: ${progress.percent && progress.percent.toFixed(2)
         } % done \r`
       )
     })
