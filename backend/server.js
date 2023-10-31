@@ -7,6 +7,7 @@ const categoriesRoutes = require('./routes/categoriesRoutes')
 const purchaseRoutes = require('./routes/purchaseRoutes')
 const planRoutes = require('./routes/planRoutes')
 const videoRoutes = require('./routes/videoRoutes')
+const cookieParser = require('cookie-parser')
 require('colors')
 require('dotenv').config()
 
@@ -18,6 +19,7 @@ const SERVER_PORT = process.env.SERVER_PORT
 // Built-in middlwares
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser(process.env.JWT_SECRET));
 
 // Handle requests
 app.get('/', (req, res) => {
