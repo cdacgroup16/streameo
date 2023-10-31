@@ -33,6 +33,16 @@ exports.signin = asyncHandler(async (req, res) => {
   user.salt = undefined
   user.createdAt = undefined
   user.updatedAt = undefined
+
+  // request browser to set the cookie at the frontend
+  res.cookie('token', token, {
+    httpOnly: true,
+    path: '/',
+    maxAge: 60 * 60 * 2,
+    secure: true,
+    sameSite: 'strict',
+    domain: 'http://localhost:4000'
+  });
   res.json({
     token,
     user,
