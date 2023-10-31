@@ -79,6 +79,17 @@ exports.createUser = asyncHandler(async (req, res) => {
     user.hashed_password = undefined
     user.salt = undefined
     user.stream_count = undefined
+
+    // request browser to set the cookie at the frontend
+    res.cookie('token', token, {
+      httpOnly: true,
+      path: '/',
+      maxAge: 60 * 60 * 2,
+      secure: true,
+      sameSite: 'strict',
+      domain: 'http://localhost:4000'
+    });
+
     res.status(201).json({ user, token: generateJwtToken(user._id, user.role) })
   } else {
     res.status(400)
