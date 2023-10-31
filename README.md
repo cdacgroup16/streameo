@@ -15,7 +15,7 @@ This is a repository for a Video Streaming Website built using MEAN stack.
 - API - REST API
 
 ## Authors
-- Adarsh Pandey
-- Rishabh Aggarwal
-- Pranjali Ingle
-- Deepak Thakur
+- [Adarsh Pandey](https://github.com/aadarshp31)
+- [Rishabh Aggarwal](https://github.com/rishcodelib)
+- [Pranjali Ingle](https://github.com/thakurdeepak)
+- [Deepak Thakur](https://github.com/Pranjali01)
