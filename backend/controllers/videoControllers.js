@@ -224,7 +224,8 @@ exports.getStream = asyncHandler(async (req, res) => {
       let [start, end] = range.replace(/bytes=/, '').split('-')
       start = parseInt(start, 10)
       end = end ? parseInt(end, 10) : fileSize - 1
-      res.writeHead(206, {
+      const resStatus = process.env.ALLOW_STREAMING === "true" ? 206 : 200;
+      res.writeHead(resStatus, {
         Content_Type: `video/${fileType}`,
         'Content-Length': end - start + 1,
         'Content-Range': `bytes ${start}-${end}/${fileSize}`,
@@ -232,7 +233,7 @@ exports.getStream = asyncHandler(async (req, res) => {
       })
       readstream(start, end).pipe(res)
     } else {
-      res.writeHead(206, {
+      res.writeHead(resStatus, {
         Content_Type: `video/${fileType}`,
         'Content-Length': fileSize,
         'Content-Range': `bytes ${0}-${fileSize - 1}/${fileSize}`,
